@@ -1,0 +1,53 @@
+
+<html>
+<head>
+   <!-- <link rel="stylesheet" href="indexMainPage.css"> -******-->
+    <title>Austism NS pre-login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <link rel="stylesheet" href="./styles/selectionPages.css">
+    <script>
+        function changeToStudent() {
+            window.location.href = "studentLogin.html";
+        }
+        function changeToSpecialist() {
+            window.location.href = "specialistLogin.html";
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+    <div class="logoDiv">
+            <div class="logoContainer"><i class="fa fa-envelope logoIcon" aria-hidden="true"></i></div>
+        </div>
+    <div class="centerInnerDiv">
+    <div class="innerContainer">
+       <div class="title logoToTheSide">
+           <div style="margin: auto;">
+               <img src="./AutismNSLogo.png" width="90" height="90">
+           </div>
+           <div>Autism Nova Scotia<br>Email Training System</div>
+           <br>
+        </div>
+        <div class="prompt">Are you a Specialist or a Student?</div>
+        <div class="row"  id="studentSelection" onclick="changeToStudent()">
+            <div class="insideRow">
+                <div>Student</div>
+            </div>
+            <div class="hiddenDescription">
+                <div class="descriptionContainer">Hello and Welcome</div>
+            </div>
+        </div>
+       <div class="row" id="specialistSelection" onclick="changeToSpecialist()">
+            <div class="insideRow">
+                <div>Specialist</div>
+            </div>
+            <div class="hiddenDescription">
+                <div class="descriptionContainer">Hello and Welcome</div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+</body>
+</html>

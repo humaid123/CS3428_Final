@@ -1,0 +1,196 @@
+
+body {
+    background-color: white
+    font-size: 1rem;
+    line-height: 1.5;
+}
+label {
+    display: inline-block;
+}
+i {
+    padding-right: 5px;
+}
+
+.emailRow {
+    width: 100%;
+    vertical-align: center;
+    padding: 10px;
+    border-bottom: 1px solid lightgrey;
+    border-top: 1px solid lightgrey;
+    display: grid;
+    grid-template-columns: auto 15% 7%;
+    grid-column-gap: 5px;
+}
+
+.emailRow:Hover .clickToView:Hover {
+    display: grid;
+    grid-template-columns: auto 20%;
+}
+
+.twoButtons {
+    display: grid;
+    grid-template-rows: 60% 40%;
+    grid-row-gap: 5px;
+    border-radius: 5px;
+    padding: 5px;  
+}
+
+.whoButton {
+    text-align: left;
+    display: inline-block;
+    font-size: 1em;
+    font-weight: bold;
+    overflow: hidden;
+} 
+
+.subjectButton {
+    text-align: left;
+    display: inline-block;
+    font-size: 0.75em;
+    overflow: hidden;
+}
+
+.clickToView:Hover .viewPrompt {
+    display: block;
+}
+.viewPrompt {
+    display: none;
+    height: 100%;
+    text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.deleteKey {
+    width:100%;
+    margin: 2px;
+}
+.checkboxLabel {
+    padding: 0;
+}
+
+.flags {
+    display: grid;
+    grid-template-rows: 50% 50%;
+    grid-row-gap: 5px;
+}
+
+.checkBoxDiv {
+    border-radius: 5px;
+    padding: 0px;
+    text-align: center;
+    font-size: 0.7em;
+    z-index: 2;
+}
+.checkBoxDiv:hover {
+    background-color: lightskyblue;
+    cursor: pointer;
+}
+
+.deleteKeyDiv {
+    border-radius: 5px;
+    padding: 0px;
+    text-align: center;
+    font-size: 0.7em;
+    z-index: 2;
+}
+.deleteKeyDiv:Hover {
+    background-color: #ff3333;
+    cursor: pointer;
+}
+.deleteKey:Hover {
+    background-color: #ff3333;
+}
+
+.toRead{
+    text-align: center;
+    font-weight: bold;
+}
+
+/*********READ ROW*****************/
+.readRow {
+}
+
+.readTwoButtons {
+    border-left: 0.5em solid #a6a6a6;
+}
+.readWhoButton {
+}
+.readSubjectButton {
+}
+
+.readTwoButtons:Hover {
+    background-color: #d9d9d9;
+    cursor: pointer; /*pointer is the value for a hand.*/
+}
+.readRow:hover .clickToView:Hover {
+    background-color: #d9d9d9;
+}
+
+
+/*********UNREAD ROW********************/
+.unreadRow:Hover .clickToView:Hover {
+    background-color:#b3e6ff;
+}
+
+.unreadRow {
+    background-color:  #cceeff;
+}
+
+.unreadTwoButtons {
+    border-left: 0.5em solid #2162cc;
+    color: darkblue;
+}
+.unreadWhoButton {
+}
+.unreadSubjectButton {
+}
+.unreadTwoButtons:Hover {
+    background-color: 	#b3e6ff; 
+    cursor: pointer;
+}
+
+/********READ URGENT ROW ********************/
+.readUrgentRow:Hover .clickToView:Hover {
+    background-color: lemonChiffon;
+}
+
+.readUrgentRow {
+    background-color: lightyellow;
+}
+
+.readUrgentTwoButtons {
+    border-left: 0.5em solid orangered;
+    color: red;
+}
+.readUrgentWhoButton {
+}
+.readUrgentSubjectButton {
+}
+.readUrgentTwoButtons:Hover {
+    background-color: lemonChiffon; 
+    cursor: pointer;
+}
+
+/***** UNREAD URGENT ROW ******/
+.unreadUrgentRow:Hover .clickToView:Hover {
+    background-color: lemonChiffon;
+}
+
+.unreadUrgentRow {
+    background-color:  lightyellow;
+}
+
+.unreadUrgentTwoButtons {
+    border-left: 0.5em solid orangered;
+    color: red;
+}
+.unreadUrgentWhoButton {
+}
+.unreadUrgentSubjectButton {
+}
+.unreadUrgentTwoButtons:Hover {
+    background-color: lemonChiffon; 
+    cursor: pointer;
+}
+

@@ -1,0 +1,43 @@
+<!--This is the main help menu for informal writing-->
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<link rel="stylesheet" href="../styles/index.css">
+<script src="../jquery-3.4.1.min.js" async></script>
+<script src="./helpScripts.js"></script> 
+
+<style>
+.container {
+  width: 400px;
+  height: 250px;
+  position: absolute;
+}
+
+.center {
+  margin: 0;
+  position: absolute;
+  left: 50%;
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+</style>
+</head>
+<body>
+<h2><strong>What do you need help with?</strong></h2> 
+<div class = "container">
+    <div class = "center">
+<a data-role= "button" class = "btn normalButton" onclick = "linkTo()"">To</a>
+<br><br>
+<a data-role = "button" class = "btn normalButton" onclick = "linkCC()">CC</a>
+<br><br>
+<a data-role = "button" class = "btn normalButton" onclick = "linkSubject()">Subject</a>
+<br><br>
+<a data-role = "button" class = "btn normalButton" onclick = "linkFormal()">Body</a>
+</div>
+</div>
+</body>
+
+
+
+</html>

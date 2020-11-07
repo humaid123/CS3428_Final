@@ -1,0 +1,104 @@
+
+<html>
+<head>
+    <title>Your Email System</title>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/composeStyles.css">
+    <script src="../jquery-3.4.1.min.js" async></script>
+    <script src="../constants.js" async></script>
+    <script src="../Modules/viewEmailComponent.js" async></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body onload="fillTextBoxes()"> <!--Fills in the text boxes as per the email clicked-->
+     <header>VIEWING SENT ITEM</header>
+
+    <div id="viewingEmails">
+        <div id="From">
+            <div class="composeField ToTextBox">
+                <div id="ToCorrect" class="reading"><i class="fa fa-circle-o" aria-hidden="true"></i></div>
+                <div class="labelComposeField">
+                    <label for="ToTextBox" class="myLabel" onclick="showHelpForTo()">To</label>
+                </div>
+                <div class="elementComposeField">
+                    <input type="email" class="longTextBox" id="partnerTextBox" onfocus="turnOnHidden('To')" readOnly>
+                </div>
+            </div>
+            <div class="hidden" id="ToHidden">
+                <div class="hints" id="ToHints">
+                    <p class="hintTitle">HINTS FOR TO</p>
+                    <ul id="ToHintList">
+                        <li>Says to whom you sent the email</li>
+                    </ul>
+               </div>
+           </div>
+        </div>
+        <div id="Cc">
+            <div class="composeField myTextBox">
+                <div id="CcCorrect" class="reading"><i class="fa fa-circle-o" aria-hidden="true"></i></div>
+                <div class="labelComposeField">
+                    <label for="CcTextBox" class="myLabel" onclick="showHelpForCc()">Cc</label>
+                </div>
+                <div class="elementComposeField">
+                    <input type="email" class="longTextBox" id="CcTextBox" onfocus="turnOnHidden('Cc')" readOnly>
+                </div>
+            </div>
+            <div class="hidden" id="CcHidden">
+                <div class="hints" id="CcHints">
+                    <p class="hintTitle">HINTS FOR CC</p>
+                    <ul id="CcHintList">
+                        <li>The other person you sent the email to.</li>
+                    </ul>
+               </div>
+           </div>
+        </div>
+        <div id="Subject">
+            <div class="composeField myTextBox">
+                <div id="SubjectCorrect" class="reading"><i class="fa fa-circle-o" aria-hidden="true"></i></div>
+                <div class="labelComposeField">
+                    <label for="SubjectTextBox" class="myLabel" onclick="showHelpForSubject()">Subject</label>
+                </div>
+                <div class="elementComposeField">
+                    <input type="email" class="longTextBox" id="SubjectTextBox" onfocus="turnOnHidden('Subject')" readOnly>
+                </div>
+            </div>
+            <div class="hidden" id="SubjectHidden">
+                <div class="hints" id="SubjectHints">
+                    <p class="hintTitle">HINTS FOR SUBJECT</p>
+                    <ul id="SubjectHintList">
+                        <li>A short description of the content of the email</li>
+                    </ul>
+               </div>
+           </div>
+        </div>
+        <div id="Body">
+            <div class="composeTextArea"> 
+                <div class="textAreaFlags">
+                    <div id="BodyCorrect" class="reading"><i class="fa fa-circle-o" aria-hidden="true"></i></div>
+                    <div class="labelTextArea">
+                        <label for="BodyTextBox" class="myLabel" onclick="showHelpForBody()">Body</label></div>
+                </div>
+                <div class="elementTextArea">
+                    <textarea class="emailTextArea" id="BodyTextBox"  onfocus="turnOnHidden('Body')" readOnly></textarea>
+                </div>
+          </div>
+          <div class="hidden" id="BodyHidden">
+                <div class="hints" id="BodyHints">
+                    <p class="hintTitle">HINTS FOR BODY</p>
+                    <ul id="BodyHintList">
+                        <li>What you said in the email</li>
+                    </ul>
+               </div>
+           </div>
+        </div>
+    </div>
+
+    <footer></footer>
+
+
+    <div class="controlGroup" >
+        <button class="normalButton" onclick="linkBackViewSent()">Back</button>
+        <button class="normalButton" onclick="showHelp()">Help</button>
+    </div>
+</body>
+</html>

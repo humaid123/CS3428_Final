@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!-- 
+    Humaid Muhammad Agowun (A00430163)
+    Mark Trickett (A00416603)
+    Diego Gardiner (A00423960)
+    HTML file for the student's sent items screen.
+-->
+<html>
+<head>
+    <title>Your Email System</title>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/emailsList.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="../jquery-3.4.1.min.js" async></script>
+    <script src="../constants.js" async></script>
+    <script src="./scripts/entryPoints.js" async></script>
+    <script src="./scripts/deleteEmail.js" async></script>
+    <script src="./scripts/clickCheckBox.js" async></script>
+    <script src="./scripts/viewEmails/viewEmailsEntry.js" async></script>
+    <script src="../Modules/displayEmails.js" async></script>
+<style>
+
+#container {
+    display: grid;
+    grid-template-row: 5% 10% 80% 5%; 
+}
+
+#innerContainer {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+}
+
+#sideBar {
+    display: grid;
+    grid-template-rows: 40px 40px 40px auto; 
+    grid-row-gap: 10px;
+    padding: 10px;
+    display: none;
+}
+#listOfEmails {
+    width: 100%;
+    align-self: stretch;
+}
+    #showSideBar {
+        margin-top: 10px;
+        margin-left: 10px;
+        color: orangered;
+        border: 1px solid orangered;
+    }
+    #showSideBar:hover {
+        color: white;
+        background-color: orangered;
+    }
+    #closeSideBar {
+        padding-top: 10px;
+        color: orangered;
+        border: 1px solid orangered;
+    }
+    #closeSideBar:hover {
+        color: white;
+        background-color: orangered;
+    }
+</style>
+<script>
+    function showSideBar() {
+        document.getElementById("sideBar").style.display = "grid";
+    }
+    function closeSideBar() {
+        document.getElementById("sideBar").style.display = "none";
+    }
+</script>
+</head>
+<body  onload="loadStudentSent()">
+        <div id="container">
+        <header>SENT ITEMS</header>
+        <div id="menuOnTop">
+            <button class="normalButton" id="showSideBar" onclick="showSideBar()">SideBar</button>
+        </div>
+
+        <div id="innerContainer">
+            <div class="controlgroup" id="sideBar">
+                    <button class="normalButton" onclick="linkInbox()">Inbox</button>
+                    <button class="normalButton" onclick="linkStudentCompose(2)">Compose</button>
+                    <button class="normalButton" onclick="helpStudentInbox()">Help Desk</button>
+                    <button class="normalButton" id="closeSideBar" onclick="closeSideBar()">Close</button>
+                <div></div>
+            </div>
+
+            <div id="listOfEmails">
+                <div class="numUnread">NUM UNREAD EMAILS: </div>
+                <div class="emails"></div> 
+            </div>
+        </div>
+
+        <footer></footer>
+    </div>
+</body>
+</html>

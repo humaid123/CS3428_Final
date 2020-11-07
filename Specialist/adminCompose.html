@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Specialist Email System</title>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/formStyles.css">
+    <script src="../jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="../styles/composeStyles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="../constants.js"></script>
+    <script src="./scripts/linkBackCompose.js"></script>
+    <script src="./scripts/composing/sendingEmailHelper.js"></script>
+    <script src="./scripts/composing/sendAdminEmail.js"></script>
+    <script src="./scripts/adminCompose.js"></script>
+</head>
+<body onload="loadAdminOptions()"> <!--Loads the drop down menu options-->
+    <header>COMPOSING</header>
+
+    <div class="unsolicitedText"> <!--Adds the yellow text-->
+        Did you know that you can click on To, Cc, Subject or Body 
+        and help will appear?
+    </div>
+
+    <div id="composing">
+        <div id="To">
+            <div class="composeField myDropDown">
+                <div id="ToCorrect" class="notAllTicked">
+                    <i class="fa fa-exclamation-triangle composeIcon" style="red"></i>
+                </div>
+                <div class="labelComposeField"><label for="ToDropDown" class="myLabel">To</label></div>
+                <div class="elementComposeField">
+                    <input type="text" class="longTextBox" list="TO_DATA_LIST" id="ToDropDown">
+                </div>
+                 <datalist id="TO_DATA_LIST" class="list"></datalist>
+            </div>
+        </div>
+        <div id="From">
+            <div class="composeField myDropDown">
+                <div id="FromCorrect" class="notAllTicked">
+                    <i class="fa fa-exclamation-triangle composeIcon" style="red"></i>
+                </div>
+                <div class="labelComposeField"><label for="FromDropDown" class="myLabel">From</label></div>
+                <div class="elementComposeField">
+                    <input type="text" class="longTextBox" list="FROM_DATA_LIST" id="FromDropDown">
+                </div>
+                 <datalist id="FROM_DATA_LIST" class="list"></datalist>
+            </div>
+        </div>
+        <div id="Cc">
+            <div class="composeField myDropDown">
+                <div id="CcCorrect" class="notAllTicked">
+                    <i class="fa fa-exclamation-triangle composeIcon" style="red"></i>
+                </div>
+                <div class="labelComposeField"><label for="CcDropDown" class="myLabel">Cc</label></div>
+                <div class="elementComposeField">
+                    <input type="text" class="longTextBox" list="CC_DATA_LIST" id="CcDropDown">
+                </div>
+                 <datalist id="CC_DATA_LIST" class="list"></datalist>
+            </div>
+        </div>
+        <div id="Subject">
+            <div class="composeField myTextBox">
+                <div id="SubjectCorrect" class="notAllTicked"><i class="fa fa-exclamation-triangle composeIcon" style="red"></i></div>
+                <div class="labelComposeField"><label for="SubjectTextBox" class="myLabel">Subject</label></div>`
+                <div class="elementComposeField"><input type="text" class="longTextBox" id="SubjectTextBox"></div>
+            </div>
+        </div>
+        <div id="Body">
+            <div class="composeTextArea">
+                <div class="textAreaFlags">
+                    <div id="BodyCorrect" class="notAllTicked"><i class="fa fa-exclamation-triangle composeIcon" style="red"></i></div>
+                    <div class="labelTextArea"><label for="BodyTextBox" class="myLabel">Body</label></div>
+                </div>
+                <div class="elementTextArea">
+                    <textarea class="emailTextArea" id="BodyTextBox"></textarea></div>
+            </div>
+        </div>
+    </div>
+
+    <footer></footer>
+
+    <div class="composeScreenButtons">
+        <button class="normalButton sendButton" onclick="sendAdminEmail()"><div><i class="fa fa-paper-plane" aria-hidden="true"></i></div><div>Send</div></button>
+        <div class="helpAndCancel">
+            <button class="normalButton" onclick="showHelp()">Help</button>
+            <button class="normalButton" onclick="cancel()">Cancel</button>
+        </div>
+    </div>
+</body>
+</html>

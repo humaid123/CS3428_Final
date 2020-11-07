@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!-- 
+    Humaid Muhammad Agowun (A00430163)
+    Mark Trickett (A00416603)
+    Diego Gardiner (A00423960)
+    HTML file for the student's sent items screen.
+-->
+<html>
+<head>
+    <title>Your Email System</title>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/emailsList.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="../jquery-3.4.1.min.js" async></script>
+    <script src="../constants.js" async></script>
+    <script src="./scripts/entryPoints.js" async></script>
+    <script src="./scripts/deleteEmail.js" async></script>
+    <script src="./scripts/clickCheckBox.js" async></script>
+    <script src="./scripts/viewEmails/viewEmailsEntry.js" async></script>
+    <script src="../Modules/displayEmails.js" async></script>>
+</head>
+<body  onload="loadStudentSent()">
+    <header>SENT ITEMS</header>
+
+    <div id="listOfEmails">
+        <div class="numUnread">NUM UNREAD EMAILS: </div>
+        <div class="emails"></div> 
+    </div>
+
+    <footer></footer>
+
+    <div class="controlGroup"> <!--Buttons at the bottom-->
+        <button class="normalButton" onclick="linkInbox()">Inbox</button>
+        <button class="normalButton" onclick="linkStudentCompose(2)">Compose</button>
+        <button class="normalButton" onclick="showHelp()">Help Desk</button>
+    </div>
+</body>
+</html>
