@@ -55,7 +55,7 @@ function turnOnHidden(divId) {
         document.getElementById(divId + "Hidden").style.display = "block";
 }
 function closeCheckBoxes(divId) {
-        let json = DIVS[divId];
+        let json = COMPOSE_DIVS[divId];
         for (let i = 0; i < json.checkBoxes.length; i++) {
             let name = divId + "CheckBox" + i;
             console.log(name);
