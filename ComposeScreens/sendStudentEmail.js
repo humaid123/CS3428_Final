@@ -1,6 +1,6 @@
 
 function sendStudentEmail() {
-    for (const divId in DIVS) {
+    for (const divId in COMPOSE_DIVS) {
         let correct = document.getElementById(divId + "Correct");
         if (correct.className == "notAllTicked") {
             alert("cannot send as you have not checked everything for: " + divId);
