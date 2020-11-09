@@ -11,9 +11,8 @@ const COMPOSE_DIVS = {
 };
 
 function loadCheckBoxes() {
-    const checkBoxShouldBeLoaded = JSON.parse(
-        localStorage.getItem("loadCheckBox")
-    ).loadCheckBox;
+    const json = JSON.parse(localStorage.getItem("loadCheckBox"));
+    const checkBoxShouldBeLoaded = json.loadCheckBox;
 
     if (!checkBoxShouldBeLoaded) {
         for (const divId in COMPOSE_DIVS) {

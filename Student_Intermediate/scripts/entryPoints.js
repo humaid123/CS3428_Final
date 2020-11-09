@@ -10,7 +10,7 @@ function linkStudentSent() {
 function linkStudentCompose(fWhere) {
     try {
         setUpLinkBackJSON(fWhere);
-        setUpCheckBoxesJSON(true);
+        setUpCheckBoxesJSON(false);
         window.location.href = "../ComposeScreens/studentCompose.html";
     } catch (e) {
         alert(e.name + "\n" + e.message)

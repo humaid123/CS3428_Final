@@ -12,7 +12,7 @@ function deleteEmail(name, i) {
         $.post(SERVER_URL + '/deleteEmail', 
             createNameIndexReq(name, i), 
             runOnSuccessFulDeletion).fail(runOnDeleteFail);
-        reloadPage(name);
+        window.location.reload();
     }
 
     function runOnSuccessFulDeletion(data) {
@@ -23,17 +23,5 @@ function deleteEmail(name, i) {
 
     function runOnDeleteFail(err) {
         alert("could not delete email");
-    }
-}
-
-function reloadPage(name) {
-    if (name === ADMIN_INBOX_NAME) {
-        window.location.href = "adminInbox.html";
-    } else if (name === ADMIN_SENT_ITEMS_NAME) {
-        window.location.href = "adminSentItems.html";
-    } else if (name == STUDENT_INBOX_NAME) {
-        window.location.href = "inbox.html";
-    } else if (name == STUDENT_SENT_ITEMS_NAME) {
-        window.location.href = "sentItems.html";
     }
 }
