@@ -1,0 +1,27 @@
+.controlGroup {
+        display: flex;
+        flex-direction: row;
+    }
+@media screen and (max-width: 650px) {
+    body {
+        width: 100%;
+    }
+    #listOfEmails {
+        width: 100%;
+    }
+    .controlGroup {
+        display: block;
+    }
+}
+    .buttonHint {
+        display: none;
+    }
+    .buttonAndHint:hover .buttonHint {
+        display: block;
+    }
+    .emails {
+        height: 33em;
+        overflow: auto;
+        position: relative;
+    }
+
