@@ -1,7 +1,3 @@
-function showHelp() {
-    window.open("../Helps/MainHelp.html", "MsgWindow", SPECS)
-}
-
 function linkStudentSent() {
     window.location.href = "sentItems.html";
 }
@@ -54,15 +50,4 @@ function loadStudentSent() {
     } catch(e) {
         alert(e.name + "\n" + e.message);
     }
-}
-
-function helpStudentInbox() {
-    alert("The purpose of this page is to know which emails you"
-        + " have received.");
-}
-
-
-function helpStudentSentItems() {
-    alert("The purpose of this page is to know which emails you"
-        + " have sent to others.");
 }
