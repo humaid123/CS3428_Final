@@ -11,6 +11,7 @@
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="../styles/index.css">
     <link rel="stylesheet" href="../styles/emailsList.css">
+    <link rel="stylesheet" href="../styles/student_intermediate.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="../jquery-3.4.1.min.js" async></script>
     <script src="../constants.js" async></script>
@@ -19,56 +20,12 @@
     <script src="../Modules/clickCheckBox.js" async></script>
     <script src="../Modules/DisplayEmails.js" async></script>
     <script src="./scripts/viewEmailsEntry.js" async></script>
-<style>
-
-#container {
-    display: grid;
-    grid-template-row: 5% 10% 80% 5%; 
-}
-
-#innerContainer {
-    display: flex;
-    flex-direction: row;
-    padding: 10px;
-}
-
-#sideBar {
-    display: grid;
-    grid-template-rows: 40px 40px 40px auto; 
-    grid-row-gap: 10px;
-    padding: 10px;
-    display: none;
-}
-#listOfEmails {
-    width: 100%;
-    align-self: stretch;
-}
-    #showSideBar {
-        margin-top: 10px;
-        margin-left: 10px;
-        color: orangered;
-        border: 1px solid orangered;
-    }
-    #showSideBar:hover {
-        color: white;
-        background-color: orangered;
-    }
-    #closeSideBar {
-        padding-top: 10px;
-        color: orangered;
-        border: 1px solid orangered;
-    }
-    #closeSideBar:hover {
-        color: white;
-        background-color: orangered;
-    }
-</style>
 <script>
-    function showSideBar() {
-        document.getElementById("sideBar").style.display = "grid";
+    function showNavigation() {
+        document.getElementById("Navigation").style.display = "flex";
     }
-    function closeSideBar() {
-        document.getElementById("sideBar").style.display = "none";
+    function closeNavigation() {
+        document.getElementById("Navigation").style.display = "none";
     }
 </script>
 </head>
@@ -76,16 +33,31 @@
         <div id="container">
         <header>SENT ITEMS</header>
         <div id="menuOnTop">
-            <button class="normalButton" id="showSideBar" onclick="showSideBar()">SideBar</button>
+            <div class="topButtonDiv">
+                <button id="officeButton" class="normalButton topButton" onclick="showNavigation()">
+                    <i class="fa fa-cube" style="font-size: 2em; color: orangered" aria-hidden="true"></i>
+                    <div>OFFICE</div>
+                </button>
+                <div class="hintSideBar">Open Side Bar</div>
+            </div>
         </div>
 
         <div id="innerContainer">
-            <div class="controlgroup" id="sideBar">
-                    <button class="normalButton" onclick="linkInbox()">Inbox</button>
-                    <button class="normalButton" onclick="linkStudentCompose(2)">Compose</button>
-                    <button class="normalButton" onclick="helpStudentInbox()">Help Desk</button>
-                    <button class="normalButton" id="closeSideBar" onclick="closeSideBar()">Close</button>
-                <div></div>
+            <div id="Navigation">
+                <div id="NavigationContent">
+                    <div class="OfficeClickedDiv">
+                        <button class="normalButton navigationButton" onclick="linkInbox()">Inbox</button>
+                    </div>
+                    <div class="OfficeClickedDiv">
+                        <button class="normalButton navigationButton" onclick="linkStudentCompose(2)">Compose</button>
+                    </div>
+                    <div class="OfficeClickedDiv">
+                        <button class="normalButton navigationButton" onclick="showHelp()">Help Desk</button>
+                    </div>
+                    <div class="OfficeClickedDiv" id="closeButtonDiv">
+                        <button class="normalButton navigationButton" id="closeButton" onclick="closeNavigation()">Close</button>
+                    </div>
+                </div>
             </div>
 
             <div id="listOfEmails">
