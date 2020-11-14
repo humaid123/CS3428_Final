@@ -6,18 +6,11 @@
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="../styles/index.css">
     <link rel="stylesheet" href="../styles/composeStyles.css">
+    <link rel="stylesheet" href="../styles/student_basic.css">
     <script src="../jquery-3.4.1.min.js" async></script>
     <script src="../constants.js" async></script>
     <script src="../Modules/viewEmailComponent.js" async></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-.reading {
-    color: navy;
-    flex: 0.5;
-    height: 100%;
-    font-weight: bold
-}
-</style>
 </head>
 <body onload="fillTextBoxes()"> <!--Fills in the text boxes as per the email clicked-->
     <header>VIEWING INBOX ITEM</header>
@@ -105,9 +98,18 @@
     <footer></footer>
 
     <div class="controlGroup"> <!--Buttons at the bottom-->
-        <button class="normalButton" onclick="reply()">Reply</button>
-        <button class="normalButton" onclick="linkBackViewInbox()">Back</button>
-        <button class="normalButton" onclick="showHelp()">Help</button>
+        <div class="buttonAndHint">
+            <button class="normalButton" onclick="reply()"><i class="fa fa-pencil-square-o" style="color: lightskyblue; padding: 0px;" aria-hidden="true"></i>Reply</button>
+            <div class="buttonHint">write a reply</div>
+        </div>
+        <div class="buttonAndHint">
+            <button class="normalButton" onclick="linkBackViewInbox()">Back</button>
+            <div class="buttonHint">return back</div>
+        </div>
+        <div class="buttonAndHint">
+            <button class="normalButton" onclick="showHelp()"><i class="fa fa-info-circle" style="color: lightskyblue; padding: 0px;" aria-hidden="true"></i>Help Desk</button>
+            <div class="buttonHint">look for help</div>
+        </div>
     </div>
 </body>
 </html>

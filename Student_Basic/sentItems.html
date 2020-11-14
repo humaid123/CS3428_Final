@@ -11,6 +11,7 @@
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="../styles/index.css">
     <link rel="stylesheet" href="../styles/emailsList.css">
+    <link rel="stylesheet" href="../styles/student_basic.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="../jquery-3.4.1.min.js" async></script>
     <script src="../constants.js" async></script>
@@ -31,9 +32,22 @@
     <footer></footer>
 
     <div class="controlGroup"> <!--Buttons at the bottom-->
-        <button class="normalButton" onclick="linkInbox()">Inbox</button>
-        <button class="normalButton" onclick="linkStudentCompose(2)">Compose</button>
-        <button class="normalButton" onclick="showHelp()">Help Desk</button>
+        <div class="buttonAndHint">
+            <button class="normalButton" onclick="linkInbox()">Inbox</button>
+            <div class="buttonHint">see received emails</div>
+        </div>
+        <div class="buttonAndHint">
+            <button class="normalButton" onclick="linkStudentCompose(2)">
+            <i class="fa fa-pencil-square-o" style="color: lightskyblue; padding: 0px;" aria-hidden="true"></i>Compose
+            </button>
+            <div class="buttonHint">compose an email</div>
+        </div>
+        <div class="buttonAndHint">
+            <button class="normalButton" onclick="showHelp()">
+                <i class="fa fa-info-circle" style="color: lightskyblue; padding: 0px;" aria-hidden="true"></i>Help Desk
+            </button>
+            <div class="buttonHint">look for help</div>
+        </div>
     </div>
 </body>
 </html>

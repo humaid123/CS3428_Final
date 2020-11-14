@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="../styles/index.css">
     <link rel="stylesheet" href="../styles/composeStyles.css">
+    <link rel="stylesheet" href="../styles/student_basic.css">
     <script src="../jquery-3.4.1.min.js" async></script>
     <script src="../constants.js" async></script>
     <script src="../Modules/viewEmailComponent.js" async></script>
@@ -97,8 +98,16 @@
 
 
     <div class="controlGroup" >
-        <button class="normalButton" onclick="linkBackViewSent()">Back</button>
-        <button class="normalButton" onclick="showHelp()">Help</button>
+        <div class="buttonAndHint">
+            <button class="normalButton" onclick="linkBackViewSent()">Back</button>
+            <div class="buttonHint">return back</div>
+        </div>
+        <div class="buttonAndHint">
+            <button class="normalButton" onclick="showHelp()">
+                <i class="fa fa-info-circle" style="color: lightskyblue; padding: 0px;" aria-hidden="true"></i>Help Desk
+            </button>
+            <div class="buttonHint">look for help</div>
+        </div>
     </div>
 </body>
 </html>
