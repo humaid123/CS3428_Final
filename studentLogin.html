@@ -6,77 +6,54 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <link rel="stylesheet" href="./styles/selectionPages.css">
-    <style>
-    .inputFieldDiv {
-        padding: 5px;
-        border-bottom: 1px solid lightgrey;
-        transition-duration: 0.2s;
-    }
-    .inputField {
-        width: 90%;
-        font-size: 1.3em;
-    }
-    .inputFieldDiv:hover .hiddenDescription {
-        display: block;
-    }
-    .inputFieldDiv:hover {
-        border-left: 5px solid darkblue;
-    }
-
-
-    /*Needed for this screen only*/
-    .innerContainer {
-        font-size: 1em;
-    }
-    .title {
-        font-size: 2em;
-    }
-    .signInButton {
-        font-size: 2em;
-        text-align: center;
-        font-weight: bold;
-        font-size: 1.1em;
-        color: #2162cc;
-        margin-bottom: 5px;
-        transition-duration: 0.2s;
-    }
-    .signInButton:Hover {
-        color: darkblue;
-        font-size: 2.2em;
-        cursor: pointer;
-    }
-    .cancelButtonDiv {
-        font-size: 0.5em;
-        display: flex;
-        color: orangered;
-        justify-content: flex-end;
-    }
-    .cancelButton {
-        padding: 1px;
-        border-radius: 5px;
-        border: 1px solid orangered;
-        transition-duration: 0.2s;
-    }
-    .cancelButton:hover {
-        color: white;
-        background-color: red;
-        cursor: pointer;
-    }
-    </style>
-
+    <script src="./jquery-3.4.1.min.js"></script>
+    <script src="./constants.js"></script>
+    <script src="./Modules/client.js"></script>
     <script>
         function LoginStudent() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            loginInServer(email, password, (err, result) => {
+                if (err) {
+                    alert("Oops you made a mistake.\n"
+                        + "The error from the server is:\n " 
+                        + err.message
+                    );
+                } else {
+                    //loginInServer takes care of localStorage stuff.
+                    alert("successfully connected");
+                    linkToCorrectPage();
+                }
+            });
+        }
+        function linkToCorrectPage() {
             if (document.getElementById("Basic").checked) {
                 window.location = "Student_Basic/inbox.html"; 
+                setUpCheckBoxesJSON(true);
             } else if (document.getElementById("Intermediate").checked) {
                 window.location = "Student_Intermediate/inbox.html"; 
+                setUpCheckBoxesJSON(false);
             } else if (document.getElementById("Advanced").checked) {
-                window.location = "Student_Advanced/mainPage.html"; 
+                window.location = "Student_Advanced/mainPage.html";
+                setUpCheckBoxesJSON(false);
             }
         }
-function cancelLogin() {
-    window.history.back();
-}
+        function setUpCheckBoxesJSON(load) {
+            var json = {"loadCheckBox" : load};
+            if (DEBUG) {
+                alert(json.loadCheckBox);
+            }
+            localStorage.setItem("loadCheckBox", JSON.stringify(json))
+        }
+
+        function cancelLogin() {
+            window.history.back();
+        }
+        function createAccount() {
+            const json = {isSpecialist: false};
+            localStorage.setItem('isSpecialist', JSON.stringify(json));
+            window.location.href = "./createAccount.html";
+        }
     </script>
 </head>
 <body>
@@ -88,20 +65,19 @@ function cancelLogin() {
     <div class="innerContainer">
         <div class="title logoToTheSide"><div><i class="fa fa-user-circle" style="padding-right: 10px" aria-hidden="true"></i></div><div>STUDENT SIGN IN</div><br>
         </div>
-         <b style="color:red;">FAKE LOGIN. Just choose difficulty and click sign in</b>
         <div class="inputFieldDiv">
-            <label for="name" class="inputFieldLabel">Name:</label><br>
-            <input type="text" class="inputField" name="name" id="name" placeholder="Enter your name">
+            <label for="email" class="inputFieldLabel">Email:</label><br>
+            <input type="text" class="inputField" name="email" id="email" placeholder="Enter your email">
             <div class="hiddenDescription">
-                <div class="descriptionContainer">Spell your username correctly</div>
+                <div class="descriptionContainer">Do not make spelling or capitalisation mistakes</div>
             </div>
         </div>
         <br>
         <div class="inputFieldDiv">
             <label for="password" class="inputFieldLabel">Password:</label><br>
-            <input type="text" class="inputField" id="password" name="password" placeholder="Enter your password">
+            <input type="password" class="inputField" id="password" name="password" placeholder="Enter your password">
             <div class="hiddenDescription">
-                <div class="descriptionContainer">Spell your password correctly</div>
+                <div class="descriptionContainer">Do not make spelling or capitalisation mistakes</div>
             </div>
         </div>
         <br>
@@ -126,12 +102,18 @@ function cancelLogin() {
             <div>Sign in</div>
         </div>
         <br>
+        <div class="createAccountButtonDiv">
+            <div class="createAccountButton logoToTheSide" onclick="createAccount()">
+                <div><i class="fa fa-address-card-o" style="padding: 1px;"aria-hidden="true"></i></div>
+                <div>Create Account</div>
+            </div>
+        </div>
         <br>
         <div class="cancelButtonDiv">
-        <div class="cancelButton logoToTheSide" style="font-size: 2em;" onclick="cancelLogin()">
-            <div><i class="fa fa-chevron-circle-left" style="padding-right: 10px;" aria-hidden="true"></i></div>
-            <div>Cancel</div>
-        </div>
+            <div class="cancelButton logoToTheSide" style="font-size: 2em;" onclick="cancelLogin()">
+                <div><i class="fa fa-chevron-circle-left" style="padding-right: 10px;" aria-hidden="true"></i></div>
+                <div>Cancel</div>
+            </div>
         </div>
     </div>
    </div>
