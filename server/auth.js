@@ -28,6 +28,10 @@ passport.use(
                 if (manipulationSecretKey != MANIPULATION_SECRET_KEY) {
                     throw new Error({message : "wrong secret passed to create account"});
                 }
+                const found = await UserModel.findOne({email});
+                if (found) {
+                     throw new Error({code: 400, message: "email already taken"});
+                }
                 console.log("creating new user");
                 const newUser = await UserModel.create({
                     email, password, isSpecialist, inbox: [], sentItems: []
@@ -52,18 +56,19 @@ passport.use(
         },
         async function (email, password, done) {
             console.log("login Strategy reached");
+            //the done callback is done(error, <user or False if no user>, <message>)
             try {
                 const user = await UserModel.findOne({email});
                 if (!user) {
                     return done(null, false, {message: 'User not found'});
                 }
-                console.log("searched user: ", user);
+                console.log("searched user: ", user.email, user.password);
                 const valid = await user.isValidPassword(password);
+                console.log("password validity: " + valid);
                 if (!valid) {
                     return done(null, false, {message: 'Wrong Password'});
                 }
-                //the done callback is done(error, <user or False if no user>, <message>)
-                // login the user... by calling next function.
+                
                 return done(null, user, {message: 'Logged in Successfully'});
             } catch (error) {
                 return done(error);

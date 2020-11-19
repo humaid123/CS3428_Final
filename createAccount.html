@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <link rel="stylesheet" href="./styles/selectionPages.css">
-    <script src="./Modules/client.js"></script>
+    <script src="./Modules/manageAccounts.js"></script>
     <script src="./jquery-3.4.1.min.js"></script>
     <script src="./constants.js"></script>
     <style>
@@ -77,6 +77,7 @@ function createAccount() {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     const retypedPassword = document.getElementById('retypePassword').value;
+    alert("creating account:\nemail: " + email + "\npassword: " + password);
     if (retypedPassword != password) {
         alert("The password and the retyped password does not match");
         return;

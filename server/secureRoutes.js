@@ -76,8 +76,6 @@ router.post('/deleteEmail', async function (req, res) {
 });
 
 router.post('/storeNewEmail', async function(req, res) {
-    // email is used for database key/the username, 
-    // while newEmail is a newly composed email... 
     let {email, newEmail} = req.body;
     if (!email || !newEmail) {
         return res.status(400).json({message: "incorrect request"});
@@ -88,26 +86,22 @@ router.post('/storeNewEmail', async function(req, res) {
     try {
         if (!newEmail.isRead) newEmail.isRead = true;
         let user = await UserModel.findOne({email});
-        console.log("user found: ", user);
         let success = await user.addNewSentItem(newEmail);
         if (!success) throw new Error({message: "cannot add to sender"});
-        console.log("add email to sendee's sent items");
 
-	if (!newEmail.isRead) newEmail.isRead = false;
+	newEmail.isRead = false;
         const toEmail = newEmail.to;
         user = await UserModel.findOne({email: toEmail});
-        console.log("found to", toEmail);
         success = await user.addNewInboxEmail(newEmail);
         if (!success) throw new Error({message: "cannot add to main receiver"});
-        console.log("add email to 'to' sent items");
 
         const ccEmails = newEmail.cc;
-        for (const ccEmail of ccEmails) {
-            user = await UserModel.findOne({email: ccEmail});
-            console.log("found cc", user);
-            success = await user.addNewInboxEmail(newEmail); 
-            if (!success) throw new Error({message: "cannot add to a cced"});
-            console.log("added to cc sent Items");
+        if (ccEmails) {
+            for (const ccEmail of ccEmails) {
+                user = await UserModel.findOne({email: ccEmail});
+                success = await user.addNewInboxEmail(newEmail); 
+                if (!success) throw new Error({message: "cannot add to a cced"});
+            }
         }
         res.status(200).send({message: "new Email sent successful"})
     } catch(thrownErr) {
@@ -128,7 +122,7 @@ router.post('/viewEmail', async function(req, res) {
             return res.status(400).send({message: "could not find user"});
         }
 
-        const requestedEmail = user.viewEmail(isInbox, index);
+        const requestedEmail = await user.viewEmail(isInbox, index);
         return res.status(200).send({requestedEmail});
     } catch (error) {
         console.log("error in /viewEmail: ", error);

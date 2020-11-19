@@ -8,15 +8,16 @@
     <link rel="stylesheet" href="./styles/selectionPages.css">
     <script src="./jquery-3.4.1.min.js"></script>
     <script src="./constants.js"></script>
-    <script src="./Modules/client.js"></script>
+    <script src="./Modules/login.js"></script>
     <script>
         function LoginStudent() {
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
+            console.log("logging in with: ", email, password);
             loginInServer(email, password, (err, result) => {
                 if (err) {
                     alert("Oops you made a mistake.\n"
-                        + "The error from the server is:\n " 
+                        + "The error from the server is: " 
                         + err.message
                     );
                 } else {

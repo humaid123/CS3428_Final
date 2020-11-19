@@ -1,9 +1,8 @@
 
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
 const EmailSchema = new Schema({
     to: {type: String, required: true},
     from: {type: String, required: true},
@@ -38,20 +37,10 @@ UserSchema.pre(
 
 UserSchema.methods.isValidPassword = async function(password) {
     const user = this;
+    console.log("isValidPassword", password, user.password);
     const comparison = await bcrypt.compare(password, user.password);
+    console.log(comparison);
     return comparison;
-}
-
-UserSchema.methods.getEmails = function(isInbox) {
-    const user = this;
-    console.log("in getEmails method: ", user);
-    if (isInbox) {
-        console.log("GETTING: ", user._doc.inbox);
-        return user._doc.inbox;
-    } else {
-        console.log("GETTING: ", user._doc.sentItems);
-        return user._doc.sentItems;
-    }
 }
 
 UserSchema.methods.changeUrgency = async function(isInbox, index) {
@@ -78,21 +67,17 @@ UserSchema.methods.changeRead = async function(isInbox, index) {
 
 UserSchema.methods.addNewInboxEmail = async function(newEmail) {
     const user = this;
-    console.log("In addNewInboxEmail, user inbox before:\n", user.inbox);
     user.inbox.unshift(newEmail);
     user.markModified("inbox");
     const err = await user.save().catch(err => err);
-    console.log("In addNewInboxEmail, user inbox after:\n", user.inbox);
     return (err != null) ? true : false; 
 }
 
 UserSchema.methods.addNewSentItem = async function(newEmail) {
     const user = this;
-    console.log("In addNewSentItem, user sentItems before:\n", user.sentItems);
     user.sentItems.unshift(newEmail);
     user.markModified("sentItems");
     const err = await user.save().catch(err => err);
-    console.log("In addNewSentItems, user sentItems after:\n", user.sentItems);
     return (err != null)  ? true : false; 
 }
 
@@ -105,13 +90,18 @@ UserSchema.methods.deleteEmail = async function(isInbox, index) {
     return (err != null) ? true : false;
 }
 
-UserSchema.methods.viewEmail = function(isInbox, index) {
+UserSchema.methods.viewEmail = async function(isInbox, index) {
     const user = this;
-    if (isInbox) {
-        return user.inbox[index];
-    } else {
-        return user.sentItems[index];
+    const which = (isInbox) ? "inbox" : "sentItems";
+    const email = user[which][index];
+    user[which][index].isRead = true;
+    user.markModified(which);
+    const err = await user.save().catch(err => err);
+    if (err) {
+         console.log("error in saving for view Email: ", err);
     }
+    console.log("requested email: ", email);
+    return email;
 }
 const UserModel = mongoose.model('User', UserSchema);
 module.exports = UserModel;

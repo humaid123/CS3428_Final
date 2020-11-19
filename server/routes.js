@@ -28,7 +28,7 @@ router.post(
                 console.log("router for login running", err, user);
                 try {
                     if (err || !user) {
-                        return res.status(400).json({message : "unknown user"});
+                        return res.status(400).json({message : info.message});
                     }
                     console.log("calling req.login");
                     req.login(user, {session: false}, async function (error) {
