@@ -17,10 +17,10 @@ function loadSentEmails() {
   addSentEmailsFromCollection();
 }
 function linkCompose() {
-  window.location.href = "adminCompose.html";
+  window.location.href = "./adminCompose.html";
 }
-function showHelp() {
-  window.open("../Helps/MainHelp.html", "MsgWindow", SPECS);
+function manageAccounts() {
+  window.location.href = "./manageAccounts.html";
 }
 function showOffice() {
   document.getElementById("Navigation").style.display = "flex";

@@ -28,7 +28,7 @@ function loginInServer(email, password, loginFunc) {
     },
     error: function (xhrm, status, error) {
       if (xhrm.status != 400) {
-        return alert("unrecognised error: " + error);
+        return alert("unrecognised error: " + error + "-" + error);
       }
       const myErr = { code: xhrm.status, message: xhrm.responseJSON.message };
       loginFunc(myErr);

@@ -1,0 +1,91 @@
+<html>
+  <head>
+    <script src="../Modules/getAllAccountsFromServer.js"></script>
+    <script src="../Modules/deleteAccountFromDB.js"></script>
+    <script src="../jquery-3.4.1.min.js"></script>
+    <script src="../constants.js"></script>
+    <script>
+      function fillInAllAccounts() {
+        getAllAccountsFromServer(true, (err, result) => {
+          if (err) {
+            return alert(
+              "error occured in getting all accounts.\nError: " + err.message
+            );
+          }
+          displayAccounts(result.accounts);
+        });
+      }
+      function displayAccounts(accounts) {
+        console.log("displaying accounts: ", accounts);
+        let res = "";
+        for (const account of accounts) {
+          res += `<div class="account" onclick="writeAccount('${account}')">${account}</div>`;
+        }
+        document.getElementById("accounts").innerHTML = res;
+      }
+
+      function writeAccount(accountName) {
+        document.getElementById("emailToDelete").value = accountName;
+      }
+
+      function deleteAccount() {
+        const emailToDelete = document.getElementById("emailToDelete").value;
+        const deletionSecret = document.getElementById("deletionSecret").value;
+        deleteAccountFromDB(emailToDelete, deletionSecret, (err, result) => {
+          if (err) {
+            return alert("could not delete account: " + err.message);
+          }
+          alert("Server responded with: " + result.message);
+          windw.location.reload();
+        });
+      }
+
+      function goBack() {
+        window.location.back();
+      }
+    </script>
+    <style>
+      body {
+        width: 60%;
+        font-size: 1.5em;
+      }
+      .account {
+        padding: 2px;
+        border-bottom: 1px solid black;
+      }
+      .account:hover {
+        cursor: pointer;
+        background-color: red;
+        color: white;
+      }
+    </style>
+  </head>
+  <body onload="fillInAllAccounts()">
+    <div id="accountDisplay">
+      <div>EMAILS</div>
+      <div id="accounts"></div>
+    </div>
+
+    <div id="deleteAccountForm">
+      <h2>DELETING ACCOUNT</h2>
+      <label for="emailToDelete">
+        Email to delete:<input
+          type="text"
+          id="emailToDelete"
+          name="emailToDelete"
+        />
+      </label>
+      <label for="deletionSecret">
+        Deletion secret:<input
+          type="text"
+          id="deletionSecret"
+          name="deletionSecret"
+        />
+      </label>
+      <input type="button" value="delete account" onclick="deleteAccount()" />
+    </div>
+    <br>
+    <br>
+    <input type="button" value="Back" onclick="goBack()"></div>
+  </body>
+</html>

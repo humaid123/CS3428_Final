@@ -34,7 +34,7 @@ function deleteEmailFromServer(isInbox, index, deleteEmailFunc) {
     },
     error: function (xhrm, status, error) {
       if (xhrm.status != 400) {
-        return alert("unrecognised error status: " + xhrm.status);
+        return alert("unrecognised error status: " + xhrm.status + "-" + error);
       }
       const myErr = { code: xhrm.status, message: xhrm.responseJSON.message };
       deleteEmailFunc(myErr);
