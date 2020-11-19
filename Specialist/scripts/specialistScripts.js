@@ -19,8 +19,8 @@ function loadSentEmails() {
 function linkCompose() {
   window.location.href = "./adminCompose.html";
 }
-function manageAccounts() {
-  window.location.href = "./manageAccounts.html";
+function deleteAccounts() {
+  window.location.href = "./deleteAccounts.html";
 }
 function showOffice() {
   document.getElementById("Navigation").style.display = "flex";

@@ -1,6 +1,7 @@
 
 
 const MANIPULATION_SECRET_KEY = "MANIPULATE"; //this should be in process.env
+const DELETION_SECRET_KEY = "DELETE"; //this should be in process.env
 
 const express = require('express');
 const router = express.Router();
@@ -131,11 +132,11 @@ router.post('/viewEmail', async function(req, res) {
 });
 
 router.post('/deleteAccount', async function(req, res) {
-    let {email, manipulationSecretKey, emailToDelete} = req.body;
-    if (!email || !manipulationSecretKey) {
+    let {email, deletionSecretKey, emailToDelete} = req.body;
+    if (!email || !deletionSecretKey) {
         return res.status(400).send({message: "improper request"});
     }
-    if (manipulationSecretKey != MANIPULATION_SECRET_KEY) {
+    if (deletionSecretKey != DELETION_SECRET_KEY) {
         return res.status(400).send({message: "wrong secret key"});
     }
     try {
@@ -148,6 +149,29 @@ router.post('/deleteAccount', async function(req, res) {
             message: "could not delete", 
             error_message : error.message
         });
+    }
+});
+
+router.post('/getAllAccountEmails', async function(req, res) {
+    console.log("getAllAccountEmailReached");
+    let {email, isSpecialist} = req.body;
+    if (!email || !isSpecialist) {
+        return res.status(400).send({message : "improper request"});
+    }
+    isSpecialist = (isSpecialist == 'true'); //make sure it is a boolean need == and not ===
+    console.log("========> called with: ", email, isSpecialist, typeof(isSpecialist));
+    try {
+        let accounts = await UserModel.find({}, 'email isSpecialist');
+        console.log("found accounts: ", accounts);
+        if (!isSpecialist) {
+            accounts = accounts.filter((acc) => acc.isSpecialist); //return only specialists if student
+        }
+        const toReturn = accounts.map((acc) => acc.email); //return only emails
+        console.log("returning: ", toReturn);
+        res.status(200).json({accounts: toReturn});
+    } catch (error) {
+        console.log(error);
+        return res.status(400).send({message: "could not find all accounts."})
     }
 });
 

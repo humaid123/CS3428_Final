@@ -14,6 +14,22 @@
     <script src="../Modules/viewEmailFromServer.js" async></script>
     <script src="./scripts/specialistScripts.js" async></script>
     <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <style>
+        #deleteAccountButton {
+            border: 1px solid red;
+            color: red;
+        }
+        #deleteAccountButton:Hover {
+            background-color: red;
+            color: white;
+        }
+        @media screen and (max-width: 1000px) {
+            .topButton {
+                width: 7em;
+                font-size: 0.5em;
+            }
+        }
+    </style>
 </head>
 <body onload="loadInboxEmails()">
     <header>MAIN PAGE</header>
@@ -38,9 +54,7 @@
                 </button>
             </div>
             <div class="topButtonDiv">
-                <button id="manageAccountButton" class="normalButton topButton" onclick="manageAccounts()">
-                    <div>MANAGE</div>
-                </button>
+                <button id="deleteAccountButton" style="width: 6.5em;" class="normalButton topButton" onclick="deleteAccounts()">DELETE ACCOUNTS</button>
             </div>
         </div>
         <div id="innerContainer">
