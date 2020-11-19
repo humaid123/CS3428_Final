@@ -1,8 +1,7 @@
 
 
-<html>
+<html lang="en">
 <head>
-
     <title>Create Account</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta content="width=device-width, initial-scale=1" name="viewport" />
@@ -69,33 +68,31 @@
     </style>
 
     <script>
-function cancelCreateAccount() {
-    window.history.back();
-}
-
-function createAccount() {
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    const retypedPassword = document.getElementById('retypePassword').value;
-    alert("creating account:\nemail: " + email + "\npassword: " + password);
-    if (retypedPassword != password) {
-        alert("The password and the retyped password does not match");
-        return;
-    }
-    const secret = document.getElementById('secret').value;
-    let isSpecialist = JSON.parse(localStorage.getItem('isSpecialist')).isSpecialist;
-
-    createAccountInServer(email, password, secret, isSpecialist, (err, result) => {
-        if (err) {
-            alert("error in creating your account: " + err.message);
-        } else {
-            alert("Account created.\nTime to login now!");
-            window.location.href = "./index.html";
-            localStorage.removeItem('isSpecialist');
+        function cancelCreateAccount() {
+            window.history.back();
         }
-    });
 
-}
+        function createAccount() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const retypedPassword = document.getElementById('retypePassword').value;
+            if (retypedPassword != password) {
+                alert("The password and the retyped password does not match");
+                return;
+            }
+            const secret = document.getElementById('secret').value;
+            let isSpecialist = JSON.parse(localStorage.getItem('isSpecialist')).isSpecialist;
+
+            createAccountInServer(email, password, secret, isSpecialist, (err, result) => {
+                if (err) {
+                    alert("error in creating your account: " + err.message);
+                } else {
+                    alert("Account created.\nTime to login now!");
+                    window.location.href = "./index.html";
+                    localStorage.removeItem('isSpecialist');
+                }
+            });
+        }
     </script>
 </head>
 <body>

@@ -1,169 +1,173 @@
-     body {
-        width: 100%;
-    }
-    .emails {
-        height: 35em;
-        position: relative;
-        overflow: auto;
-    }
-    #container {
-        display: flex;
-        width: 100%;
-        flex-direction: column;
-        height: fit-content;
-    }
-    #innerContainer {
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-        height: 100%;
-        justify-content: stretch;
-        align-content: stretch;
-    }
-    #menuOnTop {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        align-items: flex-start;
-        vertical-align: middle;
-        border-bottom: 5px solid lightgrey;
-        flex-wrap: wrap;
-        position: sticky;
-        top: 0%;
-        background-color: white;
-        z-index: 3;
-        height: 30%;
-    }
-    #menuOnTop > div {
-        margin: 0.5em;
-    }
-    #Navigation {
-        padding-top: 10px;
-        display: flex;
-        flex-direction: column;
-        justify-items: flex-start;
-        align-content: flex-start;
-        background-color: #F0F0F0;
-            width: 50%;
-    }
-    #listOfEmails {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-    }
-    #ViewingEmail {
-        display: block;
-        width: 100%;
-    }
-    .seperator {
-        height: 100%;
-        background-color: lightgray;
-        width: 1em;
-    }
-    .navigationButton {
-        width: 100%;
-        border: none;
-        text-align: left;
-        background-color: inherit;
-            font-weight: 250;
-    }
-    .navigationButton:hover {
-        background-color:  #e6f2ff;
-        color: black;
-    }
-    .navigationButton:click {
-        background-color:  #e6f2ff;
-        font-weight: bold;
-        color: navy;
-    }
-    .topButtonDiv {
-        padding: 0.5em;
-        margin: 1em;
-    }
-    .topButton {
-        height: 7em;
-        width: 6em;
-        font-size: 0.76em;
-        padding: 0.5em;
-        border-radius: 35%;
-    }
+body {
+  width: 100%;
+}
+.emails {
+  height: 35em;
+  position: relative;
+  overflow: auto;
+}
+#container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  height: fit-content;
+}
+#innerContainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  justify-content: stretch;
+  align-content: stretch;
+}
+#menuOnTop {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  vertical-align: middle;
+  border-bottom: 5px solid lightgrey;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0%;
+  background-color: white;
+  z-index: 3;
+  height: 30%;
+}
+#menuOnTop > div {
+  margin: 0.5em;
+}
+#Navigation {
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-items: flex-start;
+  align-content: flex-start;
+  background-color: #f0f0f0;
+  width: 50%;
+}
+#listOfEmails {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+#ViewingEmail {
+  display: block;
+  width: 100%;
+}
+.seperator {
+  height: 100%;
+  background-color: lightgray;
+  width: 1em;
+}
+.navigationButton {
+  width: 100%;
+  border: none;
+  text-align: left;
+  background-color: inherit;
+  font-weight: 250;
+}
+.navigationButton:hover {
+  background-color: #e6f2ff;
+  color: black;
+}
+.navigationButton:click {
+  background-color: #e6f2ff;
+  font-weight: bold;
+  color: navy;
+}
+.topButtonDiv {
+  padding: 0.5em;
+  margin: 1em;
+}
+.topButton {
+  height: 7em;
+  width: 6em;
+  font-size: 0.76em;
+  padding: 0.5em;
+  border-radius: 35%;
+}
 #composeButton {
-    background-color: #2162cc;
-    color: white;
+  background-color: #2162cc;
+  color: white;
 }
 #composeButton:hover {
-    background-color: white;
-    color: orangered;
+  background-color: white;
+  color: orangered;
 }
 
-        #closeViewEmailDiv {
-            padding: 1em;
-            display: flex;
-            flex-direction: row;
-            align-items: right;
-            background-color: white;
-        }
-         #closeViewEmail {
-        margin-right: 1em;
-            border: 1px solid orangered;
-        color: orangered;
-        text-align: center;
-        height: 4em;
-        width: 5em;
-        font-weight: bold;
-        border-radius: 25%;
-    }
-    #closeViewEmail:hover {
-        background-color: orangered;
-        color: white;
-    }
-    @media screen and (max-width: 1000px) {
-        #Navigation {
-            display: none;
-        }
-        #ViewingEmail {
-            display: none;
-            position: fixed;
-            top: 0%;
-            overflow: auto;
-            z-index: 4;
-            height: 100%;
-        }
-        #closeViewEmailDiv {
-            display: block;
-        }
-        #listOfEmails {
-            width: 100%;
-        }
-        .emails {
-            height: 100%;
-        }
-        .seperator {
-            display: none;
-        }
-    }
+#closeViewEmailDiv {
+  padding: 1em;
+  display: flex;
+  flex-direction: row;
+  align-items: right;
+  background-color: white;
+}
+#closeViewEmail {
+  margin-right: 1em;
+  border: 1px solid orangered;
+  color: orangered;
+  text-align: center;
+  height: 4em;
+  width: 5em;
+  font-weight: bold;
+  border-radius: 25%;
+}
+#closeViewEmail:hover {
+  background-color: orangered;
+  color: white;
+}
+@media screen and (max-width: 1000px) {
+  #Navigation {
+    display: none;
+  }
+  #ViewingEmail {
+    display: none;
+    position: fixed;
+    top: 0%;
+    overflow: auto;
+    z-index: 4;
+    height: 100%;
+  }
+  #closeViewEmailDiv {
+    display: block;
+  }
+  #listOfEmails {
+    width: 100%;
+  }
+  .emails {
+    height: 100%;
+  }
+  .seperator {
+    display: none;
+  }
+}
 
-    #closeButton {
-        margin-right: 1em;
-            border: 1px solid orangered;
-        color: orangered;
-        text-align: center;
-        height: 4em;
-        width: 5em;
-        font-weight: bold;
-        border-radius: 25%;
-    }
-    #closeButton:hover {
-        background-color: orangered;
-        color: white;
-    }
-    #closeButtonDiv {
-        margin-top: 4em;
-        display: flex;
-        flex-direction: row;
-        align-items: right;
-    }
-    #NavigationContent {
-        position: sticky;
-        top: 20%;
-    }
+#closeButton {
+  margin-right: 1em;
+  border: 1px solid orangered;
+  color: orangered;
+  text-align: center;
+  height: 4em;
+  width: 5em;
+  font-weight: bold;
+  border-radius: 25%;
+}
+#closeButton:hover {
+  background-color: orangered;
+  color: white;
+}
+#closeButtonDiv {
+  margin-top: 4em;
+  display: flex;
+  flex-direction: row;
+  align-items: right;
+}
+#NavigationContent {
+  position: sticky;
+  top: 20%;
+}
+#logOutButton:hover {
+  cursor: pointer;
+  background-color: red;
+}

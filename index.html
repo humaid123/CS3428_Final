@@ -1,67 +1,65 @@
-
 <html>
-<head>
-   <!-- <link rel="stylesheet" href="indexMainPage.css"> -******-->
+  <head>
     <title>Austism NS pre-login</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <link rel="stylesheet" href="./styles/selectionPages.css">
-<style>
-    .prompt {
-        font-size: 1.7em;
-    }
-    #specialistSelection {
-        font-size: 1.5em;
-    }
-    #studentSelection {
-        font-size: 1.5em;
-    }
-</style>
+    <link rel="stylesheet" href="./styles/selectionPages.css" />
     <script>
-        function changeToStudent() {
-            window.location.href = "studentLogin.html";
-        }
-        function changeToSpecialist() {
-            window.location.href = "specialistLogin.html";
-        }
-        function createAccount() {
-            window.location.href = "createAccount.html";
-        }
+      function changeToStudent() {
+        window.location.href = "studentLogin.html";
+      }
+      function changeToSpecialist() {
+        window.location.href = "specialistLogin.html";
+      }
+      function createAccount() {
+        window.location.href = "createAccount.html";
+      }
     </script>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-    <div class="logoDiv">
-            <div class="logoContainer"><i class="fa fa-envelope logoIcon" aria-hidden="true"></i></div>
+      <div class="logoDiv">
+        <div class="logoContainer">
+          <i class="fa fa-envelope logoIcon" aria-hidden="true"></i>
         </div>
-    <div class="centerInnerDiv">
-    <div class="innerContainer">
-       <div class="title logoToTheSide">
-           <div style="margin: auto;">
-               <img src="./AutismNSLogo.png" width="90" height="90">
-           </div>
-           <div>Autism Nova Scotia<br>Email Training System</div>
-           <br>
-        </div>
-        <div class="prompt">Are you a Specialist or a Student?</div>
-        <div class="row"  id="studentSelection" onclick="changeToStudent()">
-            <div class="insideRow">
-                <div>Student</div>
+      </div>
+      <div class="centerInnerDiv">
+        <div class="innerContainer">
+          <div class="title logoToTheSide">
+            <div style="margin: auto">
+              <img src="./AutismNSLogo.png" width="90" height="90" />
+            </div>
+            <div>Autism Nova Scotia<br />Email Training System</div>
+            <br />
+          </div>
+          <div class="prompt" style="font-size: 2em">
+            Are you a Specialist or a Student?
+          </div>
+          <div class="row" id="studentSelection" onclick="changeToStudent()">
+            <div class="insideRow" style="font-size: 2em">
+              <div>Student</div>
             </div>
             <div class="hiddenDescription">
-                <div class="descriptionContainer">Hello and Welcome</div>
+              <div class="descriptionContainer">Hello and Welcome</div>
             </div>
-        </div>
-       <div class="row" id="specialistSelection" onclick="changeToSpecialist()">
-            <div class="insideRow">
-                <div>Specialist</div>
+          </div>
+          <div
+            class="row"
+            id="specialistSelection"
+            onclick="changeToSpecialist()"
+          >
+            <div class="insideRow" style="font-size: 2em">
+              <div>Specialist</div>
             </div>
             <div class="hiddenDescription">
-                <div class="descriptionContainer">Hello and Welcome</div>
+              <div class="descriptionContainer">Hello and Welcome</div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-    </div>
-    </div>
-</body>
+  </body>
 </html>

@@ -1,5 +1,5 @@
 function loadInboxEmails() {
-  addInboxEmailsFromCollection(ADMIN_INBOX_NAME);
+  addInboxEmailsFromCollection();
   for (const div in DIVS) {
     console.log(div);
     hints = DIVS[div].hints;
@@ -14,7 +14,7 @@ function loadInboxEmails() {
   }
 }
 function loadSentEmails() {
-  addSentEmailsFromCollection(ADMIN_SENT_ITEMS_NAME);
+  addSentEmailsFromCollection();
 }
 function linkCompose() {
   window.location.href = "adminCompose.html";
@@ -65,20 +65,12 @@ function viewEmail(i, isInbox) {
 
 function changeEmailToReadClasses(i) {
   let email = document.getElementById("email" + i);
-  let classNames = email.className.split(" ");
-  if (classNames[1] == "unreadUrgentRow") {
-    email.className = classNames[0] + " readUrgentRow";
-  } else {
-    email.className = classNames[0] + " readRow";
-  }
+  let classNames = email.className;
+  email.className = classNames.replace("unread", "read");
 
   let emailTwoButtons = document.getElementById("emailTwoButtons" + i);
-  let buttonClassNames = emailTwoButtons.className.split(" ");
-  if (buttonClassNames[1] == "unreadUrgentTwoButtons") {
-    emailTwoButtons.ClassName = buttonClassNames[0] + " readUrgentTwoButtons";
-  } else {
-    emailTwoButtons.ClassName = buttonClassNames[0] + " readTwoButtons";
-  }
+  let buttonClassNames = emailTwoButtons.className;
+  emailTwoButtons.className = buttonClassNames.replace("unread", "read");
 }
 
 function fillTextBoxes(email, isInbox) {

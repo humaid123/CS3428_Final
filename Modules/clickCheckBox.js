@@ -1,5 +1,5 @@
 function changeUrgencyInServer(isInbox, index, changeUrgencyFunc) {
-  const { email, token } = JSON.parse(localStorage.getItem("user"));
+  const { email, token } = JSON.parse(localStorage.getItem("user")) || {};
   if (!token || !email) {
     alert("YOU ARE NOT LOGGED IN");
     window.location.href = "../index.html";
@@ -19,7 +19,7 @@ function changeUrgencyInServer(isInbox, index, changeUrgencyFunc) {
     },
     error: function (xhrm, status, error) {
       if (xhrm.status != 400) {
-        return alert("unrecognised error: " + error);
+        return alert("unrecognised error-status: " + xhrm.status);
       }
       const myErr = { code: xhrm.status, message: xhrm.responseJSON.message };
       changeUrgencyFunc(myErr);
@@ -33,9 +33,9 @@ function clickCheckBox(i, isInbox) {
       alert("could not change urgency. \nError:" + err.message);
     } else {
       console.log(result);
-      changeCheckboxText(i);
-      changeRowClasses(i);
-      changeTwoButtonsClasses(i);
+      const wasUrgent = changeCheckboxText(i);
+      changeRowClasses(i, wasUrgent);
+      changeTwoButtonsClasses(i, wasUrgent);
     }
   });
 }
@@ -44,39 +44,33 @@ function changeCheckboxText(i) {
   let checkbox = document.getElementById("checkbox" + i);
   if (checkbox.innerHTML == CHECKED) {
     checkbox.innerHTML = NOT_CHECKED;
+    return true; //it was checked so it was urgent
   } else {
     checkbox.innerHTML = CHECKED;
+    return false;
   }
 }
 
-function changeRowClasses(i) {
+function changeRowClasses(i, wasUrgent) {
   let email = document.getElementById("email" + i);
-  let classNames = email.className.split(" ");
-  let newClassNames = classNames[0] + " ";
-  if (classNames[1] == "readUrgentRow") {
-    newClassNames += "readRow";
-  } else if (classNames[1] == "unreadUrgentRow") {
-    newClassNames += "unreadRow";
-  } else if (classNames[1] == "readRow") {
-    newClassNames += "readUrgentRow";
-  } else if (classNames[1] == "unreadRow") {
-    newClassNames += "unreadUrgentRow";
+  let classNames = email.className;
+  let newClassNames;
+  if (wasUrgent) {
+    newClassNames = classNames.replace("Urgent", "");
+  } else {
+    newClassNames = classNames.replace("read", "readUrgent");
   }
   email.className = newClassNames;
 }
 
-function changeTwoButtonsClasses(i) {
+function changeTwoButtonsClasses(i, wasUrgent) {
   let emailTwoButtons = document.getElementById("emailTwoButtons" + i);
-  classNames = emailTwoButtons.className.split(" ");
-  newClassNames = classNames[0] + " ";
-  if (classNames[1] == "readUrgentTwoButtons") {
-    newClassNames += "readTwoButtons";
-  } else if (classNames[1] == "unreadUrgentTwoButtons") {
-    newClassNames += "unreadTwoButtons";
-  } else if (classNames[1] == "readTwoButtons") {
-    newClassNames += "readUrgentTwoButtons";
-  } else if (classNames[1] == "unreadTwoButtons") {
-    newClassNames += "unreadUrgentTwoButtons";
+  classNames = emailTwoButtons.className;
+  let newClassNames;
+  if (wasUrgent) {
+    newClassNames = classNames.replace("Urgent", "");
+  } else {
+    newClassNames = classNames.replace("read", "readUrgent");
   }
   emailTwoButtons.className = newClassNames;
 }
