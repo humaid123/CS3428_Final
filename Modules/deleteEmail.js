@@ -1,27 +1,41 @@
 
-function createDeleteKey(name, i) {
-    return `<div class="deleteKeyDiv">`
-                + `<a class="deleteKey" onclick="deleteEmail('${name}', ${i})"><i class="fa fa-trash" aria-hidden="true"></i>DELETE</a>`
-                 + `</div>`;
-} 
+function deleteEmail(i, isInbox) {
 
-function deleteEmail(name, i) {
     var ans = confirm("Are you sure you want to delete this email?");
 
     if (ans == true) {
-        $.post(SERVER_URL + '/deleteEmail', 
-            createNameIndexReq(name, i), 
-            runOnSuccessFulDeletion).fail(runOnDeleteFail);
-        window.location.reload();
+        deleteEmailFromServer(isInbox, i, (err, result) => {
+            if (err) {
+                alert("server error in deleting email\nError: " + err.message); 
+            } else {
+                window.location.reload();
+                console.log("delete success");
+            }
+        });
     }
+}
 
-    function runOnSuccessFulDeletion(data) {
-        if (DEBUG) {
-            alert(data.message);
+function deleteEmailFromServer(isInbox, index, deleteEmailFunc) {
+    const {email, token} = JSON.parse(localStorage.getItem('user'));
+    if (!token || !email) {
+        alert("YOU ARE NOT LOGGED IN");
+        window.location.href = "../index.html";
+        return;
+    }
+    $.ajax({
+        type: "POST",
+        url: SERVER_URL + "/secure/deleteEmail" + "?" +  $.param({secret_token: token}),
+        data: {email, isInbox, index},
+        dataType: 'json',
+        success: function(result, status, xhr) {
+            deleteEmailFunc(null, result);
+        },
+        error: function(xhrm, status, error) {
+            if (xhrm.status != 400) {
+                return alert("unrecognised error: " + error);
+            }
+            const myErr = {code: xhrm.status, message: xhrm.responseJSON.message};
+            deleteEmailFunc(myErr);
         }
-    }
-
-    function runOnDeleteFail(err) {
-        alert("could not delete email");
-    }
+    });
 }

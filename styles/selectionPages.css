@@ -84,7 +84,83 @@ body {
         font-size: 0.6em;
     }
 }
-        .logoToTheSide {
-            display: flex;
-            flex-direction: row;
-        }
+.logoToTheSide {
+    display: flex;
+    flex-direction: row;
+}
+
+.inputFieldDiv {
+        padding: 5px;
+        border-bottom: 1px solid lightgrey;
+        transition-duration: 0.2s;
+    }
+    .inputField {
+        width: 90%;
+        font-size: 1.3em;
+    }
+    .inputFieldDiv:hover .hiddenDescription {
+        display: block;
+    }
+    .inputFieldDiv:hover {
+        border-left: 5px solid darkblue;
+    }
+
+
+    /*Needed for this screen only*/
+    .innerContainer {
+        font-size: 1em;
+    }
+    .title {
+        font-size: 2em;
+    }
+    .signInButton {
+        font-size: 2em;
+        text-align: center;
+        font-weight: bold;
+        font-size: 1.1em;
+        color: #2162cc;
+        margin-bottom: 5px;
+        transition-duration: 0.2s;
+    }
+    .signInButton:Hover {
+        color: darkblue;
+        font-size: 2.2em;
+        cursor: pointer;
+    }
+    .cancelButtonDiv {
+        font-size: 0.5em;
+        display: flex;
+        color: orangered;
+        justify-content: flex-end;
+    }
+    .cancelButton {
+        padding: 1px;
+        border-radius: 5px;
+        border: 1px solid orangered;
+        transition-duration: 0.2s;
+    }
+    .cancelButton:hover {
+        color: white;
+        background-color: red;
+        cursor: pointer;
+    }
+
+.createAccountButtonDiv {
+    margin-top: 1.5em;
+    display: flex;
+    color: navy;
+    justify-content: flex-end;
+}
+
+.createAccountButton {
+    padding: 1px;
+    border-radius: 5px;
+    transition-duration: 0.5s;
+}
+.createAccountButton:hover {
+    color: white;
+    background-color: navy;
+    cursor: pointer;
+}
+
+

@@ -40,15 +40,6 @@ function linkBackViewInbox() {
 const VIEW_DIVS = ["Cc", "Subject", "Body", "From", "To"];
 
 
-function fillTextBoxes() {
-    var name = JSON.parse(localStorage.getItem("emailToView")).collectionName;
-    var index = JSON.parse(localStorage.getItem("emailToView")).index;
-    getEmailJSONFromServer(
-        createViewRequest(name, index)
-    );
-}
-
-
 function turnOnHidden(div) {
     for (const curr_div of VIEW_DIVS) {
         if (curr_div == div) {
@@ -60,33 +51,32 @@ function turnOnHidden(div) {
 }
 
 
-function createViewRequest(name, index) {
-    return {"collectionName":name, "index":index};
+function fillTextBoxes() {
+    var isInbox = JSON.parse(localStorage.getItem("emailToView")).isInbox;
+    var index = JSON.parse(localStorage.getItem("emailToView")).index;
+    viewEmailFromServer(isInbox, index, (err, result) => {
+        if (err) {
+            alert("could not find email.\nError: " + err.message);
+        } else {
+             useEmailToFillTextBox(result.email, isInbox);
+        }
+    });
 }
 
-
-function getEmailJSONFromServer(req) {
-    $.post(SERVER_URL + '/viewEmail', req, 
-        useTheEmailToFillTextBoxes).fail(errorFunction);
-
-    function useTheEmailToFillTextBoxes(data) {
-        var email = data.email;
-        $("#partnerTextBox").val(email.conversationPartner);
-        $("#CcTextBox").val(email.cc);
-        $("#SubjectTextBox").val(email.subject);
-        $("#BodyTextBox").val(email.emailText);
+function useTheEmailToFillTextBoxes(email, isInbox) {
+    if (isInbox) {
+        $("#partnerTextBox").val(email.from);
+    } else {
+        $("#partnerTextBox").val(email.to);
     }
-
-    function errorFunction (err) {
-        alert("server error in viewing an email.");
-    }
+    $("#CcTextBox").val(email.cc);
+    $("#SubjectTextBox").val(email.subject);
+    $("#BodyTextBox").val(email.body);
 }
-
 
 function reply() {
     try {
         setUpLinkBackJSON(fWhere);
-        setUpCheckBoxesJSON(true);
         window.location.href = "../ComposeScreens/studentCompose.html";
     } catch (e) {
         alert(e.name + "\n" + e.message)
@@ -96,12 +86,4 @@ function reply() {
 function setUpLinkBackJSON(fWhere) {
     var json = {"fromWhere" : fWhere};
     localStorage.setItem("fromWhere",JSON.stringify(json))
-}
-
-function setUpCheckBoxesJSON(load) {
-    var json = {"loadCheckBox" : load};
-    if (DEBUG) {
-        alert(json.loadCheckBox);
-    }
-    localStorage.setItem("loadCheckBox", JSON.stringify(json))
 }

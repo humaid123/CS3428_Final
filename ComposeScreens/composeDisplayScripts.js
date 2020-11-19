@@ -25,7 +25,6 @@ function loadCheckBoxes() {
             div.innerHTML = createCheckBoxes(divId);
         }
     }
-    localStorage.removeItem("loadCheckBox"); //clean up
 }
 
 function createCheckBoxes(divId) {
