@@ -1,5 +1,5 @@
 
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
@@ -24,16 +24,6 @@ UserSchema.add({
 });
 
 console.log(UserSchema);
-
-UserSchema.pre(
-    'save', 
-    async function(next) {
-        const user = this;
-        const hash = await bcrypt.hash(this.password, 10);
-        console.log(hash);
-        this.password = hash;
-        next();
-});
 
 UserSchema.methods.isValidPassword = async function(password) {
     const user = this;

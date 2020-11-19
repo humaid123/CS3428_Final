@@ -3,6 +3,7 @@ const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
 console.log(localStrategy);
 const UserModel = require('./model');
+const bcrypt = require('bcryptjs');
 
 const SECRET = "TOP_SECRET"; //this string should be in process.env, is the secret that is used to hash user to get the jwt
 const MANIPULATION_SECRET_KEY = "MANIPULATE"; //this should be in process.env
@@ -33,6 +34,9 @@ passport.use(
                      throw new Error({code: 400, message: "email already taken"});
                 }
                 console.log("creating new user");
+                const hash = await bcrypt.hash(password, 10);
+                console.log(hash);
+                password = hash;
                 const newUser = await UserModel.create({
                     email, password, isSpecialist, inbox: [], sentItems: []
                 });
