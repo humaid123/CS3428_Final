@@ -14,11 +14,7 @@ footer {
   height: 1em;
   margin-top: 1em;
 }
-@media screen and (max-width: 650px) {
-  body {
-    width: 100%;
-  }
-}
+
 html {
   font-family: sans-serif;
   line-height: 1.15;
@@ -94,4 +90,10 @@ root {
 }
 #logOutButton:hover {
   background-color: red;
+}
+
+@media screen and (max-width: 650px) {
+  body {
+    width: 100%;
+  }
 }
