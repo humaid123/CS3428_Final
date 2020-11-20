@@ -3,44 +3,11 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 const bodyParser = require("body-parser");
 const userModel = require("./server/model");
-
-const port = 3555;
-const username = "group7";
-const password = encodeURIComponent("spent@provide@39");
-const localHost = "127.0.0.1";
-const localPort = "27017";
-const database = "group7";
-const credentialString =
-  "mongodb://" +
-  username +
-  ":" +
-  password +
-  "@" +
-  localHost +
-  ":" +
-  localPort +
-  "/" +
-  database;
+require("dotenv").config();
 
 const server = express();
 server.use(express.json());
 server.use(bodyParser.urlencoded({ extended: true }));
-server.use("/scripts", express.static(__dirname + "/scripts"));
-//This was added because of how the folders in our project are.
-server.use(
-  "/scripts/composing",
-  express.static(__dirname + "/scripts/composing")
-);
-server.use(
-  "/scripts/inboxAndSentItems",
-  express.static(__dirname + "/scripts/inboxAndSentItems")
-);
-server.use(
-  "/scripts/viewEmails",
-  express.static(__dirname + "/scripts/viewEmails")
-);
-server.use("/scripts/helps", express.static(__dirname + "/scripts/helps"));
-server.use("/css", express.static(__dirname + "/css"));
 server.use(express.static(__dirname));
 var allowCrossDomain = function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -50,8 +17,7 @@ var allowCrossDomain = function (req, res, next) {
 };
 server.use(allowCrossDomain);
 
-mongoose.set("debug", true);
-mongoose.connect(credentialString, {
+mongoose.connect(process.env.DB_STRING, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -79,6 +45,6 @@ server.use((err, req, res, next) => {
   res.json({ error: err });
 });
 
-server.listen(port, () => {
-  console.log("Listening on port " + port);
+server.listen(process.env.PORT, () => {
+  console.log("Listening on port " + process.env.PORT);
 });

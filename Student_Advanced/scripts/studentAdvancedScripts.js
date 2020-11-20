@@ -17,11 +17,9 @@ function turnOnHidden(div) {
     }
   }
 }
-
-function loadInboxEmails() {
+function loadPage() {
   addInboxEmailsFromCollection();
   for (const div in DIVS) {
-    console.log(div);
     hints = DIVS[div].hints;
     res = "";
     for (hint of hints) {
@@ -33,9 +31,18 @@ function loadInboxEmails() {
     }
   }
 }
+function loadInboxEmails() {
+  addInboxEmailsFromCollection();
+  if (window.innerWidth < 1000) {
+    document.getElementById("Navigation").style.display = "none";
+  }
+}
 
 function loadSentEmails() {
   addSentEmailsFromCollection();
+  if (window.innerWidth < 1000) {
+    document.getElementById("Navigation").style.display = "none";
+  }
 }
 
 function linkCompose() {
