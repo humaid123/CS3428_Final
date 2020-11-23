@@ -106,7 +106,7 @@ router.post("/storeNewEmail", async function (req, res) {
 
   //send to sender
   newEmail.isRead = true;
-  let success = await sendee.addNewSentItem(newEmail);
+  let success = await sender.addNewSentItem(newEmail);
   if (!success) {
     return res
       .status(400)
@@ -122,7 +122,7 @@ router.post("/storeNewEmail", async function (req, res) {
       unsentEmail.push(emailReceiver.email);
     }
   }
-  if (unsentEmails) {
+  if (unsentEmails.length != 0) {
     //not empty, so some one did not get the email
     let str = "";
     for (let i = 0; i < unsentEmails.length; i++) {
