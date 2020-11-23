@@ -71,35 +71,73 @@ router.post("/deleteEmail", async function (req, res) {
 router.post("/storeNewEmail", async function (req, res) {
   let { email, newEmail } = req.body;
   if (!email || !newEmail) {
-    return res.status(400).json({ message: "incorrect request" });
+    return res.status(400).json({ message: "Incorrect request" });
   }
   if (!newEmail.from) newEmail.from = email;
-  if (!newEmail.isUrgent) newEmail.isUrgent = false;
-  try {
-    if (!newEmail.isRead) newEmail.isRead = true;
-    let user = await UserModel.findOne({ email });
-    let success = await user.addNewSentItem(newEmail);
-    if (!success) throw new Error({ message: "cannot add to sender" });
+  newEmail.isUrgent = false;
 
-    newEmail.isRead = false;
-    const toEmail = newEmail.to;
-    user = await UserModel.findOne({ email: toEmail });
-    success = await user.addNewInboxEmail(newEmail);
-    if (!success) throw new Error({ message: "cannot add to main receiver" });
+  let sender = await UserModel.findOne({ email });
+  if (!sender) {
+    return res.status(400).send({ message: "Could not find sendee" });
+  }
 
-    const ccEmails = newEmail.cc;
-    if (ccEmails) {
-      //if empty array, this is not read
-      for (const ccEmail of ccEmails) {
-        user = await UserModel.findOne({ email: ccEmail });
-        success = await user.addNewInboxEmail(newEmail);
-        if (!success) throw new Error({ message: "cannot add to a cced" });
+  //find al receivers first
+  let emailReceivers = [];
+  let receiver = await UserModel.findOne({ email: newEmail.to });
+  if (receiver) {
+    emailReceivers.push(receiver);
+  } else {
+    throw res
+      .status(400)
+      .send({ message: "Could not find receiver: " + newEmail.to });
+  }
+  if (newEmail.cc) {
+    for (const ccEmail of newEmail.cc) {
+      let ccedPerson = await UserModel.findOne({ email: ccEmail });
+      if (ccedPerson) {
+        emailReceivers.push(user);
+      } else {
+        return res
+          .status(400)
+          .send({ message: "could not find a cced person: " + ccEmail });
       }
     }
-    res.status(200).send({ message: "new Email sent successful" });
-  } catch (thrownErr) {
-    res.status(400).send({ message: thrownErr.message });
   }
+
+  //send to sender
+  newEmail.isRead = true;
+  let success = await sendee.addNewInboxEmail(newEmail);
+  if (!success) {
+    return res
+      .status(400)
+      .send({ message: "Could not find your user account." });
+  }
+  //send to receivers
+  newEmail.isRead = false;
+  let unsentEmails = [];
+  for (const emailReceiver of emailReceivers) {
+    let success = await emailReceiver.addNewSentItem(newEmail);
+    if (!success) {
+      unsentEmail.push(emailReceiver.email);
+    }
+  }
+  if (unsentEmails) {
+    //not empty, so some one did not get the email, respond
+    let str = "";
+    for (let i = 0; i < unsentEmails.length; i++) {
+      if (i == unsentEmails.length - 1) {
+        str += unsentEmails[i];
+      } else {
+        str += unsentEmails[i] + ", ";
+      }
+    }
+    // we just send a message if we could not add to someone...
+    return res
+      .status(200)
+      .send({ message: "sent message to everyone except: " + str + "." });
+  }
+
+  return res.status(200).send({ message: "message successfully sent." });
 });
 
 router.post("/viewEmail", async function (req, res) {

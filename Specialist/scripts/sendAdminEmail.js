@@ -12,7 +12,7 @@ function sendAdminEmail() {
   let body = $("#BodyTextBox").val();
   let cc;
   if (cc_string) {
-    cc = cc_string.split(" ");
+    cc = cc_string.split(/\s+/);
   } else {
     cc = [];
   }

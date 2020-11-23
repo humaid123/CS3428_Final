@@ -16,7 +16,7 @@ function sendStudentEmail() {
 
   let cc;
   if (cc_string != "") {
-    cc = cc_string.split(" ");
+    cc = cc_string.split(/\s+/);
   } else {
     cc = [];
   }
@@ -27,6 +27,7 @@ function sendStudentEmail() {
     if (err) {
       alert("could not send email.\nError: " + err.message);
     } else {
+      alert(result.message);
       linkBackAfterSending();
     }
   });

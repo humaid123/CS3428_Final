@@ -15,17 +15,17 @@
     <script src="./scripts/linkBackCompose.js"></script>
     <script src="./scripts/sendAdminEmail.js"></script>
     <script src="./scripts/adminCompose.js"></script>
+    <script src="../Modules/getAllAccountsFromServer.js"></script>
   </head>
   <body onload="loadAdminOptions()">
-    <!--Loads the drop down menu options-->
     <header>COMPOSING</header>
 
     <div class="unsolicitedText">
-      <!--Adds the yellow text-->
       Did you know that you can click on To, Cc, Subject or Body and help will
       appear?
     </div>
 
+    <datalist id="LIST"></datalist>
     <div id="composing">
       <div id="To">
         <div class="composeField myDropDown">
@@ -39,11 +39,10 @@
             <input
               type="text"
               class="longTextBox"
-              list="TO_DATA_LIST"
+              list="LIST"
               id="ToDropDown"
             />
           </div>
-          <datalist id="TO_DATA_LIST" class="list"></datalist>
         </div>
       </div>
       <div id="From">
@@ -58,11 +57,10 @@
             <input
               type="text"
               class="longTextBox"
-              list="FROM_DATA_LIST"
               id="FromDropDown"
+              placeholder="Write a name that your student will recognise"
             />
           </div>
-          <datalist id="FROM_DATA_LIST" class="list"></datalist>
         </div>
       </div>
       <div id="Cc">
@@ -77,11 +75,10 @@
             <input
               type="text"
               class="longTextBox"
-              list="CC_DATA_LIST"
+              list="LIST"
               id="CcDropDown"
             />
           </div>
-          <datalist id="CC_DATA_LIST" class="list"></datalist>
         </div>
       </div>
       <div id="Subject">

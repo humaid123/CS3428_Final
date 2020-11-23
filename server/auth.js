@@ -16,27 +16,26 @@ passport.use(
     },
     //callback after authentication
     async function (req, email, password, done) {
-      console.log(
-        "/signup local Strategy reached: ",
-        email,
-        password,
-        req.body
-      );
-      // callback on how to use local strategy for the authentication.
-      // We take the email and password and create a new User..
+      // Configure localStrategy to create Account-We take the email and password and create a new User..
       try {
         const { manipulationSecretKey, isSpecialist } = req.body;
-        if (manipulationSecretKey != process.env.MANIPULATION_SECRET_KEY) {
-          throw new Error({ message: "wrong secret passed to create account" });
+        if (
+          (isSpecialist &&
+            manipulationSecretKey != process.env.SPECIALIST_MANIPULATION_KEY) ||
+          (!isSpecialist &&
+            manipulationSecretKey != process.env.STUDENT_MANIPULATION_KEY)
+        ) {
+          throw new Error({
+            message: "Wrong secret passed - cannot create account",
+          });
         }
 
-        //test if already exists
         const found = await UserModel.findOne({ email });
         if (found) {
-          throw new Error({ code: 400, message: "email already taken" });
+          throw new Error({ code: 400, message: "Email already taken" });
         }
 
-        //hash password instead of saving
+        //hash password before saving
         const hash = await bcrypt.hash(password, 10);
         password = hash;
         const newUser = await UserModel.create({

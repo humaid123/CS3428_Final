@@ -1,16 +1,17 @@
-
-
 function loadAdminOptions() {
-    if (DEBUG) {
-        alert("loading admin options.");
+  getAllAccountsFromServer(true, (err, result) => {
+    if (err) {
+      alert("error in loading the dropdown");
+    } else {
+      loadTheOptions(result.accounts);
     }
-    console.log("to add dropdown");
+  });
 }
 
-function createOptionsString(array) {
-    var result ="";
-    for (var i = 0; i < array.length; i++) {
-        result += '<option class="optionItem">'+ array[i] + '</option>';
-    }
-    return result;
+function loadTheOptions(accounts) {
+  let res = "";
+  for (const account of accounts) {
+    res += `<option class="optionItem">${account}</option>`;
+  }
+  $("#LIST").html(res);
 }

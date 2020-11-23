@@ -1,240 +1,316 @@
 <html>
-<head>
+  <head>
     <title>Your Email System</title>
     <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" href="../styles/index.css">
-    <link rel="stylesheet" href="../styles/composeStyles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../styles/index.css" />
+    <link rel="stylesheet" href="../styles/composeStyles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <script src="../jquery-3.4.1.min.js"></script>
     <script src="../constants.js"></script>
     <script src="../Modules/storeNewEmailOnServer.js"></script>
     <script src="./linkBackCompose.js"></script>
     <script src="./sendStudentEmail.js"></script>
-    <script src="./composeDisplayScripts.js"></script>
-</head>
-<body onload="loadCheckBoxes()">
+    <script src="./loadCheckboxes.js"></script>
+    <script src="./loadDropdown.js"></script>
+    <script src="../Modules/getAllAccountsFromServer.js"></script>
+    <script>
+      const COMPOSE_DIVS = {
+        To: { checkBoxes: [] },
+        Cc: { checkBoxes: [] },
+        Subject: { checkBoxes: [] },
+        Greeting: { checkBoxes: [] },
+        Body: { checkBoxes: [] },
+        Closure: { checkBoxes: [] },
+      };
+      function loadPage() {
+        loadCheckBoxes();
+        loadDropdown();
+      }
+    </script>
+  </head>
+  <body onload="loadPage()">
     <header>COMPOSING</header>
 
     <div class="unsolicitedText">
-        Help will appear when you click on a field.
+      Help will appear when you click on a field.
     </div>
+    <datalist id="LIST"></datalist>
     <div id="composing">
-        <div id="To">
-            <div class="composeField myDropDown">
-                <div id="ToCorrect" class="notAllTicked">
-                    <i class="fa fa-exclamation-triangle composeIcon"></i>
-                </div>
-                <div class="labelComposeField">
-                    <label for="ToDropDown" class="myLabel">To</label>
-                </div>
-                <div class="elementComposeField">
-                    <input type="text" class="longTextBox" list="TO_LIST" id="ToDropDown" onfocus="turnOnHidden('To')">
-                </div>
-                <datalist id="TO_LIST" class="list"></datalist>
-            </div>
-            <div id="ToHidden" class="hidden">
-                <div class="hiddenBlock">
-                    <div class="hintsAndCheckBoxes">
-                        <div class="hints" id="ToHints">
-                            <p>HINTS FOR TO</p>
-                            <ul class="hintList" id="ToHintList">
-                                <li class="hintListItem">To whom are you sending the email?</li>
-                            </ul>
-                        </div>
-                        <div class="composeCheckBoxes" id="ToCheckBoxes"></div>
-                    </div>
-                    <div class="checkedEverthingDiv">
-                        <button class="checkedEverythingButton" onclick="closeCheckBoxes('To')">
-                            <i class="fa fa-check-square"></i>
-                            <span>Checked Everything?</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
+      <div id="To">
+        <div class="composeField myDropDown">
+          <div id="ToCorrect" class="notAllTicked">
+            <i class="fa fa-exclamation-triangle composeIcon"></i>
+          </div>
+          <div class="labelComposeField">
+            <label for="ToDropDown" class="myLabel">To</label>
+          </div>
+          <div class="elementComposeField">
+            <input
+              type="text"
+              class="longTextBox"
+              list="LIST"
+              id="ToDropDown"
+              onfocus="turnOnHidden('To')"
+            />
+          </div>
         </div>
-        <div id="Cc">
-            <div class="composeField myDropDown">
-                <div id="CcCorrect" class="notAllTicked">
-                    <i class="fa fa-exclamation-triangle composeIcon"></i>
-                </div>
-                <div class="labelComposeField">
-                    <label for="CcDropDown" class="myLabel">Cc</label>
-                </div>
-                <div class="elementComposeField">
-                    <input type="text" class="longTextBox" list="CC_LIST" id="CcDropDown" onfocus="turnOnHidden('Cc')">
-                </div>
-                <datalist id="CC_LIST" class="list"></datalist>
+        <div id="ToHidden" class="hidden">
+          <div class="hiddenBlock">
+            <div class="hintsAndCheckBoxes">
+              <div class="hints" id="ToHints">
+                <p>HINTS FOR TO</p>
+                <ul class="hintList" id="ToHintList">
+                  <li class="hintListItem">
+                    To whom are you sending the email?
+                  </li>
+                </ul>
+              </div>
+              <div class="composeCheckBoxes" id="ToCheckBoxes"></div>
             </div>
-            <div id="CcHidden" class="hidden">
-                <div class="hiddenBlock">
-                    <div class="hintsAndCheckBoxes">
-                        <div class="hints" id="CcHints">
-                            <p>HINTS FOR CC</p>
-                            <ul class="hintList" id="CcHintList">
-                                <li class="hintListItem">Who else needs to get this email?</li>
-                                <li class="hintListItem">Include only the person who really need to see this email</li>
-                            </ul>
-                        </div>
-                        <div class="composeCheckBoxes" id="CcCheckBoxes"></div>
-                    </div>
-                    <div class="checkedEverthingDiv">
-                        <button class="checkedEverythingButton" onclick="closeCheckBoxes('Cc')">
-                            <i class="fa fa-check-square"></i>
-                            <span>Checked Everything?</span>
-                        </button>
-                    </div>
-                </div>
+            <div class="checkedEverthingDiv">
+              <button
+                class="checkedEverythingButton"
+                onclick="closeCheckBoxes('To')"
+              >
+                <i class="fa fa-check-square"></i>
+                <span>Checked Everything?</span>
+              </button>
             </div>
+          </div>
         </div>
-        <div id="Subject">
-            <div class="composeField myTextBox">
-                <div id="SubjectCorrect" class="notAllTicked">
-                    <i class="fa fa-exclamation-triangle composeIcon"></i>
-                </div>
-                <div class="labelComposeField">
-                    <label for="SubjectTextBox" class="myLabel">Subject</label>
-                </div>
-                <div class="elementComposeField">
-                    <input type="text" class="longTextBox" id="SubjectTextBox" onfocus="turnOnHidden('Subject')">
-                </div>
-            </div>
-            <div id="SubjectHidden" class="hidden">
-                <div class="hiddenBlock">
-                    <div class="hintsAndCheckBoxes">
-                        <div class="hints" id="SubjectHints">
-                            <p>HINTS FOR SUBJECT</p>
-                            <ul class="hintList" id="subjectHintList">
-                                <li class="hintListItem">Give a Brief description of the content of the email</li>
-                            </ul>
-                        </div>
-                        <div class="composeCheckBoxes" id="SubjectCheckBoxes"></div>
-                    </div>
-                    <div class="checkedEverthingDiv">
-                        <button class="checkedEverythingButton" onclick="closeCheckBoxes('Subject')">
-                            <i class="fa fa-check-square"></i>
-                            <span>Checked Everything?</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
+      </div>
+      <div id="Cc">
+        <div class="composeField myDropDown">
+          <div id="CcCorrect" class="notAllTicked">
+            <i class="fa fa-exclamation-triangle composeIcon"></i>
+          </div>
+          <div class="labelComposeField">
+            <label for="CcDropDown" class="myLabel">Cc</label>
+          </div>
+          <div class="elementComposeField">
+            <input
+              type="text"
+              class="longTextBox"
+              list="LIST"
+              id="CcDropDown"
+              onfocus="turnOnHidden('Cc')"
+            />
+          </div>
         </div>
-        <div id="Greeting">
-            <div class="composeTextArea">
-                <div class="textAreaFlags">
-                    <div id="GreetingCorrect" class="notAllTicked">
-                        <i class="fa fa-exclamation-triangle composeIcon"></i>
-                    </div>
-                    <div class="labelTextArea">
-                        <label for="GreetingTextBox" class="myLabel">Greeting</label>
-                    </div>
-                </div>
-                <div class="elementTextArea">
-                    <textarea class="emailTextArea" id="GreetingTextBox" onfocus="turnOnHidden('Greeting')"></textarea>
-                </div>
+        <div id="CcHidden" class="hidden">
+          <div class="hiddenBlock">
+            <div class="hintsAndCheckBoxes">
+              <div class="hints" id="CcHints">
+                <p>HINTS FOR CC</p>
+                <ul class="hintList" id="CcHintList">
+                  <li class="hintListItem">
+                    Who else needs to get this email?
+                  </li>
+                  <li class="hintListItem">
+                    Include only the person who really need to see this email
+                  </li>
+                </ul>
+              </div>
+              <div class="composeCheckBoxes" id="CcCheckBoxes"></div>
             </div>
-            <div id="GreetingHidden" class="hidden">
-                <div class="hiddenBlock">
-                    <div class="hintsAndCheckBoxes">
-                        <div class="hints" id="GreetingHints">
-                            <p>HINTS FOR GREETING</p>
-                            <ul class="hintList" id="GreetingHintList">
-                                <li class="hintListItem">Give a polite greeting</li>
-                                <li class="hintListItem">Example: Dear Sir, Dear Madam</li>
-                            </ul>
-                        </div>
-                        <div class="composeCheckBoxes" id="GreetingCheckBoxes"></div>
-                    </div>
-                    <div class="checkedEverthingDiv">
-                        <button class="checkedEverythingButton" onclick="closeCheckBoxes('Greeting')">
-                            <i class="fa fa-check-square"></i>
-                            <span>Checked Everything?</span>
-                        </button>
-                    </div>
-                </div>
+            <div class="checkedEverthingDiv">
+              <button
+                class="checkedEverythingButton"
+                onclick="closeCheckBoxes('Cc')"
+              >
+                <i class="fa fa-check-square"></i>
+                <span>Checked Everything?</span>
+              </button>
             </div>
+          </div>
         </div>
-        <div id="Body">
-            <div class="composeTextArea">
-                <div class="textAreaFlags">
-                    <div id="BodyCorrect" class="notAllTicked">
-                        <i class="fa fa-exclamation-triangle composeIcon"></i>
-                    </div>
-                    <div class="labelTextArea">
-                        <label for="BodyTextBox" class="myLabel">Body</label>
-                    </div>
-                </div>
-                <div class="elementTextArea">
-                    <textarea class="emailTextArea" id="BodyTextBox" onfocus="turnOnHidden('Body')"></textarea>
-                </div>
-            </div>
-            <div id="BodyHidden" class="hidden">
-                <div class="hiddenBlock">
-                    <div class="hintsAndCheckBoxes">
-                        <div class="hints" id="BodyHints">
-                            <p>HINTS FOR BODY</p>
-                            <ul class="hintList" id="BodyHintList">
-                                <li class="hintListItem">Say everything you had to say</li>
-                                <li class="hintListItem">Check for spelling and grammar mistake</li>
-                            </ul>
-                        </div>
-                        <div class="composeCheckBoxes" id="BodyCheckBoxes"></div>
-                    </div>
-                    <div class="checkedEverthingDiv">
-                        <button class="checkedEverythingButton" onclick="closeCheckBoxes('Body')">
-                            <i class="fa fa-check-square"></i>
-                            <span>Checked Everything?</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
+      </div>
+      <div id="Subject">
+        <div class="composeField myTextBox">
+          <div id="SubjectCorrect" class="notAllTicked">
+            <i class="fa fa-exclamation-triangle composeIcon"></i>
+          </div>
+          <div class="labelComposeField">
+            <label for="SubjectTextBox" class="myLabel">Subject</label>
+          </div>
+          <div class="elementComposeField">
+            <input
+              type="text"
+              class="longTextBox"
+              id="SubjectTextBox"
+              onfocus="turnOnHidden('Subject')"
+            />
+          </div>
         </div>
-        <div id="Closure">
-            <div class="composeTextArea">
-                <div class="textAreaFlags">
-                    <div id="ClosureCorrect" class="notAllTicked">
-                        <i class="fa fa-exclamation-triangle composeIcon"></i>
-                    </div>
-                    <div class="labelTextArea">
-                        <label for="ClosureTextBox" class="myLabel">Closure</label>
-                    </div>
-                </div>
-                <div class="elementTextArea">
-                    <textarea class="emailTextArea" id="ClosureTextBox" onfocus="turnOnHidden('Closure')"></textarea>
-                </div>
+        <div id="SubjectHidden" class="hidden">
+          <div class="hiddenBlock">
+            <div class="hintsAndCheckBoxes">
+              <div class="hints" id="SubjectHints">
+                <p>HINTS FOR SUBJECT</p>
+                <ul class="hintList" id="subjectHintList">
+                  <li class="hintListItem">
+                    Give a Brief description of the content of the email
+                  </li>
+                </ul>
+              </div>
+              <div class="composeCheckBoxes" id="SubjectCheckBoxes"></div>
             </div>
-            <div id="ClosureHidden" class="hidden">
-                <div class="hiddenBlock">
-                    <div class="hintsAndCheckBoxes">
-                        <div class="hints" id="ClosureHints">
-                            <p>HINTS FOR CLOSURE</p>
-                            <ul class="hintList" id="ClosureHintList">
-                                <li class="hintListItem">Give a polite greeting</li>
-                                <li class="hintListItem">Example: Dear Sir, Dear Madam</li>
-                            </ul>
-                        </div>
-                        <div class="composeCheckBoxes" id="ClosureCheckBoxes"></div>
-                    </div>
-                    <div class="checkedEverthingDiv">
-                        <button class="checkedEverythingButton" onclick="closeCheckBoxes('Closure')">
-                            <i class="fa fa-check-square"></i>
-                            <span>Checked Everything?</span>
-                        </button>
-                    </div>
-                </div>
+            <div class="checkedEverthingDiv">
+              <button
+                class="checkedEverythingButton"
+                onclick="closeCheckBoxes('Subject')"
+              >
+                <i class="fa fa-check-square"></i>
+                <span>Checked Everything?</span>
+              </button>
             </div>
+          </div>
         </div>
+      </div>
+      <div id="Greeting">
+        <div class="composeTextArea">
+          <div class="textAreaFlags">
+            <div id="GreetingCorrect" class="notAllTicked">
+              <i class="fa fa-exclamation-triangle composeIcon"></i>
+            </div>
+            <div class="labelTextArea">
+              <label for="GreetingTextBox" class="myLabel">Greeting</label>
+            </div>
+          </div>
+          <div class="elementTextArea">
+            <textarea
+              class="emailTextArea"
+              id="GreetingTextBox"
+              onfocus="turnOnHidden('Greeting')"
+            ></textarea>
+          </div>
+        </div>
+        <div id="GreetingHidden" class="hidden">
+          <div class="hiddenBlock">
+            <div class="hintsAndCheckBoxes">
+              <div class="hints" id="GreetingHints">
+                <p>HINTS FOR GREETING</p>
+                <ul class="hintList" id="GreetingHintList">
+                  <li class="hintListItem">Give a polite greeting</li>
+                  <li class="hintListItem">Example: Dear Sir, Dear Madam</li>
+                </ul>
+              </div>
+              <div class="composeCheckBoxes" id="GreetingCheckBoxes"></div>
+            </div>
+            <div class="checkedEverthingDiv">
+              <button
+                class="checkedEverythingButton"
+                onclick="closeCheckBoxes('Greeting')"
+              >
+                <i class="fa fa-check-square"></i>
+                <span>Checked Everything?</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="Body">
+        <div class="composeTextArea">
+          <div class="textAreaFlags">
+            <div id="BodyCorrect" class="notAllTicked">
+              <i class="fa fa-exclamation-triangle composeIcon"></i>
+            </div>
+            <div class="labelTextArea">
+              <label for="BodyTextBox" class="myLabel">Body</label>
+            </div>
+          </div>
+          <div class="elementTextArea">
+            <textarea
+              class="emailTextArea"
+              id="BodyTextBox"
+              onfocus="turnOnHidden('Body')"
+            ></textarea>
+          </div>
+        </div>
+        <div id="BodyHidden" class="hidden">
+          <div class="hiddenBlock">
+            <div class="hintsAndCheckBoxes">
+              <div class="hints" id="BodyHints">
+                <p>HINTS FOR BODY</p>
+                <ul class="hintList" id="BodyHintList">
+                  <li class="hintListItem">Say everything you had to say</li>
+                  <li class="hintListItem">
+                    Check for spelling and grammar mistake
+                  </li>
+                </ul>
+              </div>
+              <div class="composeCheckBoxes" id="BodyCheckBoxes"></div>
+            </div>
+            <div class="checkedEverthingDiv">
+              <button
+                class="checkedEverythingButton"
+                onclick="closeCheckBoxes('Body')"
+              >
+                <i class="fa fa-check-square"></i>
+                <span>Checked Everything?</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="Closure">
+        <div class="composeTextArea">
+          <div class="textAreaFlags">
+            <div id="ClosureCorrect" class="notAllTicked">
+              <i class="fa fa-exclamation-triangle composeIcon"></i>
+            </div>
+            <div class="labelTextArea">
+              <label for="ClosureTextBox" class="myLabel">Closure</label>
+            </div>
+          </div>
+          <div class="elementTextArea">
+            <textarea
+              class="emailTextArea"
+              id="ClosureTextBox"
+              onfocus="turnOnHidden('Closure')"
+            ></textarea>
+          </div>
+        </div>
+        <div id="ClosureHidden" class="hidden">
+          <div class="hiddenBlock">
+            <div class="hintsAndCheckBoxes">
+              <div class="hints" id="ClosureHints">
+                <p>HINTS FOR CLOSURE</p>
+                <ul class="hintList" id="ClosureHintList">
+                  <li class="hintListItem">Give a polite greeting</li>
+                  <li class="hintListItem">Example: Dear Sir, Dear Madam</li>
+                </ul>
+              </div>
+              <div class="composeCheckBoxes" id="ClosureCheckBoxes"></div>
+            </div>
+            <div class="checkedEverthingDiv">
+              <button
+                class="checkedEverythingButton"
+                onclick="closeCheckBoxes('Closure')"
+              >
+                <i class="fa fa-check-square"></i>
+                <span>Checked Everything?</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <footer></footer>
 
-
     <div class="composeScreenButtons">
-        <button class="normalButton sendButton" onclick="sendStudentEmail()"><div><i class="fa fa-paper-plane" aria-hidden="true"></i></div><div>Send</div></button>
-        <div class="helpAndCancel">
-            <button class="normalButton" onclick="showHelp()">Help</button>
-            <button class="normalButton" onclick="cancel()">Cancel</button>
-        </div>
+      <button class="normalButton sendButton" onclick="sendStudentEmail()">
+        <div><i class="fa fa-paper-plane" aria-hidden="true"></i></div>
+        <div>Send</div>
+      </button>
+      <div class="helpAndCancel">
+        <button class="normalButton" onclick="showHelp()">Help</button>
+        <button class="normalButton" onclick="cancel()">Cancel</button>
+      </div>
     </div>
-</body>
+  </body>
 </html>
-

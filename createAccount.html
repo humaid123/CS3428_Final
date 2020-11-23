@@ -74,6 +74,10 @@
 
         function createAccount() {
             const email = document.getElementById('email').value;
+            if (/\s+/.test(email)) {
+                alert("Your email must not contain any blank spaces.");
+                return;
+            }
             const password = document.getElementById('password').value;
             const retypedPassword = document.getElementById('retypePassword').value;
             if (retypedPassword != password) {
