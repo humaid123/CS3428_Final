@@ -10,7 +10,8 @@
     width: 100%;
   }
   .controlGroup {
-    display: block;
+    display: grid;
+    grid-template-columns: 50% 50%;
   }
 }
 .buttonHint {
