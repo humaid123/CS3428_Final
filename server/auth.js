@@ -18,7 +18,8 @@ passport.use(
     async function (req, email, password, done) {
       // Configure localStrategy to create Account-We take the email and password and create a new User..
       try {
-        const { manipulationSecretKey, isSpecialist } = req.body;
+        let { manipulationSecretKey, isSpecialist } = req.body;
+        isSpecialist = isSpecialist == "true"; //change to boolean if it is string
         if (
           (isSpecialist &&
             manipulationSecretKey != process.env.SPECIALIST_MANIPULATION_KEY) ||
