@@ -78,7 +78,7 @@ router.post("/storeNewEmail", async function (req, res) {
 
   let sender = await UserModel.findOne({ email });
   if (!sender) {
-    return res.status(400).send({ message: "Could not find sendee" });
+    return res.status(400).send({ message: "Could not find sender" });
   }
 
   //find al receivers first
@@ -95,7 +95,7 @@ router.post("/storeNewEmail", async function (req, res) {
     for (const ccEmail of newEmail.cc) {
       let ccedPerson = await UserModel.findOne({ email: ccEmail });
       if (ccedPerson) {
-        emailReceivers.push(user);
+        emailReceivers.push(ccedPerson);
       } else {
         return res
           .status(400)
@@ -106,23 +106,24 @@ router.post("/storeNewEmail", async function (req, res) {
 
   //send to sender
   newEmail.isRead = true;
-  let success = await sendee.addNewInboxEmail(newEmail);
+  let success = await sendee.addNewSentItem(newEmail);
   if (!success) {
     return res
       .status(400)
-      .send({ message: "Could not find your user account." });
+      .send({ message: "Could not email to your sent Items." });
   }
   //send to receivers
   newEmail.isRead = false;
   let unsentEmails = [];
   for (const emailReceiver of emailReceivers) {
-    let success = await emailReceiver.addNewSentItem(newEmail);
+    success = await emailReceiver.addNewInboxEmail(newEmail);
     if (!success) {
+      //we dont cancel => we try to add to as many people as possible
       unsentEmail.push(emailReceiver.email);
     }
   }
   if (unsentEmails) {
-    //not empty, so some one did not get the email, respond
+    //not empty, so some one did not get the email
     let str = "";
     for (let i = 0; i < unsentEmails.length; i++) {
       if (i == unsentEmails.length - 1) {
@@ -135,9 +136,9 @@ router.post("/storeNewEmail", async function (req, res) {
     return res
       .status(200)
       .send({ message: "sent message to everyone except: " + str + "." });
+  } else {
+    return res.status(200).send({ message: "message successfully sent." });
   }
-
-  return res.status(200).send({ message: "message successfully sent." });
 });
 
 router.post("/viewEmail", async function (req, res) {
