@@ -5,17 +5,16 @@
  * createAccounts and login only.
  */
 
-import { Router } from "express";
-import { authenticate } from "passport";
-import { sign } from "jsonwebtoken";
+const passport = require("passport");
+const jwt = require("jsonwebtoken");
 require("dotenv").config(); //gives access to process.env
+const router = require("express").Router();
 
-const router = Router();
 // route for signing up. Humaid M. Agowun (A00431063)
 router.post(
   "/signup",
   //call passport middleware for signing up
-  authenticate("signup", { session: false }),
+  passport.authenticate("signup", { session: false }),
   //callback after passport middleware called
   async function (req, res) {
     res.status(200).json({
@@ -32,7 +31,7 @@ router.post(
  */
 router.post("/login", async function (req, res, next) {
   //we only call the passport middleware in a closure so it can use res
-  authenticate("login", async function (err, user, info) {
+  passport.authenticate("login", async function (err, user, info) {
     try {
       if (err || !user) {
         return res.status(400).json({ message: info.message });
@@ -42,7 +41,7 @@ router.post("/login", async function (req, res, next) {
 
         const body = { _id: user._id, email: user.email };
         // create token using _id from mongo and user email
-        const token = sign({ user: body }, process.env.JWT_SECRET, {
+        const token = jwt.sign({ user: body }, process.env.JWT_SECRET, {
           expiresIn: "5h",
         });
 
@@ -55,4 +54,4 @@ router.post("/login", async function (req, res, next) {
   })(req, res, next);
 });
 
-export default router;
+module.exports = router;

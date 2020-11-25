@@ -4,17 +4,17 @@
  * File run with node server.js to set up the server.
  * Uses Express router for modularisation.
  */
-import express, { json, static } from "express";
-import { connect, set, connection, Promise } from "mongoose";
-import { authenticate } from "passport";
-import { urlencoded } from "body-parser";
+const express = require("express");
+const mongoose = require("mongoose");
+const passport = require("passport");
+const bodyParser = require("body-parser");
 require("dotenv").config();
 
 //set up express
 const server = express();
-server.use(json());
-server.use(urlencoded({ extended: true }));
-server.use(static(__dirname));
+server.use(express.json());
+server.use(bodyParser.urlencoded({ extended: true }));
+server.use(express.static(__dirname));
 var allowCrossDomain = function (_, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
@@ -24,25 +24,29 @@ var allowCrossDomain = function (_, res, next) {
 server.use(allowCrossDomain);
 
 //connect to database
-connect(process.env.DB_STRING, {
+mongoose.connect(process.env.DB_STRING, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
-set("useCreateIndex", true);
-connection.on("error", (error) => console.log(error));
-Promise = global.Promise;
+mongoose.set("useCreateIndex", true);
+mongoose.connection.on("error", (error) => console.log(error));
+mongoose.Promise = global.Promise;
 
 //import passport configuration.
-import "./server/auth";
+require("./server/auth");
 
-import routes from "./server/routes";
-import secureRoutes from "./server/secureRoutes";
+const routes = require("./server/routes");
+const secureRoutes = require("./server/secureRoutes");
 
 // any post to / have a different routing procedure
 server.use("/", routes);
 
 //any post to a /secure needs to be authenticated via jwt
-server.use("/secure", authenticate("jwt", { session: false }), secureRoutes);
+server.use(
+  "/secure",
+  passport.authenticate("jwt", { session: false }),
+  secureRoutes
+);
 
 // middleware that throws error 500 if
 // anything wrong happens in server code

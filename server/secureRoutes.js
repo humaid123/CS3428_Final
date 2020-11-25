@@ -6,9 +6,8 @@
  */
 require("dotenv").config();
 
-import { Router } from "express";
-const router = Router();
-import UserModel from "./model";
+const router = require("express").Router();
+const UserModel = require("./model");
 
 /*
  * route to get the email array needed for the list of emails
@@ -247,4 +246,4 @@ router.post("/getAllAccountEmails", async function (req, res) {
   }
 });
 
-export default router;
+module.exports = router;

@@ -5,14 +5,14 @@
  * We have 3 strategy: signup, login and jwt.
  */
 
-import { use } from "passport";
-import { Strategy as localStrategy } from "passport-local";
-import { findOne, create } from "./model";
-import { hash as _hash } from "bcryptjs";
+const passport = require("passport");
+const localStrategy = require("passport-local").Strategy;
+const UserModel = require("./model");
+const bcrypt = require("bcryptjs");
 require("dotenv").config();
 
 // Creating our signing up strategy
-use(
+passport.use(
   "signup",
   new localStrategy(
     {
@@ -30,7 +30,7 @@ use(
           throw new Error({ message: "Wrong secret passed." });
         }
 
-        const emailAlreadyTaken = await findOne({ email });
+        const emailAlreadyTaken = await UserModel.findOne({ email });
         if (emailAlreadyTaken) {
           throw new Error({ code: 400, message: "Email already taken" });
         }
@@ -46,7 +46,7 @@ use(
 );
 
 // Creating our login strategy.
-use(
+passport.use(
   "login",
   new localStrategy(
     {
@@ -56,7 +56,7 @@ use(
     //function to configure login strategy. Humaid M. Agowun (A00430163)
     async function (email, password, done) {
       try {
-        const user = await findOne({ email });
+        const user = await UserModel.findOne({ email });
         if (!user) {
           return done(null, false, { message: "Typed email was not found." });
         }
@@ -75,14 +75,15 @@ use(
 );
 
 //creating our jwt strategy.
-import { Strategy as JWTStrategy } from "passport-jwt";
-import { ExtractJwt as ExtractJWT } from "passport-jwt";
-use(
-  new JWTStrategy(
+const passportJWT = require("passport-jwt");
+passport.use(
+  new passportJWT.Strategy(
     {
       // THE CLIENT NEED TO PASS a field secret_token in their params
       secretOrKey: process.env.JWT_SECRET,
-      jwtFromRequest: ExtractJWT.fromUrlQueryParameter("secret_token"),
+      jwtFromRequest: passportJWT.ExtractJwt.fromUrlQueryParameter(
+        "secret_token"
+      ),
     },
     /*
      * function to configure JWT strategy.
@@ -116,9 +117,9 @@ function isWrongSecret(isSpecialist, secretKey) {
  * Humaid M. Agowun (A00430163)
  */
 async function createNewUserInDb(email, password, isSpecialist) {
-  const hash = await _hash(password, 10);
+  const hash = await bcrypt.hash(password, 10);
   password = hash;
-  const newUser = await create({
+  const newUser = await UserModel.create({
     email,
     password,
     isSpecialist,

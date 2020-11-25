@@ -5,11 +5,11 @@
  * It then exports the model
  */
 
-import { compare } from "bcryptjs";
-import { Schema, model } from "mongoose";
+const bcrypt = require("bcryptjs");
+const mongoose = require("mongoose");
 
 //Schema used by inbox and sentItems keys
-const EmailSchema = new Schema({
+const EmailSchema = new mongoose.Schema({
   to: { type: String, required: true },
   from: { type: String, required: true },
   cc: [{ type: String }],
@@ -20,7 +20,7 @@ const EmailSchema = new Schema({
 });
 
 // Schema actually stored in the database
-const UserSchema = new Schema({
+const UserSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   isSpecialist: { type: Boolean },
   password: { type: String, required: true },
@@ -35,7 +35,7 @@ const UserSchema = new Schema({
  */
 UserSchema.methods.isValidPassword = async function (password) {
   const user = this;
-  const comparison = await compare(password, user.password);
+  const comparison = await bcrypt.compare(password, user.password);
   return comparison;
 };
 
@@ -120,5 +120,5 @@ UserSchema.methods.viewEmail = async function (isInbox, index) {
   return email;
 };
 
-const UserModel = model("User", UserSchema);
-export default UserModel;
+const UserModel = mongoose.model("User", UserSchema);
+module.exports = UserModel;
