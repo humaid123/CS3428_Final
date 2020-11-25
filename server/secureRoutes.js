@@ -8,77 +8,77 @@ const UserModel = require("./model");
 router.post("/getEmails", async function (req, res) {
   let { email, isInbox } = req.body;
   if (!email || isInbox == null) {
-    return res.status(400).json({ message: "improper request" });
+    return res.status(400).json({ message: "Improper request." });
   }
   isInbox = isInbox == "true"; //change to boolean, sometimes it comes off as string
   try {
     const user = await UserModel.findOne({ email });
     if (!user) {
-      return res.status(400).json({ message: "could not find user" });
+      return res.status(400).json({ message: "Could not find user." });
     }
 
     let emails = isInbox ? user.inbox : user.sentItems;
     return res.status(200).json({ emails });
   } catch (error) {
-    return res.status(400).json({ message: "error in fetching emails" });
+    return res.status(400).json({ message: "Error in fetching emails." });
   }
 });
 
 router.post("/changeUrgency", async function (req, res) {
   let { email, isInbox, index } = req.body;
   if (!email || !isInbox || !index) {
-    return res.status(400).json({ message: "improper request" });
+    return res.status(400).json({ message: "Improper request." });
   }
   isInbox = isInbox == "true"; //change to boolean, sometimes it comes off as string
   try {
     const user = await UserModel.findOne({ email });
     if (!user) {
-      return res.status(400).json({ message: "could not find user" });
+      return res.status(400).json({ message: "Could not find user." });
     }
     const success = await user.changeUrgency(isInbox, index);
     if (success) {
-      return res.status(200).json({ message: "urgency success" });
+      return res.status(200).json({ message: "Urgency changed." });
     } else {
-      return res.status(400).json({ message: "urgency failure" });
+      return res.status(400).json({ message: "Urgency change failed." });
     }
   } catch (error) {
-    return res.status(400).json({ message: "error in changing urgency" });
+    return res.status(400).json({ message: "Error in changing urgency." });
   }
 });
 
 router.post("/deleteEmail", async function (req, res) {
   let { email, isInbox, index } = req.body;
   if (!email || !isInbox || !index) {
-    return res.status(400).json({ message: "incorrect request" });
+    return res.status(400).json({ message: "Improper request." });
   }
   isInbox = isInbox == "true"; //change to boolean, sometimes it comes off as string
   try {
     const user = await UserModel.findOne({ email });
     if (!user) {
-      return res.status(400).json({ message: "could not find user" });
+      return res.status(400).json({ message: "Could not find user." });
     }
     const success = await user.deleteEmail(isInbox, index);
     if (success) {
-      return res.status(200).json({ message: "deletion success" });
+      return res.status(200).json({ message: "Email Deleted." });
     } else {
-      return res.status(400).json({ message: "deletion failure" });
+      return res.status(400).json({ message: "Email deletion failed." });
     }
   } catch (error) {
-    return res.status(400).json({ message: "error in deleting email" });
+    return res.status(400).json({ message: "Error in deleting email." });
   }
 });
 
 router.post("/storeNewEmail", async function (req, res) {
   let { email, newEmail } = req.body;
   if (!email || !newEmail) {
-    return res.status(400).json({ message: "Incorrect request" });
+    return res.status(400).json({ message: "Improper request." });
   }
   if (!newEmail.from) newEmail.from = email;
   newEmail.isUrgent = false;
 
   let sender = await UserModel.findOne({ email });
   if (!sender) {
-    return res.status(400).send({ message: "Could not find sender" });
+    return res.status(400).send({ message: "Could not find sender." });
   }
 
   //find al receivers first
@@ -89,7 +89,7 @@ router.post("/storeNewEmail", async function (req, res) {
   } else {
     throw res
       .status(400)
-      .send({ message: "Could not find receiver: " + newEmail.to });
+      .send({ message: "Could not find receiver: " + newEmail.to + "." });
   }
   if (newEmail.cc) {
     for (const ccEmail of newEmail.cc) {
@@ -99,7 +99,7 @@ router.post("/storeNewEmail", async function (req, res) {
       } else {
         return res
           .status(400)
-          .send({ message: "could not find a cced person: " + ccEmail });
+          .send({ message: "Could not find cced person: " + ccEmail + "." });
       }
     }
   }
@@ -110,7 +110,9 @@ router.post("/storeNewEmail", async function (req, res) {
   if (!success) {
     return res
       .status(400)
-      .send({ message: "Could not email to your sent Items." });
+      .send({
+        message: "Could not add email to your sent Items, Email not sent.",
+      });
   }
   //send to receivers
   newEmail.isRead = false;
@@ -135,47 +137,46 @@ router.post("/storeNewEmail", async function (req, res) {
     // we just send a message if we could not add to someone...
     return res
       .status(200)
-      .send({ message: "sent message to everyone except: " + str + "." });
+      .send({ message: "Sent email to everyone except: " + str + "." });
   } else {
-    return res.status(200).send({ message: "message successfully sent." });
+    return res.status(200).send({ message: "Email successfully sent." });
   }
 });
 
 router.post("/viewEmail", async function (req, res) {
   let { email, isInbox, index } = req.body;
   if (!email || !isInbox || !index) {
-    return res.status(400).json({ message: "incorrect request" });
+    return res.status(400).json({ message: "Incorrect request." });
   }
   isInbox = isInbox == "true"; //change to boolean, sometimes it comes off as string
   try {
     const user = await UserModel.findOne({ email });
     if (!user) {
-      return res.status(400).send({ message: "could not find user" });
+      return res.status(400).send({ message: "Could not find user." });
     }
 
     const requestedEmail = await user.viewEmail(isInbox, index);
     return res.status(200).send({ requestedEmail });
   } catch (error) {
     console.log("error in /viewEmail: ", error);
-    return res.status(400).json({ message: "error in viewing email" });
+    return res.status(400).json({ message: "Error in getting email to view." });
   }
 });
 
 router.post("/deleteAccount", async function (req, res) {
   let { email, deletionSecretKey, emailToDelete } = req.body;
   if (!email || !deletionSecretKey) {
-    return res.status(400).send({ message: "improper request" });
+    return res.status(400).send({ message: "Improper request." });
   }
   if (deletionSecretKey != process.env.DELETION_SECRET_KEY) {
-    return res.status(400).send({ message: "wrong secret key" });
+    return res.status(400).send({ message: "Wrong secret key for deletion." });
   }
   try {
     await UserModel.deleteOne({ email: emailToDelete });
-    return res.status(200).send({ message: "account deleted" });
+    return res.status(200).send({ message: "Account deleted." });
   } catch (error) {
     return res.status(400).send({
-      message: "could not delete",
-      error_message: error.message,
+      message: "Could not delete account due to error: " + error.message + ".",
     });
   }
 });
@@ -183,7 +184,7 @@ router.post("/deleteAccount", async function (req, res) {
 router.post("/getAllAccountEmails", async function (req, res) {
   let { email, isSpecialist } = req.body;
   if (!email || !isSpecialist) {
-    return res.status(400).send({ message: "improper request" });
+    return res.status(400).send({ message: "Improper request" });
   }
   isSpecialist = isSpecialist == "true"; //make sure it is a boolean, need == and not ===
   try {
@@ -194,7 +195,9 @@ router.post("/getAllAccountEmails", async function (req, res) {
     const toReturn = accounts.map((acc) => acc.email); //return only emails
     res.status(200).json({ accounts: toReturn });
   } catch (error) {
-    return res.status(400).send({ message: "could not find all accounts." });
+    return res
+      .status(400)
+      .send({ message: "Could not find all emails for your menu." });
   }
 });
 

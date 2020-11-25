@@ -21,7 +21,7 @@ function showHelp() {
   window.open("../Helps/HelpMain.html", "MsgWindow", SPECS);
 }
 function logOut() {
-  alert("logging out.\nGood Bye");
+  alert("Logging out.\nGood Bye");
   localStorage.clear();
   window.location.href = "../index.html";
 }

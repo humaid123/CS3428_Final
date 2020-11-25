@@ -26,9 +26,7 @@ passport.use(
           (!isSpecialist &&
             manipulationSecretKey != process.env.STUDENT_MANIPULATION_KEY)
         ) {
-          throw new Error({
-            message: "Wrong secret passed - cannot create account",
-          });
+          throw new Error({ message: "Wrong secret passed." });
         }
 
         const found = await UserModel.findOne({ email });
@@ -67,15 +65,15 @@ passport.use(
       try {
         const user = await UserModel.findOne({ email });
         if (!user) {
-          return done(null, false, { message: "User not found" });
+          return done(null, false, { message: "Typed email was not found." });
         }
 
         const valid = await user.isValidPassword(password);
         if (!valid) {
-          return done(null, false, { message: "Wrong Password" });
+          return done(null, false, { message: "Wrong Password." });
         }
 
-        return done(null, user, { message: "Logged in Successfully" });
+        return done(null, user, { message: "Logged in Successfully." });
       } catch (error) {
         return done(error);
       }

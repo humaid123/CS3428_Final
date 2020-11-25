@@ -31,7 +31,7 @@ router.post("/login", async function (req, res, next) {
         return res.status(200).json({ token });
       });
     } catch (error) {
-      return res.status(400).json({ message: "error in logging in" });
+      return res.status(400).json({ message: "Error while logging in." });
     }
   })(req, res, next);
 });
