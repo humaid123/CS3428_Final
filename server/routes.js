@@ -1,12 +1,22 @@
-const express = require("express");
-const passport = require("passport");
-const router = express.Router();
-const jwt = require("jsonwebtoken");
-require("dotenv").config();
+/*
+ * routes.js
+ * Humaid M. Agowun (A00430163)
+ * Contains our passport-local routes that is
+ * createAccounts and login only.
+ */
 
+import { Router } from "express";
+import { authenticate } from "passport";
+import { sign } from "jsonwebtoken";
+require("dotenv").config(); //gives access to process.env
+
+const router = Router();
+// route for signing up. Humaid M. Agowun (A00431063)
 router.post(
   "/signup",
-  passport.authenticate("signup", { session: false }),
+  //call passport middleware for signing up
+  authenticate("signup", { session: false }),
+  //callback after passport middleware called
   async function (req, res) {
     res.status(200).json({
       message: "Signup successful",
@@ -15,19 +25,28 @@ router.post(
   }
 );
 
-// YOU NEED TO USE A CLOSURE SO THAT THE passport.authenticate can send the token to the user
+/*
+ * route for logging in - Humaid M. Agowun (A00430163)
+ * YOU NEED TO USE A CLOSURE SO THAT THE passport.authenticate
+ * gets access to res so it can send the token to the user
+ */
 router.post("/login", async function (req, res, next) {
-  passport.authenticate("login", async function (err, user, info) {
+  //we only call the passport middleware in a closure so it can use res
+  authenticate("login", async function (err, user, info) {
     try {
       if (err || !user) {
         return res.status(400).json({ message: info.message });
       }
       req.login(user, { session: false }, async function (error) {
         if (error) return next(error);
+
         const body = { _id: user._id, email: user.email };
-        const token = jwt.sign({ user: body }, process.env.JWT_SECRET, {
+        // create token using _id from mongo and user email
+        const token = sign({ user: body }, process.env.JWT_SECRET, {
           expiresIn: "5h",
         });
+
+        //return the token which is to be put in localStorage for auth.
         return res.status(200).json({ token });
       });
     } catch (error) {
@@ -36,4 +55,4 @@ router.post("/login", async function (req, res, next) {
   })(req, res, next);
 });
 
-module.exports = router;
+export default router;

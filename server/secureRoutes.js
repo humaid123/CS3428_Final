@@ -1,16 +1,26 @@
+/*
+ * secureRoutes.js
+ * Humaid M. Agowun (A00430163)
+ * routes for when the user has a token and
+ * token has been authenticated.
+ */
 require("dotenv").config();
 
-const express = require("express");
-const router = express.Router();
+import { Router } from "express";
+const router = Router();
+import UserModel from "./model";
 
-const UserModel = require("./model");
-
+/*
+ * route to get the email array needed for the list of emails
+ * Humaid M. Agowun (A00430163)
+ */
 router.post("/getEmails", async function (req, res) {
   let { email, isInbox } = req.body;
   if (!email || isInbox == null) {
     return res.status(400).json({ message: "Improper request." });
   }
-  isInbox = isInbox == "true"; //change to boolean, sometimes it comes off as string
+
+  isInbox = isInbox == "true"; //need == in case it comes off as string
   try {
     const user = await UserModel.findOne({ email });
     if (!user) {
@@ -24,6 +34,11 @@ router.post("/getEmails", async function (req, res) {
   }
 });
 
+/*
+ * route used when user clicks on TO DO button
+ * changes the urgency in the database
+ * Humaid M. Agowun (A00430163)
+ */
 router.post("/changeUrgency", async function (req, res) {
   let { email, isInbox, index } = req.body;
   if (!email || !isInbox || !index) {
@@ -35,6 +50,7 @@ router.post("/changeUrgency", async function (req, res) {
     if (!user) {
       return res.status(400).json({ message: "Could not find user." });
     }
+
     const success = await user.changeUrgency(isInbox, index);
     if (success) {
       return res.status(200).json({ message: "Urgency changed." });
@@ -46,6 +62,11 @@ router.post("/changeUrgency", async function (req, res) {
   }
 });
 
+/*
+ * route used when user clicks delete key to delete an email
+ * Delete the email in the database
+ * Humaid M. Agowun (A00430163)
+ */
 router.post("/deleteEmail", async function (req, res) {
   let { email, isInbox, index } = req.body;
   if (!email || !isInbox || !index) {
@@ -57,6 +78,7 @@ router.post("/deleteEmail", async function (req, res) {
     if (!user) {
       return res.status(400).json({ message: "Could not find user." });
     }
+
     const success = await user.deleteEmail(isInbox, index);
     if (success) {
       return res.status(200).json({ message: "Email Deleted." });
@@ -68,6 +90,14 @@ router.post("/deleteEmail", async function (req, res) {
   }
 });
 
+/*
+ * route used when sending a new email.
+ * Adds the email to the sender's sentItems and then
+ * to the receiver and cced persons' inbox
+ * Code could not be shortened as requires res
+ * for pretty much everything.
+ * Humaid M. Agowun
+ */
 router.post("/storeNewEmail", async function (req, res) {
   let { email, newEmail } = req.body;
   if (!email || !newEmail) {
@@ -81,7 +111,7 @@ router.post("/storeNewEmail", async function (req, res) {
     return res.status(400).send({ message: "Could not find sender." });
   }
 
-  //find al receivers first
+  //find all receivers first, so we can say improper email from the start
   let emailReceivers = [];
   let receiver = await UserModel.findOne({ email: newEmail.to });
   if (receiver) {
@@ -108,11 +138,9 @@ router.post("/storeNewEmail", async function (req, res) {
   newEmail.isRead = true;
   let success = await sender.addNewSentItem(newEmail);
   if (!success) {
-    return res
-      .status(400)
-      .send({
-        message: "Could not add email to your sent Items, Email not sent.",
-      });
+    return res.status(400).send({
+      message: "Could not add email to your sent Items, Email not sent.",
+    });
   }
   //send to receivers
   newEmail.isRead = false;
@@ -143,12 +171,19 @@ router.post("/storeNewEmail", async function (req, res) {
   }
 });
 
+/*
+ * Route used when user wishes to see an email
+ * returns the email the user wants to see and
+ * updates read status in database.
+ * Humaid M. Agowun (A00430163)
+ */
 router.post("/viewEmail", async function (req, res) {
   let { email, isInbox, index } = req.body;
   if (!email || !isInbox || !index) {
     return res.status(400).json({ message: "Incorrect request." });
   }
   isInbox = isInbox == "true"; //change to boolean, sometimes it comes off as string
+
   try {
     const user = await UserModel.findOne({ email });
     if (!user) {
@@ -158,11 +193,15 @@ router.post("/viewEmail", async function (req, res) {
     const requestedEmail = await user.viewEmail(isInbox, index);
     return res.status(200).send({ requestedEmail });
   } catch (error) {
-    console.log("error in /viewEmail: ", error);
     return res.status(400).json({ message: "Error in getting email to view." });
   }
 });
 
+/*
+ * route used when specialists wants to delete an account
+ * Removes the account from the database.
+ * Humaid M. Agowun (A00430163)
+ */
 router.post("/deleteAccount", async function (req, res) {
   let { email, deletionSecretKey, emailToDelete } = req.body;
   if (!email || !deletionSecretKey) {
@@ -181,6 +220,11 @@ router.post("/deleteAccount", async function (req, res) {
   }
 });
 
+/*
+ * route used to get dropdown accounts for composing an email
+ * and to get the accounts for the specialist to delete them.
+ * Humaid M. Agowun (A00430163)
+ */
 router.post("/getAllAccountEmails", async function (req, res) {
   let { email, isSpecialist } = req.body;
   if (!email || !isSpecialist) {
@@ -189,16 +233,18 @@ router.post("/getAllAccountEmails", async function (req, res) {
   isSpecialist = isSpecialist == "true"; //make sure it is a boolean, need == and not ===
   try {
     let accounts = await UserModel.find({}, "email isSpecialist");
+
     if (!isSpecialist) {
       accounts = accounts.filter((acc) => acc.isSpecialist); //return only specialists if student
     }
+
     const toReturn = accounts.map((acc) => acc.email); //return only emails
     res.status(200).json({ accounts: toReturn });
   } catch (error) {
     return res
       .status(400)
-      .send({ message: "Could not find all emails for your menu." });
+      .send({ message: "Could not fill in your selection menus." });
   }
 });
 
-module.exports = router;
+export default router;

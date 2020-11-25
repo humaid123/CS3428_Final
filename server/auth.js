@@ -1,49 +1,42 @@
-const passport = require("passport");
-const localStrategy = require("passport-local").Strategy;
-const UserModel = require("./model");
-const bcrypt = require("bcryptjs");
+/*
+ * auth.js
+ * Humaid M. Agowun (A00430163)
+ * File that configures our passport strategies.
+ * We have 3 strategy: signup, login and jwt.
+ */
+
+import { use } from "passport";
+import { Strategy as localStrategy } from "passport-local";
+import { findOne, create } from "./model";
+import { hash as _hash } from "bcryptjs";
 require("dotenv").config();
 
 // Creating our signing up strategy
-passport.use(
+use(
   "signup",
   new localStrategy(
     {
-      //options
-      usernameField: "email",
-      passwordField: "password",
-      passReqToCallback: true,
+      usernameField: "email", // tells passport how our username wiil be called
+      passwordField: "password", // tells passport how our password field is called
+      passReqToCallback: true, // let's us access req.body
     },
-    //callback after authentication
+    // function to configure signup strategy. Humaid M. Agowun (A00430163)
     async function (req, email, password, done) {
-      // Configure localStrategy to create Account-We take the email and password and create a new User..
       try {
         let { manipulationSecretKey, isSpecialist } = req.body;
-        isSpecialist = isSpecialist == "true"; //change to boolean if it is string
-        if (
-          (isSpecialist &&
-            manipulationSecretKey != process.env.SPECIALIST_MANIPULATION_KEY) ||
-          (!isSpecialist &&
-            manipulationSecretKey != process.env.STUDENT_MANIPULATION_KEY)
-        ) {
+        isSpecialist = isSpecialist == "true"; // use == so as to change string to boolean
+
+        if (isWrongSecret(isSpecialist, manipulationSecretKey)) {
           throw new Error({ message: "Wrong secret passed." });
         }
 
-        const found = await UserModel.findOne({ email });
-        if (found) {
+        const emailAlreadyTaken = await findOne({ email });
+        if (emailAlreadyTaken) {
           throw new Error({ code: 400, message: "Email already taken" });
         }
 
-        //hash password before saving
-        const hash = await bcrypt.hash(password, 10);
-        password = hash;
-        const newUser = await UserModel.create({
-          email,
-          password,
-          isSpecialist,
-          inbox: [],
-          sentItems: [],
-        });
+        newUser = await createNewUserInDb(email, password, isSpecialist);
+
         return done(null, newUser); //successfully created the account.
       } catch (error) {
         done(error);
@@ -53,23 +46,23 @@ passport.use(
 );
 
 // Creating our login strategy.
-passport.use(
+use(
   "login",
   new localStrategy(
     {
       usernameField: "email",
       passwordField: "password",
     },
+    //function to configure login strategy. Humaid M. Agowun (A00430163)
     async function (email, password, done) {
-      //the done callback is done(error, <user or False if no user>, <message>)
       try {
-        const user = await UserModel.findOne({ email });
+        const user = await findOne({ email });
         if (!user) {
           return done(null, false, { message: "Typed email was not found." });
         }
 
-        const valid = await user.isValidPassword(password);
-        if (!valid) {
+        const validPassword = await user.isValidPassword(password);
+        if (!validPassword) {
           return done(null, false, { message: "Wrong Password." });
         }
 
@@ -82,15 +75,20 @@ passport.use(
 );
 
 //creating our jwt strategy.
-const JWTStrategy = require("passport-jwt").Strategy;
-const ExtractJWT = require("passport-jwt").ExtractJwt;
-passport.use(
+import { Strategy as JWTStrategy } from "passport-jwt";
+import { ExtractJwt as ExtractJWT } from "passport-jwt";
+use(
   new JWTStrategy(
     {
       // THE CLIENT NEED TO PASS a field secret_token in their params
       secretOrKey: process.env.JWT_SECRET,
       jwtFromRequest: ExtractJWT.fromUrlQueryParameter("secret_token"),
     },
+    /*
+     * function to configure JWT strategy.
+     * JWT takes care of everything for us
+     * Humaid M. Agowun (A00430163)
+     */
     async function (token, done) {
       try {
         return done(null, token.user);
@@ -100,3 +98,32 @@ passport.use(
     }
   )
 );
+
+//functions called by our callback
+/*
+ * Check if the secret passed is correct to create account
+ * Humaid M. Agowun (A00430163)
+ */
+function isWrongSecret(isSpecialist, secretKey) {
+  if (isSpecialist) return secretKey != process.env.SPECIALIST_MANIPULATION_KEY;
+  // !isSpecialist
+  else return secretKey != process.env.STUDENT_MANIPULATION_KEY;
+}
+
+/*
+ * adds the new user in the database.
+ * Hashes the password before creating account.
+ * Humaid M. Agowun (A00430163)
+ */
+async function createNewUserInDb(email, password, isSpecialist) {
+  const hash = await _hash(password, 10);
+  password = hash;
+  const newUser = await create({
+    email,
+    password,
+    isSpecialist,
+    inbox: [],
+    sentItems: [],
+  });
+  return newUser;
+}
