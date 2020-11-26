@@ -13,11 +13,11 @@
 // LOCAL STRATEGY wants data from req.body
 // JWT wants data from query parameters
 
-function loginInServer(email, password, loginFunc) {
+function loginInServer(email, password, isSpecialist, loginFunc) {
   $.ajax({
     type: "POST",
     url: SERVER_URL + "/login",
-    data: { email, password },
+    data: { email, password, isSpecialist },
     dataType: "json",
     success: function (result, status, xhr) {
       //put result in localStorage.

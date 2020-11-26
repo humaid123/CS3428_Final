@@ -13,7 +13,7 @@
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             console.log("logging in with: ", email, password);
-            loginInServer(email, password, (err, result) => {
+            loginInServer(email, password, true, (err, result) => {
                 if (err) {
                     alert("A mistake occured. \nServer said: " 
                         + err.message);

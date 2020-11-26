@@ -36,6 +36,19 @@ router.post("/login", async function (req, res, next) {
       if (err || !user) {
         return res.status(400).json({ message: info.message });
       }
+
+      let isSpecialist = req.body.isSpecialist == "true";
+      if (isSpecialist != user.isSpecialist) {
+        const accountStatus = user.isSpecialist ? "specialist" : "student";
+        return res.status(400).send({
+          message:
+            "Account is a " +
+            accountStatus +
+            "." +
+            "\nYou need to use the other login.",
+        });
+      }
+
       req.login(user, { session: false }, async function (error) {
         if (error) return next(error);
 

@@ -15,10 +15,10 @@
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             console.log("logging in with: ", email, password);
-            loginInServer(email, password, (err, result) => {
+            loginInServer(email, password, false, (err, result) => {
                 if (err) {
                     alert("Oops you made a mistake.\n"
-                        + "The error from the server is: " 
+                        + "Error: " 
                         + err.message
                     );
                 } else {
