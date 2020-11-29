@@ -73,13 +73,13 @@
         }
 
         function createAccount() {
-            const email = document.getElementById('email').value;
+            const email = document.getElementById('email').value.trim();
             if (/\s+/.test(email)) {
                 alert("Your email must not contain any blank spaces.");
                 return;
             }
-            const password = document.getElementById('password').value;
-            const retypedPassword = document.getElementById('retypePassword').value;
+            const password = document.getElementById('password').value.trim();
+            const retypedPassword = document.getElementById('retypePassword').value.trim();
             if (retypedPassword != password) {
                 alert("The password and the retyped password do not match.");
                 return;

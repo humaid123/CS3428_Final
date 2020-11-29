@@ -1,0 +1,111 @@
+dotenv
+=======
+if you type: require('dotenv').config();, 
+you get the process.env json which contains the jsons in your .env file
+the json in the .env file is written as:
+<key>=<value>  //use equal sign
+<value> is a literal, if it is a string, you need add ""
+
+
+require() instead of 'const <var_name> = require()' => all the functions are copy-pasted
+with varname => namespace....
+
+
+jwt - jsonwebtokens
+======
+{token : <encrypted_string>} <= this is called a json web token
+or in request.headers...
+
+
+how to use the server:
+when you create an account => it just adds a json in the database
+when login => it checks credentials with the json in the database and sends a token
+for all calls the server => the client sends the received TOKEN and the server authenticates the token.
+    if it is a valid token => you can access the server.
+
+mongoose
+========
+mongoose is a library that calls mongo for you.
+Mongoose is a wrapper library aroung mongo.
+Mongoose allows you to create schemas. Mongo just store jsons and is very unstructured.
+mongoose is DBMS
+    => prevent type errors
+    => forces uniquenes
+mongoose allows non-atomic values => you can have lists...
+
+mongoose is also an ORB
+Every row can also have functions...
+You can define behaviour and not just properties for your rows...
+
+
+when there is a lost in mongoose => you need to call .markModified() so that mongoose knows it has been markModified
+
+mongoose read-write pattern
+====================================
+you call .find() or .findOne() to read an item from mongo
+you use the item, that is, use the properties or call their functions
+.save() => writes back the item...
+
+
+You have 
+schema = you tell what properties and constraints
+model = schema + methods
+
+bcrypt library
+=================
+just does hashing for us
+We dont store passwords, we hash the passwords before storing it
+when user wants to authenticates => we .compare
+
+bcrypt.hash(<string>, <salt_just an int>) => it will give you a hashed string..
+bcrypt.compare(<string password>, <hashed version of the passowrd>) => returns true if the same, false otherwise
+
+passwords are not stored as strings, they are stored as hashed_strings.
+
+
+passport
+=============
+passport abstracts all the security stuff for us.
+We just need to provide a callback after everything is done.
+
+to use passport:
+configure with passport.use()
+    1. declare your authentication strategy with new <Strategy>()
+    2. provide a call back to CONFIGURE Strategy
+    3. if you want to name your strategy => for re-use/cleaner code.. => pass a name
+
+on you route:
+    1. call passport.authenticate('<stategy name>", <callback here>
+    2. you proceed with your route.
+
+there are default names 
+passport.authenticate('local') => it will use the default localStrategy
+but we have names, so you need to call it with
+passport.authenticate('signup') for our signup configuration
+passport.authenticate('login') for out login configuration
+
+
+it is hiding security details <= passport is more of a framework than a library
+we just plug in small configurations for it.
+
+
+router
+=====
+instead of having a bid server.js
+you create routes:
+    a route is something like route.post('url' , <callback>)
+you then require the routes in the big server.js file
+
+
+
+client side
+=====
+
+$.ajax({
+    type: "POST/GET/PUT/DELETE", /type of the request
+    url: "give the FULL URL" + <url parameter with secret_token as the key and the token as the other stuff>
+    data : <give a json that willgo into request.body>
+    dataType: "json", //another datatype would be XML - HTML but with different
+    success: <pass a function which is read if error status is 200>
+    error: <pass a function if error status is not 200>
+})
