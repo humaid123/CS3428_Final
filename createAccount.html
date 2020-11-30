@@ -1,159 +1,173 @@
-
-
+<!DOCTYPE html>
+<!-- 
+    File used both student and specialist to 
+    create an account.
+    Humaid M. Agowun (A00430163)
+-->
 <html lang="en">
 <head>
-    <title>Create Account</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <link rel="stylesheet" href="./styles/selectionPages.css">
-    <script src="./Modules/createAccountInServer.js"></script>
-    <script src="./jquery-3.4.1.min.js"></script>
-    <script src="./constants.js"></script>
-    <style>
-    .inputFieldDiv {
-        padding: 5px;
-        border-bottom: 1px solid lightgrey;
-        transition-duration: 0.2s;
+  <title>Create Account</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <link rel="stylesheet" href="./styles/selectionPages.css">
+  <script src="./Modules/createAccountInServer.js"></script>
+  <script src="./jquery-3.4.1.min.js"></script>
+  <script src="./constants.js"></script>
+  <style>
+    body {
+      height: 100vh;
     }
+
+    .inputFieldDiv {
+      padding: 5px;
+      border-bottom: 1px solid lightgrey;
+      transition-duration: 0.2s;
+    }
+
     .inputField {
-        width: 90%;
-        font-size: 1.3em;
+      width: 90%;
+      font-size: 1.3em;
     }
     .inputFieldDiv:hover .hiddenDescription {
-        display: block;
+      display: block;
     }
     .inputFieldDiv:hover {
-        border-left: 5px solid darkblue;
+      border-left: 5px solid darkblue;
     }
 
 
     /*Needed for this screen only*/
     .innerContainer {
-        font-size: 1em;
+      font-size: 1em;
     }
     .title {
-        font-size: 2em;
+      font-size: 2em;
     }
     .signInButton {
-        font-size: 2em;
-        text-align: center;
-        font-weight: bold;
-        font-size: 1.1em;
-        color: #2162cc;
-        margin-bottom: 5px;
-        transition-duration: 0.2s;
+      font-size: 2em;
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.1em;
+      color: #2162cc;
+      margin-bottom: 5px;
+      transition-duration: 0.2s;
     }
     .signInButton:Hover {
-        color: darkblue;
-        font-size: 2.2em;
-        cursor: pointer;
+      color: darkblue;
+      font-size: 2.2em;
+      cursor: pointer;
     }
     .cancelButtonDiv {
-        font-size: 0.5em;
-        display: flex;
-        color: orangered;
-        justify-content: flex-end;
+      font-size: 0.5em;
+      display: flex;
+      color: orangered;
+      justify-content: flex-end;
     }
     .cancelButton {
-        padding: 1px;
-        border-radius: 5px;
-        border: 1px solid orangered;
-        transition-duration: 0.2s;
+      padding: 1px;
+      border-radius: 5px;
+      border: 1px solid orangered;
+      transition-duration: 0.2s;
     }
     .cancelButton:hover {
-        color: white;
-        background-color: red;
-        cursor: pointer;
+      color: white;
+      background-color: red;
+      cursor: pointer;
     }
-    </style>
+  </style>
+  <script>
+    /*
+    returns to the login screen
+    Humaid M. Agowun (A00430163)
+    */
+    function cancelCreateAccount() {
+      window.history.back();
+    }
 
-    <script>
-        function cancelCreateAccount() {
-            window.history.back();
+    /*
+    function that requests the server to create an account.
+    Humaid M. Agowun (A00430163)
+    */
+    function createAccount() {
+      const email = document.getElementById('email').value.trim();
+      if (/\s+/.test(email)) {
+        return alert("Your email must not contain any blank spaces.");
+      }
+
+      const password = document.getElementById('password').value.trim();
+      const retypedPassword = document.getElementById('retypePassword').value.trim();
+      if (retypedPassword != password) {
+        return alert("The password and the retyped password do not match.");
+      }
+
+      const secret = document.getElementById('secret').value;
+      let isSpecialist = JSON.parse(localStorage.getItem('isSpecialist')).isSpecialist;
+      createAccountInServer(email, password, secret, isSpecialist, (err, result) => {
+        if (err) {
+          alert("error in creating your account: " + err.message);
+        } else {
+          alert("Account created.\nTime to login now!");
+          window.location.href = "./index.html";
+          localStorage.removeItem('isSpecialist');
         }
-
-        function createAccount() {
-            const email = document.getElementById('email').value.trim();
-            if (/\s+/.test(email)) {
-                alert("Your email must not contain any blank spaces.");
-                return;
-            }
-            const password = document.getElementById('password').value.trim();
-            const retypedPassword = document.getElementById('retypePassword').value.trim();
-            if (retypedPassword != password) {
-                alert("The password and the retyped password do not match.");
-                return;
-            }
-            const secret = document.getElementById('secret').value;
-            let isSpecialist = JSON.parse(localStorage.getItem('isSpecialist')).isSpecialist;
-
-            createAccountInServer(email, password, secret, isSpecialist, (err, result) => {
-                if (err) {
-                    alert("error in creating your account: " + err.message);
-                } else {
-                    alert("Account created.\nTime to login now!");
-                    window.location.href = "./index.html";
-                    localStorage.removeItem('isSpecialist');
-                }
-            });
-        }
+      });
+    }
     </script>
 </head>
 <body>
-    <div class="container">
-    <div class="logoDiv">
-            <div class="logoContainer"><i class="fa fa-envelope logoIcon" aria-hidden="true"></i></div>
-    </div>
-    
-    <div class="centerInnerDiv">
-        <div class="innerContainer">
-        <div class="title logoToTheSide">
-            <div><i class="fa fa-user-circle" style="padding-right: 10px" aria-hidden="true"></i></div>
-            <div>CREATING ACCOUNT</div><br>
+  <div class="container">
+  <div class="logoDiv">
+    <div class="logoContainer"><i class="fa fa-envelope logoIcon" aria-hidden="true"></i></div>
+  </div>
+  <div class="centerInnerDiv">
+    <div class="innerContainer">
+      <div class="title logoToTheSide">
+        <div><i class="fa fa-user-circle" style="padding-right: 10px" aria-hidden="true"></i></div>
+        <div>CREATING ACCOUNT</div><br>
+      </div>
+      <div class="inputFieldDiv">
+        <label for="email" class="inputFieldLabel">Email:</label><br>
+        <input type="text" class="inputField" name="email" id="email" placeholder="Enter your email">
+        <div class="hiddenDescription">
+          <div class="descriptionContainer">Spell your email correctly</div>
         </div>
-        <div class="inputFieldDiv">
-            <label for="email" class="inputFieldLabel">Email:</label><br>
-            <input type="text" class="inputField" name="email" id="email" placeholder="Enter your email">
-            <div class="hiddenDescription">
-                <div class="descriptionContainer">Spell your email correctly</div>
-            </div>
+      </div>
+      <br>
+      <div class="inputFieldDiv">
+        <label for="password" class="inputFieldLabel">Password:</label><br>
+        <input type="password" class="inputField" id="password" name="password" placeholder="Enter your password">
+        <div class="hiddenDescription">
+          <div class="descriptionContainer">Spell your password correctly</div>
         </div>
-        <br>
-        <div class="inputFieldDiv">
-            <label for="password" class="inputFieldLabel">Password:</label><br>
-            <input type="password" class="inputField" id="password" name="password" placeholder="Enter your password">
-            <div class="hiddenDescription">
-                <div class="descriptionContainer">Spell your password correctly</div>
-            </div>
+      </div>
+      <div class="inputFieldDiv">
+        <label for="retypePassword" class="inputFieldLabel">Retype:</label><br>
+        <input type="password" class="inputField" id="retypePassword" name="retypePassword" placeholder="Retype your password">
+        <div class="hiddenDescription">
+          <div class="descriptionContainer">Spell your password correctly again</div>
         </div>
-        <div class="inputFieldDiv">
-            <label for="retypePassword" class="inputFieldLabel">Retype:</label><br>
-            <input type="password" class="inputField" id="retypePassword" name="retypePassword" placeholder="Retype your password">
-            <div class="hiddenDescription">
-                <div class="descriptionContainer">Spell your password correctly again</div>
-            </div>
+      </div>
+      <br>
+      <div class="inputFieldDiv">
+        <label for="secret" class="inputFieldLabel">Secret:</label><br>
+        <input type="text" class="inputField" id="secret" name="secret" placeholder="Enter the provided secret">
+        <div class="hiddenDescription">
+          <div class="descriptionContainer">Make no capitalisation mistakes</div>
         </div>
-        <br>
-        <div class="inputFieldDiv">
-            <label for="secret" class="inputFieldLabel">Secret:</label><br>
-            <input type="text" class="inputField" id="secret" name="secret" placeholder="Enter the provided secret">
-            <div class="hiddenDescription">
-                <div class="descriptionContainer">Make no capitalisation mistakes</div>
-            </div>
+      </div>
+      <br>
+      <div class="signInButton logoToTheSide" style="font-size: 2em;" onclick="createAccount()">
+        <div><i class="fa fa-arrow-circle-o-right" style="padding-right: 10px;" aria-hidden="true"></i></div>
+        <div>CREATE ACCOUNT</div>
+      </div>
+      <br>
+      <br>
+      <div class="cancelButtonDiv">
+        <div class="cancelButton logoToTheSide" style="font-size: 2em;" onclick="cancelCreateAccount()">
+          <div><i class="fa fa-chevron-circle-left" style="padding-right: 10px;" aria-hidden="true"></i></div>
+          <div>Cancel</div>
         </div>
-        <br>
-        <div class="signInButton logoToTheSide" style="font-size: 2em;" onclick="createAccount()">
-            <div><i class="fa fa-arrow-circle-o-right" style="padding-right: 10px;" aria-hidden="true"></i></div>
-            <div>CREATE ACCOUNT</div>
-        </div>
-        <br>
-        <br>
-        <div class="cancelButtonDiv">
-            <div class="cancelButton logoToTheSide" style="font-size: 2em;" onclick="cancelCreateAccount()">
-                <div><i class="fa fa-chevron-circle-left" style="padding-right: 10px;" aria-hidden="true"></i></div>
-                <div>Cancel</div>
-            </div>
-        </div>
+      </div>
     </div>
    </div>
 </body>

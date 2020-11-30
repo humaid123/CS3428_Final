@@ -1,3 +1,10 @@
+/*
+constants.js
+Humaid M. Agowun (A00430163)
+file used by all othe files in the app.
+Defines the constants used.
+*/
+
 //Debug flag to help debugging
 const DEBUG = false;
 
