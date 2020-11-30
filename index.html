@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html>
+<!--
+  the index page of the app. Asks the user to choose 
+  between logging in as Student and a Specialist.
+-->
+<html lang="en">
   <head>
     <title>Austism NS pre-login</title>
     <link
@@ -9,19 +13,29 @@
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <link rel="stylesheet" href="./styles/selectionPages.css" />
     <script>
+      /*
+      run when 'Student' clicked.
+      links to the student login screen.
+      Humaid M. Agowun (A00430163)
+      */
       function changeToStudent() {
         window.location.href = "studentLogin.html";
       }
+
+      /*
+      run when 'Specialist' clicked. 
+      links to specialist login screen.
+      Humaid M. Agowun (A00430163)
+      */
       function changeToSpecialist() {
         window.location.href = "specialistLogin.html";
       }
-      function createAccount() {
-        window.location.href = "createAccount.html";
-      }
     </script>
-<style>
-    body {height: 100vh;}
-</style>
+    <style>
+      body {
+        height: 100vh;
+      }
+    </style>
   </head>
   <body>
     <div class="container">

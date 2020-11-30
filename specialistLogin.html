@@ -1,83 +1,159 @@
-
 <!DOCTYPE html>
-<html>
-<head>
+<!--
+  the login screen for a specialist.
+  Humaid M. Agowun (A00430163)
+-->
+<html lang="en">
+  <head>
     <title>Specialist Login</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <script src="./Modules/login.js"></script>
     <script src="./jquery-3.4.1.min.js"></script>
     <script src="./constants.js"></script>
-    <link rel="stylesheet" href="./styles/selectionPages.css">
+    <link rel="stylesheet" href="./styles/selectionPages.css" />
     <style>
-    body {height: 100vh;}
-</style>
+      body {
+        height: 100vh;
+      }
+    </style>
     <script>
-        function LoginSpecialist() {
-            const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value.trim();
-            console.log("logging in with: ", email, password);
-            loginInServer(email, password, true, (err, result) => {
-                if (err) {
-                    alert("A mistake occured. \nServer said: " 
-                        + err.message);
-                } else {
-                    //loginInServer takes care of localStorage
-                    alert("successfully connected");
-                    window.location = "Specialist/mainPage.html"; 
-                }
-            });
-        }
-        function createAccount() {
-            const json = {isSpecialist: true};
-            localStorage.setItem('isSpecialist', JSON.stringify(json));
-            window.location.href = "./createAccount.html";
-        }
-        function cancelLogin() {
-            window.history.back();
-        }
+      /*
+        function run when sign in clicked.
+        sends data to the server to receive a token.
+        Humaid M. Agowun (A00430163)
+        */
+      function LoginSpecialist() {
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value.trim();
+        console.log("logging in with: ", email, password);
+        loginInServer(email, password, true, (err, result) => {
+          if (err) {
+            alert("A mistake occured. \nServer said: " + err.message);
+          } else {
+            //loginInServer takes care of localStorage
+            alert("successfully connected");
+            window.location = "Specialist/mainPage.html";
+          }
+        });
+      }
+
+      /*
+        function run when createAccount clicked.
+        links to createAccount page
+        Humaid M. Agowun (A00430163)
+        */
+      function createAccount() {
+        const json = { isSpecialist: true };
+        localStorage.setItem("isSpecialist", JSON.stringify(json));
+        window.location.href = "./createAccount.html";
+      }
+
+      /*
+        function when cancel clicked.
+        links back to previous page.
+        Humaid M. Agowun (A00430163)
+        */
+      function cancelLogin() {
+        window.history.back();
+      }
     </script>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-    <div class="logoDiv">
-            <div class="logoContainer"><i class="fa fa-envelope logoIcon" aria-hidden="true"></i></div>
+      <div class="logoDiv">
+        <div class="logoContainer">
+          <i class="fa fa-envelope logoIcon" aria-hidden="true"></i>
         </div>
-    <div class="centerInnerDiv">
-    <div class="innerContainer">
-        <div class="title logoToTheSide"><div><i class="fa fa-user-circle" style="padding-right: 10px" aria-hidden="true"></i></div><div>SPECIALIST SIGN IN</div><br>
-        </div>
-        <div class="inputFieldDiv">
-            <label for="email" class="inputFieldLabel">Email:</label><br>
-            <input type="text" class="inputField" name="email" id="email" placeholder="Enter your email">
-        </div>
-        <br>
-        <div class="inputFieldDiv">
-            <label for="password" class="inputFieldLabel">Password:</label><br>
-            <input type="password" class="inputField" id="password" name="password" placeholder="Enter your password">
-        </div>
-        <br>
-
-
-       <div class="signInButton logoToTheSide" style="font-size: 2em;" onclick="LoginSpecialist()">
-            <div><i class="fa fa-arrow-circle-o-right" style="padding-right: 10px;" aria-hidden="true"></i></div>
+      </div>
+      <div class="centerInnerDiv">
+        <div class="innerContainer">
+          <div class="title logoToTheSide">
+            <div>
+              <i
+                class="fa fa-user-circle"
+                style="padding-right: 10px"
+                aria-hidden="true"
+              ></i>
+            </div>
+            <div>SPECIALIST SIGN IN</div>
+            <br />
+          </div>
+          <div class="inputFieldDiv">
+            <label for="email" class="inputFieldLabel">Email:</label><br />
+            <input
+              type="text"
+              class="inputField"
+              name="email"
+              id="email"
+              placeholder="Enter your email"
+            />
+          </div>
+          <br />
+          <div class="inputFieldDiv">
+            <label for="password" class="inputFieldLabel">Password:</label
+            ><br />
+            <input
+              type="password"
+              class="inputField"
+              id="password"
+              name="password"
+              placeholder="Enter your password"
+            />
+          </div>
+          <br />
+          <div
+            class="signInButton logoToTheSide"
+            style="font-size: 2em"
+            onclick="LoginSpecialist()"
+          >
+            <div>
+              <i
+                class="fa fa-arrow-circle-o-right"
+                style="padding-right: 10px"
+                aria-hidden="true"
+              ></i>
+            </div>
             <div>Sign in</div>
-        </div>
-        <br>
-        <div class="createAccountButtonDiv">
-            <div class="createAccountButton logoToTheSide" onclick="createAccount()">
-                <div><i class="fa fa-address-card-o" style="padding: 1px;"aria-hidden="true"></i></div>
-                <div>Create Account</div>
+          </div>
+          <br />
+          <div class="createAccountButtonDiv">
+            <div
+              class="createAccountButton logoToTheSide"
+              onclick="createAccount()"
+            >
+              <div>
+                <i
+                  class="fa fa-address-card-o"
+                  style="padding: 1px"
+                  aria-hidden="true"
+                ></i>
+              </div>
+              <div>Create Account</div>
             </div>
-        </div>
-        <br>
-        <div class="cancelButtonDiv">
-            <div class="cancelButton logoToTheSide" style="font-size: 2em;" onclick="cancelLogin()">
-                <div><i class="fa fa-chevron-circle-left" style="padding-right: 10px;" aria-hidden="true"></i></div>
-                <div>Cancel</div>
+          </div>
+          <br />
+          <div class="cancelButtonDiv">
+            <div
+              class="cancelButton logoToTheSide"
+              style="font-size: 2em"
+              onclick="cancelLogin()"
+            >
+              <div>
+                <i
+                  class="fa fa-chevron-circle-left"
+                  style="padding-right: 10px"
+                  aria-hidden="true"
+                ></i>
+              </div>
+              <div>Cancel</div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-    </div>
-</body>
+  </body>
 </html>

@@ -1,8 +1,10 @@
-
 <!DOCTYPE html>
-<html>
+<!--
+  login screen for a student.
+  Humaid M. Agowun (A00430163)
+-->
+<html lang="en">
 <head>
-
     <title>Student Login</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta content="width=device-width, initial-scale=1" name="viewport" />
@@ -11,117 +13,154 @@
     <script src="./constants.js"></script>
     <script src="./Modules/login.js"></script>
     <style>
-    body {height: 100vh;}
-</style>
+        body {height: 100vh;}
+    </style>
     <script>
+        /*
+        function run when sign in clicked
+        login student by requesting to the server for a token.
+        Humaid M. Agowun (A00430163)
+        */
         function LoginStudent() {
-            const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value.trim();
-            console.log("logging in with: ", email, password);
-            loginInServer(email, password, false, (err, result) => {
-                if (err) {
-                    alert("Oops you made a mistake.\n"
-                        + "Error: " 
-                        + err.message
-                    );
-                } else {
-                    //loginInServer takes care of localStorage stuff.
-                    alert("successfully connected");
-                    linkToCorrectPage();
-                }
-            });
-        }
-        function linkToCorrectPage() {
-            if (document.getElementById("Basic").checked) {
-                window.location = "Student_Basic/inbox.html"; 
-                setUpCheckBoxesJSON(true);
-            } else if (document.getElementById("Intermediate").checked) {
-                window.location = "Student_Intermediate/inbox.html"; 
-                setUpCheckBoxesJSON(false);
-            } else if (document.getElementById("Advanced").checked) {
-                window.location = "Student_Advanced/mainPage.html";
-                setUpCheckBoxesJSON(false);
+          const email = document.getElementById('email').value.trim();
+          const password = document.getElementById('password').value.trim();
+          loginInServer(email, password, false, (err, result) => {
+            if (err) {
+              alert("Oops you made a mistake.\n"
+                + "Error: " 
+                + err.message
+              );
+            } else {
+              //loginInServer takes care of localStorage stuff.
+              alert("successfully connected");
+              linkToCorrectPage();
             }
-        }
-        function setUpCheckBoxesJSON(load) {
-            var json = {"loadCheckBox" : load};
-            if (DEBUG) {
-                alert(json.loadCheckBox);
-            }
-            localStorage.setItem("loadCheckBox", JSON.stringify(json))
+          });
         }
 
-        function cancelLogin() {
-            window.history.back();
+        /*
+        links to the correct page based on level of difficulty.
+        sets up the localStorage json to say if checkboxes are present
+        when composing
+        Humaid M. Agowun (A00430163)
+        */
+        function linkToCorrectPage() {
+          if (document.getElementById("Basic").checked) {
+            window.location = "Student_Basic/inbox.html"; 
+            setUpCheckBoxesJSON(true);
+          } else if (document.getElementById("Intermediate").checked) {
+            window.location = "Student_Intermediate/inbox.html"; 
+            setUpCheckBoxesJSON(false);
+          } else if (document.getElementById("Advanced").checked) {
+            window.location = "Student_Advanced/mainPage.html";
+            setUpCheckBoxesJSON(false);
+          }
         }
+
+        /*
+        sets up the loadCheckBox in localStorage to allow checkboxes for
+        composing.
+        Humaid M. Agowun (A00430163)
+        */        
+        function setUpCheckBoxesJSON(load) {
+          const json = {"loadCheckBox" : load};
+          localStorage.setItem("loadCheckBox", JSON.stringify(json))
+        }
+
+        /*
+        returns back when cancel button clicked.
+        Humaid M. Agowun (A00430163)
+        */
+        function cancelLogin() {
+          window.history.back();
+        }
+
+        /*
+        run when createAccount button is clicked. 
+        Links to the createAccount page
+        Humaid M. Agowun (A00430163) 
+        */
         function createAccount() {
-            const json = {isSpecialist: false};
-            localStorage.setItem('isSpecialist', JSON.stringify(json));
-            window.location.href = "./createAccount.html";
+          const json = {isSpecialist: false};
+          localStorage.setItem('isSpecialist', JSON.stringify(json));
+          window.location.href = "./createAccount.html";
         }
     </script>
 </head>
 <body>
-    <div class="container">
+  <div class="container">
     <div class="logoDiv">
-            <div class="logoContainer"><i class="fa fa-envelope logoIcon" aria-hidden="true"></i></div>
-        </div>
+      <div class="logoContainer"><i class="fa fa-envelope logoIcon" aria-hidden="true"></i></div>
+    </div>
     <div class="centerInnerDiv">
-    <div class="innerContainer">
-        <div class="title logoToTheSide"><div><i class="fa fa-user-circle" style="padding-right: 10px" aria-hidden="true"></i></div><div>STUDENT SIGN IN</div><br>
+      <div class="innerContainer">
+        <div class="title logoToTheSide">
+          <div><i class="fa fa-user-circle" style="padding-right: 10px" aria-hidden="true"></i></div>
+          <div>STUDENT SIGN IN</div><br>
         </div>
         <div class="inputFieldDiv">
-            <label for="email" class="inputFieldLabel">Email:</label><br>
-            <input type="text" class="inputField" name="email" id="email" placeholder="Enter your email">
-            <div class="hiddenDescription">
-                <div class="descriptionContainer">Do not make spelling or capitalisation mistakes</div>
-            </div>
+          <label for="email" class="inputFieldLabel">Email:</label><br>
+          <input 
+            type="text" 
+            class="inputField" 
+            name="email" 
+            id="email" 
+            placeholder="Enter your email"
+          >
+          <div class="hiddenDescription">
+            <div class="descriptionContainer">Do not make spelling or capitalisation mistakes</div>
+          </div>
         </div>
         <br>
         <div class="inputFieldDiv">
-            <label for="password" class="inputFieldLabel">Password:</label><br>
-            <input type="password" class="inputField" id="password" name="password" placeholder="Enter your password">
-            <div class="hiddenDescription">
-                <div class="descriptionContainer">Do not make spelling or capitalisation mistakes</div>
-            </div>
+          <label for="password" class="inputFieldLabel">Password:</label><br>
+          <input 
+            type="password" 
+            class="inputField" 
+            id="password" 
+            name="password" 
+            placeholder="Enter your password"
+          >
+          <div class="hiddenDescription">
+            <div class="descriptionContainer">Do not make spelling or capitalisation mistakes</div>
+          </div>
         </div>
         <br>
         <div class="inputFieldDiv">
-            <label class="inputFieldLabel">Which difficulty level will you like to use today:</label><br>
-            <label class="radioLabel">
-                <input type="radio" name="difficulty" value="Basic" id="Basic" checked>BASIC
-            </label>
-            <label class="radioLabel">
-                <input type="radio" name="difficulty" value="Intermediate" id="Intermediate">INTERMEDIATE
-            </label>
-            <label class="radioLabel">
-                <input type="radio" name="difficulty" value="Advanced" id="Advanced">ADVANCED
-            </label>
-            <div class="hiddenDescription">
-                <div class="descriptionContainer">Pick the appropriate one for you to practice</div>
-            </div>
+          <label class="inputFieldLabel">Which difficulty level will you like to use today:</label><br>
+          <label class="radioLabel">
+            <input type="radio" name="difficulty" value="Basic" id="Basic" checked>BASIC
+          </label>
+          <label class="radioLabel">
+            <input type="radio" name="difficulty" value="Intermediate" id="Intermediate">INTERMEDIATE
+          </label>
+          <label class="radioLabel">
+            <input type="radio" name="difficulty" value="Advanced" id="Advanced">ADVANCED
+          </label>
+          <div class="hiddenDescription">
+            <div class="descriptionContainer">Pick the appropriate one for you to practice</div>
+          </div>
         </div>
         <br>
         <div class="signInButton logoToTheSide" style="font-size: 2em;" onclick="LoginStudent()">
-            <div><i class="fa fa-arrow-circle-o-right" style="padding-right: 10px;" aria-hidden="true"></i></div>
-            <div>Sign in</div>
+          <div><i class="fa fa-arrow-circle-o-right" style="padding-right: 10px;" aria-hidden="true"></i></div>
+          <div>Sign in</div>
         </div>
         <br>
         <div class="createAccountButtonDiv">
-            <div class="createAccountButton logoToTheSide" onclick="createAccount()">
-                <div><i class="fa fa-address-card-o" style="padding: 1px;"aria-hidden="true"></i></div>
-                <div>Create Account</div>
-            </div>
+          <div class="createAccountButton logoToTheSide" onclick="createAccount()">
+            <div><i class="fa fa-address-card-o" style="padding: 1px;"aria-hidden="true"></i></div>
+            <div>Create Account</div>
+          </div>
         </div>
         <br>
         <div class="cancelButtonDiv">
-            <div class="cancelButton logoToTheSide" style="font-size: 2em;" onclick="cancelLogin()">
-                <div><i class="fa fa-chevron-circle-left" style="padding-right: 10px;" aria-hidden="true"></i></div>
-                <div>Cancel</div>
-            </div>
+          <div class="cancelButton logoToTheSide" style="font-size: 2em;" onclick="cancelLogin()">
+            <div><i class="fa fa-chevron-circle-left" style="padding-right: 10px;" aria-hidden="true"></i></div>
+            <div>Cancel</div>
+          </div>
         </div>
-    </div>
+      </div>
    </div>
 </body>
 </html>
-

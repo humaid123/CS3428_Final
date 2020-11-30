@@ -1,31 +1,15 @@
 function linkBackViewSent() {
   try {
-    var fromWhere = JSON.parse(localStorage.getItem("emailToView")).fromWhere;
-    if (DEBUG) {
-      alert("BACKING. fromWhere: " + fromWhere);
-    }
-    changeWindowRefForBacking(fromWhere);
+    window.history.back();
     localStorage.removeItem("emailToView"); //Removes side effects
   } catch (e) {
     alert(e.name + "\n" + e.message);
   }
 }
 
-function changeWindowRefForBacking(fromWhere) {
-  if (fromWhere == FROM_STUDENT_SENT_ITEMS) {
-    window.location.href = "sentItems.html";
-  } else if (fromWhere == FROM_STUDENT_INBOX) {
-    window.location.href = "inbox.html";
-  }
-}
-
 function linkBackViewInbox() {
   try {
-    var fromWhere = JSON.parse(localStorage.getItem("emailToView")).fromWhere;
-    if (DEBUG) {
-      alert("BACKING. fromWhere: " + fromWhere);
-    }
-    changeWindowRefForBacking(fromWhere);
+    window.history.back();
     localStorage.removeItem("emailToView");
   } catch (e) {
     alert(e.name + "\n" + e.message);
