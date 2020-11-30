@@ -49,7 +49,7 @@ server.use(
   secureRoutes
 );
 
-// middleware that throws error 500 if
+// middleware that returns error 500 if
 // anything wrong happens in server code
 server.use((err, _, res) => {
   res.status(err.status || 500);
