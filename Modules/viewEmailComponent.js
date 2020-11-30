@@ -52,16 +52,5 @@ function useEmailToFillTextBoxes(email, isInbox) {
 }
 
 function reply() {
-  try {
-    var fromWhere = JSON.parse(localStorage.getItem("emailToView")).fromWhere;
-    setUpLinkBackJSON(fromWhere);
-    window.location.href = "../ComposeScreens/studentCompose.html";
-  } catch (e) {
-    alert(e.name + "\n" + e.message);
-  }
-}
-
-function setUpLinkBackJSON(fWhere) {
-  var json = { fromWhere: fWhere };
-  localStorage.setItem("fromWhere", JSON.stringify(json));
+  window.location.href = "../ComposeScreens/studentCompose.html";
 }
