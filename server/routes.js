@@ -13,24 +13,40 @@ const router = require("express").Router();
 // route for signing up.
 router.post(
   "/signup",
-  //call passport middleware for signing up
-  passport.authenticate("signup", { session: false }),
   /*
-  callback after successful passport authentcation
-  the configuration adds the new account 
-  or sends an error message
-  so we just sends a success message
-
+  function that is immediately called.
+  its main purpose is to act as a closure so
+  passport gets access to req and res.
+  
   Humaid M. Agowun (A00430163)
 
   req = the express request object
   res = the express response object
+  next = the next callback to be called.
   */
-  async function (req, res) {
-    res.status(200).json({
-      message: "Signup successful",
-      user: req.user,
-    });
+  async function (req, res, next) {
+    passport.authenticate(
+      "signup",
+      { session: false },
+      /*
+      callback after account has been created or an error thrown.
+      sends the appropriate message based on account creation. 
+   
+      Humaid M. Agowun (A00430163)
+   
+      error = the error thrown
+      user = the created user
+      */
+      async function (error, user) {
+        if (error || !user) {
+          return res
+            .status(400)
+            .json({ message: error.message || "could not create user" });
+        }
+
+        return res.status(200).json({ message: "signup successful" });
+      }
+    )(req, res, next);
   }
 );
 

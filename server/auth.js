@@ -39,15 +39,18 @@ passport.use(
         isSpecialist = isSpecialist == "true"; // use == so as to change string to boolean
 
         if (isWrongSecret(isSpecialist, manipulationSecretKey)) {
-          throw new Error({ message: "Wrong secret passed." });
+          return done({ code: 400, message: "Wrong secret passed." });
         }
 
         const emailAlreadyTaken = await UserModel.findOne({ email });
         if (emailAlreadyTaken) {
-          throw new Error({ code: 400, message: "Email already taken" });
+          return done({ code: 400, message: "Email already taken." });
         }
 
-        newUser = await createNewUserInDb(email, password, isSpecialist);
+        const newUser = await createNewUserInDb(email, password, isSpecialist);
+        if (!newUser) {
+          return done({ code: 400, message: "Database did not save user." });
+        }
 
         return done(null, newUser); //successfully created the account.
       } catch (error) {
