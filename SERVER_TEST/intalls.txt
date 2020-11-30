@@ -1,8 +1,0 @@
-npm install --save bcryptjs
-npm install --save body-parser@1.19.0 
-npm install --save jsonwebtoken@8.5.1 
-npm install --save mongoose 
-npm install --save passport@0.4.1 passport-jwt@4.0.0 passport-local@1.0.0
-npm install --save dotenv
-
-//also need npm install express and npm install mongo
