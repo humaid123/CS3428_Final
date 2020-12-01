@@ -10,7 +10,6 @@ let DIVS = {
 function turnOnHidden(div) {
   for (const curr_div in DIVS) {
     if (curr_div == div) {
-      console.log(div);
       document.getElementById(div + "Hidden").style.display = "block";
     } else {
       document.getElementById(curr_div + "Hidden").style.display = "none";

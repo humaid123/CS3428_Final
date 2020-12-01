@@ -7,7 +7,6 @@ function deleteEmail(i, isInbox) {
         alert("server error in deleting email\nError: " + err.message);
       } else {
         window.location.reload();
-        console.log("delete success");
       }
     });
   }

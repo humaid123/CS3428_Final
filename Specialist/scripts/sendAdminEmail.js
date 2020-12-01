@@ -18,7 +18,6 @@ function sendAdminEmail() {
   }
 
   let newEmail = { to, from, cc, subject, body };
-  console.log(newEmail);
   storeNewEmailOnServer(newEmail, (err, result) => {
     if (err) {
       alert("could not send admin email.\nError: " + err.message);

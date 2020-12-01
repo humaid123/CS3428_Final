@@ -48,7 +48,6 @@ function closeCheckBoxes(divId) {
   let json = COMPOSE_DIVS[divId];
   for (let i = 0; i < json.checkBoxes.length; i++) {
     let name = divId + "CheckBox" + i;
-    console.log(name);
     let checkBox = document.getElementById(name);
     if (!checkBox.checked) {
       let correct = document.getElementById(divId + "Correct");

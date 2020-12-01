@@ -22,7 +22,6 @@ function sendStudentEmail() {
   }
 
   const newEmail = { to, cc, subject, body };
-  console.log(newEmail);
   storeNewEmailOnServer(newEmail, (err, result) => {
     if (err) {
       alert("could not send email.\nError: " + err.message);

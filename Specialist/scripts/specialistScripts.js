@@ -9,7 +9,6 @@ let DIVS = {
 function turnOnHidden(div) {
   for (const curr_div in DIVS) {
     if (curr_div == div) {
-      console.log(div);
       document.getElementById(div + "Hidden").style.display = "block";
     } else {
       document.getElementById(curr_div + "Hidden").style.display = "none";
@@ -68,7 +67,6 @@ function viewEmail(i, isInbox) {
       alert("could not fetch email.\nError: " + err.message);
     } else {
       changeEmailToReadClasses(i);
-      console.log(result);
       fillTextBoxes(result.requestedEmail, isInbox);
     }
   });
@@ -85,7 +83,6 @@ function changeEmailToReadClasses(i) {
 }
 
 function fillTextBoxes(email, isInbox) {
-  console.log("reached fill text boxes: ", email);
   const partner = isInbox ? "from" : "to";
   $("#WhoTextBox").val(email[partner]);
   $("#CcTextBox").val(email.cc);

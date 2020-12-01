@@ -10,7 +10,6 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config(); //gives access to process.env
 const router = require("express").Router();
 
-// route for signing up.
 router.post(
   "/signup",
   /*
@@ -50,11 +49,6 @@ router.post(
   }
 );
 
-/*
- * route for logging in
- * YOU NEED TO USE A CLOSURE SO THAT THE passport.authenticate
- * gets access to res so it can send the token to the user
- */
 router.post(
   "/login",
   /*

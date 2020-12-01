@@ -5,9 +5,6 @@ file used by all othe files in the app.
 Defines the constants used.
 */
 
-//Debug flag to help debugging
-const DEBUG = false;
-
 //constant to connect to server.
 const PORT = 3555;
 const SERVER_URL = "http://140.184.230.209:" + PORT;

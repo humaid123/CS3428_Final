@@ -32,7 +32,6 @@ function clickCheckBox(i, isInbox) {
     if (err) {
       alert("could not change urgency. \nError:" + err.message);
     } else {
-      console.log(result);
       const wasUrgent = changeCheckboxText(i);
       changeRowClasses(i, wasUrgent);
       changeTwoButtonsClasses(i, wasUrgent);

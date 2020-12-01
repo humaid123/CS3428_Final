@@ -35,7 +35,7 @@ function addInboxEmailsFromCollection() {
   });
 }
 
-function addSentEmailsFromCollection(name) {
+function addSentEmailsFromCollection() {
   getEmailsFromServer(false, (err, result) => {
     if (err) {
       alert("Could not find emails.\nError: " + err.message);
@@ -43,10 +43,6 @@ function addSentEmailsFromCollection(name) {
       displayEmails(result, "sent");
     }
   });
-}
-
-function displaySentEmails(data) {
-  displayEmails(data, "sent");
 }
 
 function displayEmails(data, where) {
@@ -67,7 +63,6 @@ function displayEmails(data, where) {
 
 function createNewRow(i, isInbox, email) {
   let otherClass = email.isRead ? "read" : "unread";
-  console.log(email.isRead, typeof email.isRead);
   if (email.isUrgent) {
     otherClass += "Urgent";
   }
