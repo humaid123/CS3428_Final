@@ -34,7 +34,9 @@ is clicked.
 clears localStorage and links back.
 */
 function logOut() {
-  alert("Logging out.\nGood Bye.");
-  localStorage.clear();
-  window.location.href = "../index.html";
+  const ans = confirm("Are you sure you want to log out?");
+  if (ans == true) {
+    localStorage.clear();
+    window.location.href = "../index.html";
+  }
 }

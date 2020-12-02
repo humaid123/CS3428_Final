@@ -1,18 +1,3 @@
-// the secre is currently MANIPULATE <= we need to put that in a .env file
-
-// You need the secret to create an account. After account is created.
-// You can login with the email and password
-
-// When user logs in, we fetch a token from server.
-// We store the user email and token in localStorage to make other API calls
-// the token expires after 5hrs.
-// When we logout, we can only remove the token from localStorage
-// When we make a request, we put the token in req.query with the url itself
-// We put the data in req.body with the body field
-
-// LOCAL STRATEGY wants data from req.body
-// JWT wants data from query parameters
-
 function loginInServer(email, password, isSpecialist, loginFunc) {
   $.ajax({
     type: "POST",
