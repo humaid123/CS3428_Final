@@ -103,20 +103,20 @@
     function createAccount() {
       const email = document.getElementById('email').value.trim();
       if (/\s+/.test(email)) {
-        return alert("Your email must not contain any blank spaces.");
+        return alert("Your email address must not contain any blank spaces.");
       }
 
       const password = document.getElementById('password').value.trim();
       const retypedPassword = document.getElementById('retypePassword').value.trim();
       if (retypedPassword != password) {
-        return alert("The password and the retyped password do not match.");
+        return alert("Your password and the retyped password do not match.");
       }
 
       const secret = document.getElementById('secret').value;
       let isSpecialist = JSON.parse(localStorage.getItem('isSpecialist')).isSpecialist;
       createAccountInServer(email, password, secret, isSpecialist, (err, result) => {
         if (err) {
-          alert("error in creating your account: " + err.message);
+          alert("Error in creating your account.\nServer said: " + err.message);
         } else {
           alert("Account created.\nTime to login now!");
           window.location.href = "./index.html";

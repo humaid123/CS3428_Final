@@ -107,7 +107,7 @@ UserSchema.methods.addNewSentItem = async function (newEmail) {
 
   user.sentItems.unshift(newEmail);
   user.markModified("sentItems");
-  
+
   try {
     await user.save();
     return true;
@@ -132,7 +132,7 @@ UserSchema.methods.deleteEmail = async function (isInbox, index) {
 
   user[which].splice(index, 1);
   user.markModified(which);
-  
+
   try {
     await user.save();
     return true;
@@ -159,9 +159,9 @@ UserSchema.methods.viewEmail = async function (isInbox, index) {
 
   try {
     await user.save();
-    return {error: "", requestedEmail};
-  } catch(error) {
-    return {error: "error in saving read status", requestedEmail};
+    return { error: "", requestedEmail };
+  } catch (error) {
+    return { error: "Could not fetch the email", requestedEmail };
   }
 };
 

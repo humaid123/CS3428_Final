@@ -36,11 +36,11 @@
         if (err) {
           alert("Oops you made a mistake.\n"
             + "Error: "
-            + err.message
+            + err.message + "."
           );
         } else {
           //loginInServer takes care of localStorage stuff.
-          alert("successfully connected");
+          alert("Successfully connected.");
           linkToCorrectPage();
         }
       });

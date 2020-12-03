@@ -32,13 +32,15 @@ router.post(
     try {
       const user = await UserModel.findOne({ email });
       if (!user) {
-        return res.status(400).json({ message: "Could not find user." });
+        return res
+          .status(400)
+          .json({ message: "Could not find your account." });
       }
 
       let emails = isInbox ? user.inbox : user.sentItems;
       return res.status(200).json({ emails });
     } catch (error) {
-      return res.status(400).json({ message: "Error in fetching emails." });
+      return res.status(400).json({ message: "Could not fetch your emails." });
     }
   }
 );
@@ -65,7 +67,9 @@ router.post(
     try {
       const user = await UserModel.findOne({ email });
       if (!user) {
-        return res.status(400).json({ message: "Could not find user." });
+        return res
+          .status(400)
+          .json({ message: "Could not find your account." });
       }
 
       const success = await user.changeUrgency(isInbox, index);
@@ -74,7 +78,7 @@ router.post(
       }
       return res.status(400).json({ message: "Urgency change failed." });
     } catch (error) {
-      return res.status(400).json({ message: "Error in changing urgency." });
+      return res.status(400).json({ message: "Unknown Urgency error." });
     }
   }
 );
@@ -101,7 +105,9 @@ router.post(
     try {
       const user = await UserModel.findOne({ email });
       if (!user) {
-        return res.status(400).json({ message: "Could not find user." });
+        return res
+          .status(400)
+          .json({ message: "Could not find your account." });
       }
 
       const success = await user.deleteEmail(isInbox, index);
@@ -110,7 +116,7 @@ router.post(
       }
       return res.status(400).json({ message: "Email deletion failed." });
     } catch (error) {
-      return res.status(400).json({ message: "Error in deleting email." });
+      return res.status(400).json({ message: "Unknown deleting email error." });
     }
   }
 );
@@ -141,7 +147,7 @@ router.post(
 
     let sender = await UserModel.findOne({ email });
     if (!sender) {
-      return res.status(400).send({ message: "Could not find sender." });
+      return res.status(400).send({ message: "Could not find your account." });
     }
 
     let { error, emailReceivers } = await getAllReceivers(newEmail);
@@ -185,7 +191,10 @@ async function getAllReceivers(newEmail) {
   if (receiver) {
     emailReceivers.push(receiver);
   } else {
-    return { error: "could not find receiver: " + newEmail.to, emailReceivers };
+    return {
+      error: "Could not find receiver: " + newEmail.to + ".",
+      emailReceivers,
+    };
   }
   if (newEmail.cc) {
     //it is not an empty array, so we can iterate.
@@ -195,7 +204,7 @@ async function getAllReceivers(newEmail) {
         emailReceivers.push(ccedPerson);
       } else {
         return {
-          error: "could not find cced person: " + ccEmail,
+          error: "Could not find cced person: " + ccEmail + ".",
           emailReceivers,
         };
       }
@@ -263,21 +272,21 @@ router.post(
   async function (req, res) {
     let { email, isInbox, index } = req.body;
     if (!email || !isInbox || !index) {
-      return res.status(400).json({ message: "Incorrect request." });
+      return res.status(400).json({ message: "Improper request." });
     }
     isInbox = isInbox == "true"; //change to boolean, sometimes it comes off as string
 
     try {
       const user = await UserModel.findOne({ email });
       if (!user) {
-        return res.status(400).send({ message: "Could not find user." });
+        return res
+          .status(400)
+          .send({ message: "Could not find your account." });
       }
 
       const { error, requestedEmail } = await user.viewEmail(isInbox, index);
       if (error != "") {
-        return res
-          .status(400)
-          .send({ message: error });
+        return res.status(400).send({ message: error });
       }
       return res.status(200).send({ requestedEmail });
     } catch (error) {
@@ -318,7 +327,7 @@ router.post(
       return res.status(400).send({
         message:
           "Could not delete account.\nServer Error: " +
-          (error.message || "Error does not have a message") +
+          (error.message || "Unknown deleting account error") +
           ".",
       });
     }
@@ -341,7 +350,7 @@ router.post(
   async function (req, res) {
     let { email, isSpecialist } = req.body;
     if (!email || !isSpecialist) {
-      return res.status(400).send({ message: "Improper request" });
+      return res.status(400).send({ message: "Improper request." });
     }
     isSpecialist = isSpecialist == "true"; //make sure it is a boolean, need == and not ===
     try {
@@ -356,7 +365,7 @@ router.post(
     } catch (error) {
       return res
         .status(400)
-        .send({ message: "Could not fill in your selection menus." });
+        .send({ message: "Could not fill in your menu(s)." });
     }
   }
 );

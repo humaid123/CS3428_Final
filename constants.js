@@ -19,6 +19,9 @@ const NOT_CHECKED = `<i class="fa fa-flag-o" aria-hidden="true"></i> DONE`;
 function run everytime a help desk button 
 is clicked.
 opens the help subsystem.
+Humaid M. Agowun
+
+returns N/A
 */
 function showHelp() {
   window.open(
@@ -32,6 +35,9 @@ function showHelp() {
 function run everytime a log out button 
 is clicked.
 clears localStorage and links back.
+Humaid M. Agowun
+
+returns N/A
 */
 function logOut() {
   const ans = confirm("Are you sure you want to log out?");

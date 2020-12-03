@@ -43,12 +43,15 @@ passport.use(
         }
 
         if (await emailIsAlreadyTaken(email)) {
-          return done({ code: 400, message: "Email already taken." });
+          return done({ code: 400, message: "Email address already taken." });
         }
 
         const newUser = await createNewUserInDb(email, password, isSpecialist);
         if (!newUser) {
-          return done({ code: 400, message: "Database did not save user." });
+          return done({
+            code: 400,
+            message: "Database did not save your account.",
+          });
         }
         return done(null, newUser); //successfully created the account.
       } catch (error) {
@@ -131,7 +134,7 @@ passport.use(
       try {
         const user = await UserModel.findOne({ email });
         if (!user) {
-          return done(null, false, { message: "Typed email was not found." });
+          return done(null, false, { message: "Email address was not found." });
         }
 
         const validPassword = await user.isValidPassword(password);

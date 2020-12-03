@@ -44,7 +44,7 @@ router.post(
             .json({ message: error.message || "could not create user" });
         }
 
-        return res.status(200).json({ message: "signup successful" });
+        return res.status(200).json({ message: "Signup successful." });
       }
     )(req, res);
   }
