@@ -1,164 +1,171 @@
+<!DOCTYPE html>
 
 <head>
-    <title>Specialist Email System</title>
-    <link rel="stylesheet" href="../styles/index.css">
-    <link rel="stylesheet" href="../styles/emailsList.css">
-    <link rel="stylesheet" href="../styles/composeStyles.css">
-    <link rel="stylesheet" href="../styles/outlookStyles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="../jquery-3.4.1.min.js" async></script>
-    <script src="../constants.js" async></script>
-    <script src="../Modules/deleteEmail.js" async></script>
-    <script src="../Modules/clickCheckBox.js" async></script>
-    <script src="../Modules/DisplayEmails.js" async></script>
-    <script src="../Modules/viewEmailFromServer.js" async></script>
-    <script src="./scripts/specialistScripts.js" async></script>
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <style>
-        #deleteAccountButton {
-            border: 1px solid red;
-            color: red;
-        }
-        #deleteAccountButton:Hover {
-            background-color: red;
-            color: white;
-        }
-        @media screen and (max-width: 1000px) {
-            .topButton {
-                width: 7em;
-                font-size: 0.5em;
-            }
-        }
-    </style>
+  <title>Specialist Email System</title>
+  <link rel="stylesheet" href="../styles/index.css">
+  <link rel="stylesheet" href="../styles/emailsList.css">
+  <link rel="stylesheet" href="../styles/composeStyles.css">
+  <link rel="stylesheet" href="../styles/outlookStyles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="../jquery-3.4.1.min.js" async></script>
+  <script src="../constants.js" async></script>
+  <script src="../Modules/deleteEmail.js" async></script>
+  <script src="../Modules/clickCheckBox.js" async></script>
+  <script src="../Modules/DisplayEmails.js" async></script>
+  <script src="../Modules/viewEmailFromServer.js" async></script>
+  <script src="./scripts/specialistScripts.js" async></script>
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <style>
+    #deleteAccountButton {
+      border: 1px solid red;
+      color: red;
+    }
+
+    #deleteAccountButton:Hover {
+      background-color: red;
+      color: white;
+    }
+
+    @media screen and (max-width: 1000px) {
+      .topButton {
+        width: 7em;
+        font-size: 0.5em;
+      }
+    }
+  </style>
 </head>
+
 <body onload="loadPage()">
-    <header>MAIN PAGE</header>
-    <div id="container">
-        <div id="menuOnTop">
-            <div class="topButtonDiv">
-                <button id="officeButton" class="normalButton topButton" onclick="showOffice()">
-                    <i class="fa fa-cube" style="font-size: 2em; color: orangered" aria-hidden="true"></i>
-                    <div>OFFICE</div>
-                </button>
-            </div>
-            <div class="topButtonDiv">
-                <button id="composeButton" class="normalButton topButton" onclick="linkCompose()">
-                    <i class="fa fa-pencil-square-o" style="font-size: 2em;" aria-hidden="true"></i>
-                    <div>COMPOSE</div>
-                </button>
-            </div>
-            <div class="topButtonDiv">
-                <button id="HelpDeskButton" class="normalButton topButton" onclick="showHelp()">
-                    <i class="fa fa-info-circle" style="color: lightskyblue; font-size: 2em;" aria-hidden="true"></i>
-                    <div>HELP DESK</div>
-                </button>
-            </div>
-            <div class="topButtonDiv">
-                <button id="deleteAccountButton" style="width: 6.5em;" class="normalButton topButton" onclick="deleteAccounts()">DELETE ACCOUNTS</button>
-            </div>
+  <header>MAIN PAGE</header>
+  <div id="container">
+    <div id="menuOnTop">
+      <div class="topButtonDiv">
+        <button id="officeButton" class="normalButton topButton" onclick="showOffice()">
+          <i class="fa fa-cube" style="font-size: 2em; color: orangered" aria-hidden="true"></i>
+          <div>OFFICE</div>
+        </button>
+      </div>
+      <div class="topButtonDiv">
+        <button id="composeButton" class="normalButton topButton" onclick="linkCompose()">
+          <i class="fa fa-pencil-square-o" style="font-size: 2em;" aria-hidden="true"></i>
+          <div>COMPOSE</div>
+        </button>
+      </div>
+      <div class="topButtonDiv">
+        <button id="HelpDeskButton" class="normalButton topButton" onclick="showHelp()">
+          <i class="fa fa-info-circle" style="color: lightskyblue; font-size: 2em;" aria-hidden="true"></i>
+          <div>HELP DESK</div>
+        </button>
+      </div>
+      <div class="topButtonDiv">
+        <button id="deleteAccountButton" style="width: 6.5em;" class="normalButton topButton"
+          onclick="deleteAccounts()">DELETE ACCOUNTS</button>
+      </div>
+    </div>
+    <div id="innerContainer">
+      <div id="Navigation">
+        <div id="NavigationContent">
+          <div class="OfficeClickedDiv">
+            <button class="normalButton navigationButton" onclick="loadInboxEmails()">Inbox</button>
+          </div>
+          <div class="OfficeClickedDiv">
+            <button class="normalButton navigationButton" onclick="loadSentEmails()">Sent Items</button>
+          </div>
+          <div class="OfficeClickedDiv" id="logOutButtonDiv">
+            <button class="normalButton navigationButton" id="logOutButton" onclick="logOut()">Log
+              Out</button>
+          </div>
+          <div class="OfficeClickedDiv" id="closeButtonDiv">
+            <button id="closeButton" class="normalButton" onclick="closeOfficeButtons()">CLOSE</button>
+          </div>
         </div>
-        <div id="innerContainer">
-            <div id="Navigation">
-                <div id="NavigationContent">
-                    <div class="OfficeClickedDiv">
-                        <button class="normalButton navigationButton" onclick="loadInboxEmails()">Inbox</button>
-                    </div>
-                    <div class="OfficeClickedDiv">
-                        <button class="normalButton navigationButton" onclick="loadSentEmails()">Sent Items</button>
-                    </div>
-                    <div class="OfficeClickedDiv" id="logOutButtonDiv">
-                        <button class="normalButton navigationButton" id="logOutButton" onclick="logOut()">Log Out</button>
-                    </div>
-                    <div class="OfficeClickedDiv" id="closeButtonDiv">
-                        <button id="closeButton" class="normalButton" onclick="closeOfficeButtons()">CLOSE</button>
-                    </div>
-                </div>
-            </div>
+      </div>
 
-            <div class="seperator"></div>
-            <div id="listOfEmails">
-                <div class="numUnread">NUM UNREAD EMAILS: </div>
-                <div class="emails"></div> 
-            </div>
-            <div class="seperator"></div>
+      <div class="seperator"></div>
+      <div id="listOfEmails">
+        <div class="numUnread">NUM UNREAD EMAILS: </div>
+        <div class="emails"></div>
+      </div>
+      <div class="seperator"></div>
 
-            <div id="ViewingEmail">
-                <header>VIEWING EMAIL</header>
+      <div id="ViewingEmail">
+        <header>VIEWING EMAIL</header>
         <div id="Who">
-            <div class="composeField myTextBox">
-                <div id="WhoCorrect" class="reading"><i class="fa fa-circle-o" aria-hidden="true"></i></div>
-                <div class="labelComposeField">
-                    <label for="WhoTextBox" class="myLabel">Who</label>
-                </div>
-                <div class="elementComposeField">
-                    <input type="email" class="longTextBox" id="WhoTextBox" onfocus="turnOnHidden('Who')" readonly>
-                </div>
+          <div class="composeField myTextBox">
+            <div id="WhoCorrect" class="reading"><i class="fa fa-circle-o" aria-hidden="true"></i></div>
+            <div class="labelComposeField">
+              <label for="WhoTextBox" class="myLabel">Who</label>
             </div>
-            <div class="hidden" id="WhoHidden">
-                <div class="hints" id="WhoHints">
-                    <p class="hintTitle">HINTS FOR WHO</p>
-                    <ul id="WhoHintList"></ul>
-               </div>
-           </div>
+            <div class="elementComposeField">
+              <input type="email" class="longTextBox" id="WhoTextBox" onfocus="turnOnHidden('Who')" readonly>
+            </div>
+          </div>
+          <div class="hidden" id="WhoHidden">
+            <div class="hints" id="WhoHints">
+              <p class="hintTitle">HINTS FOR WHO</p>
+              <ul id="WhoHintList"></ul>
+            </div>
+          </div>
         </div>
         <div id="Cc">
-            <div class="composeField myTextBox">
-                <div id="CcCorrect" class="reading"><i class="fa fa-circle-o" aria-hidden="true"></i></div>
-                <div class="labelComposeField">
-                    <label for="CcTextBox" class="myLabel">Cc</label>
-                </div>
-                <div class="elementComposeField">
-                    <input type="email" class="longTextBox" id="CcTextBox" onfocus="turnOnHidden('Cc')" readonly>
-                </div>
+          <div class="composeField myTextBox">
+            <div id="CcCorrect" class="reading"><i class="fa fa-circle-o" aria-hidden="true"></i></div>
+            <div class="labelComposeField">
+              <label for="CcTextBox" class="myLabel">Cc</label>
             </div>
-            <div class="hidden" id="CcHidden">
-                <div class="hints" id="CcHints">
-                    <p class="hintTitle">HINTS FOR CC</p>
-                    <ul id="CcHintList"></ul>
-               </div>
-           </div>
+            <div class="elementComposeField">
+              <input type="email" class="longTextBox" id="CcTextBox" onfocus="turnOnHidden('Cc')" readonly>
+            </div>
+          </div>
+          <div class="hidden" id="CcHidden">
+            <div class="hints" id="CcHints">
+              <p class="hintTitle">HINTS FOR CC</p>
+              <ul id="CcHintList"></ul>
+            </div>
+          </div>
         </div>
         <div id="Subject">
-            <div class="composeField myTextBox">
-                <div id="SubjectCorrect" class="reading"><i class="fa fa-circle-o" aria-hidden="true"></i></div>
-                <div class="labelComposeField">
-                    <label for="SubjectTextBox" class="myLabel">Subject</label>
-                </div>
-                <div class="elementComposeField">
-                    <input type="email" class="longTextBox" id="SubjectTextBox" onfocus="turnOnHidden('Subject')" readonly>
-                </div>
+          <div class="composeField myTextBox">
+            <div id="SubjectCorrect" class="reading"><i class="fa fa-circle-o" aria-hidden="true"></i></div>
+            <div class="labelComposeField">
+              <label for="SubjectTextBox" class="myLabel">Subject</label>
             </div>
-            <div class="hidden" id="SubjectHidden">
-                <div class="hints" id="SubjectHints">
-                    <p class="hintTitle">HINTS FOR SUBJECT</p>
-                    <ul id="SubjectHintList"></ul>
-               </div>
-           </div>
+            <div class="elementComposeField">
+              <input type="email" class="longTextBox" id="SubjectTextBox" onfocus="turnOnHidden('Subject')" readonly>
+            </div>
+          </div>
+          <div class="hidden" id="SubjectHidden">
+            <div class="hints" id="SubjectHints">
+              <p class="hintTitle">HINTS FOR SUBJECT</p>
+              <ul id="SubjectHintList"></ul>
+            </div>
+          </div>
         </div>
         <div id="Body">
-            <div class="composeTextArea"> 
-                <div class="textAreaFlags">
-                    <div id="BodyCorrect" class="reading"><i class="fa fa-circle-o" aria-hidden="true"></i></div>
-                    <div class="labelTextArea">
-                        <label for="BodyTextBox" class="myLabel">Body</label></div>
-                </div>
-                <div class="elementTextArea">
-                    <textarea class="emailTextArea" id="BodyTextBox" onfocus="turnOnHidden('Body')" readonly></textarea>
-                </div>
+          <div class="composeTextArea">
+            <div class="textAreaFlags">
+              <div id="BodyCorrect" class="reading"><i class="fa fa-circle-o" aria-hidden="true"></i>
+              </div>
+              <div class="labelTextArea">
+                <label for="BodyTextBox" class="myLabel">Body</label></div>
+            </div>
+            <div class="elementTextArea">
+              <textarea class="emailTextArea" id="BodyTextBox" onfocus="turnOnHidden('Body')" readonly></textarea>
+            </div>
           </div>
           <div class="hidden" id="BodyHidden">
-                <div class="hints" id="BodyHints">
-                    <p class="hintTitle">HINTS FOR BODY</p>
-                    <ul id="BodyHintList"></ul>
-               </div>
-           </div>
+            <div class="hints" id="BodyHints">
+              <p class="hintTitle">HINTS FOR BODY</p>
+              <ul id="BodyHintList"></ul>
+            </div>
+          </div>
         </div>
         <div id="closeViewEmailDiv">
-                    <button class="normalButton" id="closeViewEmail" onclick="closeViewEmail()">CLOSE</button>
-                </div>
-    </div>
-    </div>
+          <button class="normalButton" id="closeViewEmail" onclick="closeViewEmail()">CLOSE</button>
         </div>
+      </div>
     </div>
-    <footer></footer>
+  </div>
+  </div>
+  <footer></footer>
 </body>

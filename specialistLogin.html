@@ -22,10 +22,10 @@
     </style>
     <script>
       /*
-        function run when sign in clicked.
-        sends data to the server to receive a token.
-        Humaid M. Agowun (A00430163)
-        */
+      function run when sign in clicked.
+      sends data to the server to receive a token.
+      Humaid M. Agowun (A00430163)
+      */
       function LoginSpecialist() {
         const email = document.getElementById("email").value.trim();
         const password = document.getElementById("password").value.trim();
@@ -41,10 +41,10 @@
       }
 
       /*
-        function run when createAccount clicked.
-        links to createAccount page
-        Humaid M. Agowun (A00430163)
-        */
+      function run when createAccount clicked.
+      links to createAccount page
+      Humaid M. Agowun (A00430163)
+      */
       function createAccount() {
         const json = { isSpecialist: true };
         localStorage.setItem("isSpecialist", JSON.stringify(json));
@@ -52,15 +52,16 @@
       }
 
       /*
-        function when cancel clicked.
-        links back to previous page.
-        Humaid M. Agowun (A00430163)
-        */
+      function when cancel clicked.
+      links back to previous page.
+      Humaid M. Agowun (A00430163)
+      */
       function cancelLogin() {
         window.history.back();
       }
     </script>
   </head>
+
   <body>
     <div class="container">
       <div class="logoDiv">

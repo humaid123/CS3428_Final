@@ -1,89 +1,96 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Austism NS pre-login</title>
-    <script src="./linkBackCompose.js"></script>
-    <script src="../constants.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <link rel="stylesheet" href="../styles/selectionPages.css">
-    <style>
-    body {
-        height: 100vh;
-    }
-       .cancelButtonDiv {
-        font-size: 0.5em;
-        display: flex;
-        color: orangered;
-        justify-content: flex-end;
-    }
-    .cancelButton {
-        padding: 1px;
-        border-radius: 5px;
-        border: 1px solid orangered;
-        transition-duration: 0.2s;
-    }
-    .cancelButton:hover {
-        color: white;
-        background-color: red;
-        cursor: pointer;
-    }
-    </style>
 
-    <script>
-        function changeToFormal() {
-            window.location.href = "studentComposeFormal.html";
-        }
-        function changeToInformal() {
-            window.location.href = "studentComposeInformal.html";
-        }
-        function back() {
-            window.history.back();
-        }
-    </script>
+<head>
+  <title>Austism NS pre-login</title>
+  <script src="./linkBackCompose.js"></script>
+  <script src="../constants.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <link rel="stylesheet" href="../styles/selectionPages.css">
+  <style>
+    body {
+      height: 100vh;
+    }
+
+    .cancelButtonDiv {
+      font-size: 0.5em;
+      display: flex;
+      color: orangered;
+      justify-content: flex-end;
+    }
+
+    .cancelButton {
+      padding: 1px;
+      border-radius: 5px;
+      border: 1px solid orangered;
+      transition-duration: 0.2s;
+    }
+
+    .cancelButton:hover {
+      color: white;
+      background-color: red;
+      cursor: pointer;
+    }
+  </style>
+
+  <script>
+    function changeToFormal() {
+      window.location.href = "studentComposeFormal.html";
+    }
+    function changeToInformal() {
+      window.location.href = "studentComposeInformal.html";
+    }
+    function back() {
+      window.history.back();
+    }
+  </script>
 </head>
+
 <body>
-    <div class="container">
+  <div class="container">
     <div class="logoDiv">
-            <div class="logoContainer"><i class="fa fa-envelope logoIcon" aria-hidden="true"></i></div>
-        </div>
+      <div class="logoContainer"><i class="fa fa-envelope logoIcon" aria-hidden="true"></i></div>
+    </div>
     <div class="centerInnerDiv">
-    <div class="innerContainer">
+      <div class="innerContainer">
         <div class="title logoToTheSide">
-            <div><i class="fa fa-pencil-square-o" style="padding: 5px;" aria-hidden="true"></i></div>
-            <div>Choosing Compose Style</div>
+          <div><i class="fa fa-pencil-square-o" style="padding: 5px;" aria-hidden="true"></i></div>
+          <div>Choosing Compose Style</div>
         </div>
         <div class="prompt" style="font-size: 2em;">Is the email formal or informal?</div>
-       <div class="row" id="formal" onclick="changeToFormal()">
-            <div class="insideRow" style="font-size: 2em;">
-                <div><i class="fa fa-handshake-o" style="padding-right: 10px" aria-hidden="true"></i></div>
-                <div>Formal</div>
+        <div class="row" id="formal" onclick="changeToFormal()">
+          <div class="insideRow" style="font-size: 2em;">
+            <div><i class="fa fa-handshake-o" style="padding-right: 10px" aria-hidden="true"></i></div>
+            <div>Formal</div>
+          </div>
+          <div class="hiddenDescription">
+            <div class="descriptionContainer">You are composing to a professor,<br>employer or anybody unrelated to you.
             </div>
-            <div class="hiddenDescription">
-                <div class="descriptionContainer">You are composing to a professor,<br>employer or anybody unrelated to you.</div>
-            </div>
+          </div>
         </div>
         <div class="row" id="formal" onclick="changeToInformal()">
-            <div class="insideRow" style="font-size: 2em">
-                <div><i class="fa fa-hand-peace-o" style="padding-right: 10px" aria-hidden="true"></i></div>
-                <div>Informal</div>
+          <div class="insideRow" style="font-size: 2em">
+            <div><i class="fa fa-hand-peace-o" style="padding-right: 10px" aria-hidden="true"></i></div>
+            <div>Informal</div>
+          </div>
+          <div class="hiddenDescription">
+            <div class="descriptionContainer">You are composing to a friend, family<br>member or anybody related to you.
             </div>
-            <div class="hiddenDescription">
-                <div class="descriptionContainer">You are composing to a friend, family<br>member or anybody related to you.</div>
-            </div>
+          </div>
         </div>
         <br>
         <br>
 
 
-            <div class="cancelButtonDiv">
-        <div class="cancelButton logoToTheSide" style="font-size: 2em;" onclick="back()">
+        <div class="cancelButtonDiv">
+          <div class="cancelButton logoToTheSide" style="font-size: 2em;" onclick="back()">
             <div><i class="fa fa-chevron-circle-left" style="padding-right: 10px;" aria-hidden="true"></i></div>
             <div>Cancel</div>
+          </div>
+
         </div>
-
-        </div>   
-    </div>
+      </div>
 </body>
-</html>
 
+</html>

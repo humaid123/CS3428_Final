@@ -4,92 +4,96 @@
   Humaid M. Agowun (A00430163)
 -->
 <html lang="en">
+
 <head>
-    <title>Student Login</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <link rel="stylesheet" href="./styles/selectionPages.css">
-    <script src="./jquery-3.4.1.min.js"></script>
-    <script src="./constants.js"></script>
-    <script src="./Modules/login.js"></script>
-    <style>
-        body {height: 100vh;}
-    </style>
-    <script>
-        /*
-        function run when sign in clicked
-        login student by requesting to the server for a token.
-        Humaid M. Agowun (A00430163)
-        */
-        function LoginStudent() {
-          const email = document.getElementById('email').value.trim();
-          const password = document.getElementById('password').value.trim();
-          loginInServer(email, password, false, (err, result) => {
-            if (err) {
-              alert("Oops you made a mistake.\n"
-                + "Error: " 
-                + err.message
-              );
-            } else {
-              //loginInServer takes care of localStorage stuff.
-              alert("successfully connected");
-              linkToCorrectPage();
-            }
-          });
+  <title>Student Login</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <link rel="stylesheet" href="./styles/selectionPages.css">
+  <script src="./jquery-3.4.1.min.js"></script>
+  <script src="./constants.js"></script>
+  <script src="./Modules/login.js"></script>
+  <style>
+    body {
+      height: 100vh;
+    }
+  </style>
+  <script>
+    /*
+    function run when sign in clicked
+    login student by requesting to the server for a token.
+    Humaid M. Agowun (A00430163)
+    */
+    function LoginStudent() {
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+      loginInServer(email, password, false, (err, result) => {
+        if (err) {
+          alert("Oops you made a mistake.\n"
+            + "Error: "
+            + err.message
+          );
+        } else {
+          //loginInServer takes care of localStorage stuff.
+          alert("successfully connected");
+          linkToCorrectPage();
         }
+      });
+    }
 
-        /*
-        links to the correct page based on level of difficulty.
-        sets up the localStorage json to say if checkboxes are present
-        when composing
-        Humaid M. Agowun (A00430163)
-        */
-        function linkToCorrectPage() {
-          if (document.getElementById("Basic").checked) {
-            window.location = "Student_Basic/inbox.html"; 
-            setUpCheckBoxesJSON(true);
-          } else if (document.getElementById("Intermediate").checked) {
-            window.location = "Student_Intermediate/inbox.html"; 
-            setUpCheckBoxesJSON(false);
-          } else if (document.getElementById("Advanced").checked) {
-            window.location = "Student_Advanced/mainPage.html";
-            setUpCheckBoxesJSON(false);
-          }
-        }
+    /*
+    links to the correct page based on level of difficulty.
+    sets up the localStorage json to say if checkboxes are present
+    when composing
+    Humaid M. Agowun (A00430163)
+    */
+    function linkToCorrectPage() {
+      if (document.getElementById("Basic").checked) {
+        window.location = "Student_Basic/inbox.html";
+        setUpCheckBoxesJSON(true);
+      } else if (document.getElementById("Intermediate").checked) {
+        window.location = "Student_Intermediate/inbox.html";
+        setUpCheckBoxesJSON(false);
+      } else if (document.getElementById("Advanced").checked) {
+        window.location = "Student_Advanced/mainPage.html";
+        setUpCheckBoxesJSON(false);
+      }
+    }
 
-        /*
-        sets up the loadCheckBox in localStorage to allow checkboxes for
-        composing.
-        Humaid M. Agowun (A00430163)
+    /*
+    sets up the loadCheckBox in localStorage to allow checkboxes for
+    composing.
+    Humaid M. Agowun (A00430163)
 
-        load = boolean. true if checkboxes in the compose screens 
-        should be loaded
-        */        
-        function setUpCheckBoxesJSON(load) {
-          const json = {"loadCheckBox" : load};
-          localStorage.setItem("loadCheckBox", JSON.stringify(json))
-        }
+    load = boolean. true if checkboxes in the compose screens 
+    should be loaded
+    */
+    function setUpCheckBoxesJSON(load) {
+      const json = { "loadCheckBox": load };
+      localStorage.setItem("loadCheckBox", JSON.stringify(json))
+    }
 
-        /*
-        returns back when cancel button clicked.
-        Humaid M. Agowun (A00430163)
-        */
-        function cancelLogin() {
-          window.history.back();
-        }
+    /*
+    returns back when cancel button clicked.
+    Humaid M. Agowun (A00430163)
+    */
+    function cancelLogin() {
+      window.history.back();
+    }
 
-        /*
-        run when createAccount button is clicked. 
-        Links to the createAccount page
-        Humaid M. Agowun (A00430163) 
-        */
-        function createAccount() {
-          const json = {isSpecialist: false};
-          localStorage.setItem('isSpecialist', JSON.stringify(json));
-          window.location.href = "./createAccount.html";
-        }
-    </script>
+    /*
+    run when createAccount button is clicked. 
+    Links to the createAccount page
+    Humaid M. Agowun (A00430163) 
+    */
+    function createAccount() {
+      const json = { isSpecialist: false };
+      localStorage.setItem('isSpecialist', JSON.stringify(json));
+      window.location.href = "./createAccount.html";
+    }
+  </script>
 </head>
+
 <body>
   <div class="container">
     <div class="logoDiv">
@@ -103,13 +107,7 @@
         </div>
         <div class="inputFieldDiv">
           <label for="email" class="inputFieldLabel">Email:</label><br>
-          <input 
-            type="text" 
-            class="inputField" 
-            name="email" 
-            id="email" 
-            placeholder="Enter your email"
-          >
+          <input type="text" class="inputField" name="email" id="email" placeholder="Enter your email">
           <div class="hiddenDescription">
             <div class="descriptionContainer">Do not make spelling or capitalisation mistakes</div>
           </div>
@@ -117,13 +115,7 @@
         <br>
         <div class="inputFieldDiv">
           <label for="password" class="inputFieldLabel">Password:</label><br>
-          <input 
-            type="password" 
-            class="inputField" 
-            id="password" 
-            name="password" 
-            placeholder="Enter your password"
-          >
+          <input type="password" class="inputField" id="password" name="password" placeholder="Enter your password">
           <div class="hiddenDescription">
             <div class="descriptionContainer">Do not make spelling or capitalisation mistakes</div>
           </div>
@@ -152,7 +144,7 @@
         <br>
         <div class="createAccountButtonDiv">
           <div class="createAccountButton logoToTheSide" onclick="createAccount()">
-            <div><i class="fa fa-address-card-o" style="padding: 1px;"aria-hidden="true"></i></div>
+            <div><i class="fa fa-address-card-o" style="padding: 1px;" aria-hidden="true"></i></div>
             <div>Create Account</div>
           </div>
         </div>
@@ -164,6 +156,7 @@
           </div>
         </div>
       </div>
-   </div>
+    </div>
 </body>
+
 </html>
