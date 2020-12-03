@@ -22,7 +22,6 @@
       display: block;
       font-size: 0.8em;
     }
-
   </style>
   <script>
     /*
@@ -52,6 +51,8 @@
     sets up the localStorage json to say if checkboxes are present
     when composing
     Humaid M. Agowun (A00430163)
+    
+    returns N/A
     */
     function linkToCorrectPage() {
       if (document.getElementById("Basic").checked) {
@@ -73,6 +74,8 @@
 
     load = boolean. true if checkboxes in the compose screens 
     should be loaded
+    
+    returns N/A
     */
     function setUpCheckBoxesJSON(load) {
       const json = { "loadCheckBox": load };
@@ -82,6 +85,8 @@
     /*
     returns back when cancel button clicked.
     Humaid M. Agowun (A00430163)
+    
+    returns N/A
     */
     function cancelLogin() {
       window.history.back();
@@ -91,6 +96,8 @@
     run when createAccount button is clicked. 
     Links to the createAccount page
     Humaid M. Agowun (A00430163) 
+    
+    returns N/A
     */
     function createAccount() {
       const json = { isSpecialist: false };

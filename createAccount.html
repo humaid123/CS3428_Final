@@ -39,8 +39,6 @@
       border-left: 5px solid darkblue;
     }
 
-
-    /*Needed for this screen only*/
     .innerContainer {
       font-size: 1em;
     }
@@ -87,8 +85,10 @@
   </style>
   <script>
     /*
-    returns to the login screen
+    changes location back to the login screen
     Humaid M. Agowun (A00430163)
+
+    returns N/A
     */
     function cancelCreateAccount() {
       window.history.back();
@@ -97,6 +97,8 @@
     /*
     function that requests the server to create an account.
     Humaid M. Agowun (A00430163)
+
+    returns N/A
     */
     function createAccount() {
       const email = document.getElementById('email').value.trim();
