@@ -23,9 +23,9 @@ passport.use(
     /*
     function to configure signup strategy. 
     Creates the user in the database if everything works well
-    
+
     Humaid M. Agowun (A00430163)
-    
+
     req = the http request filled by passport
     email = the email used by passport from the request
     password = the email used by password from the request
@@ -42,8 +42,7 @@ passport.use(
           return done({ code: 400, message: "Wrong secret passed." });
         }
 
-        const emailAlreadyTaken = await UserModel.findOne({ email });
-        if (emailAlreadyTaken) {
+        if (await emailIsAlreadyTaken(email)) {
           return done({ code: 400, message: "Email already taken." });
         }
 
@@ -51,7 +50,6 @@ passport.use(
         if (!newUser) {
           return done({ code: 400, message: "Database did not save user." });
         }
-
         return done(null, newUser); //successfully created the account.
       } catch (error) {
         done(error);
@@ -61,6 +59,18 @@ passport.use(
 );
 
 /*
+function that checks if the email is already taken so 
+we know if we can create the user.
+
+Humaid M. Agowun (A00430163)
+
+email = the email address to check
+*/
+async function emailIsAlreadyTaken(email) {
+  const user = await UserModel.findOne({ email });
+  return user != null;
+}
+/*
  * Check if the secret passed is correct to create account
  *
  * Humaid M. Agowun (A00430163)
@@ -69,9 +79,11 @@ passport.use(
  * secretKey = secret used by request
  */
 function isWrongSecret(isSpecialist, secretKey) {
-  if (isSpecialist) return secretKey != process.env.SPECIALIST_MANIPULATION_KEY;
+  if (isSpecialist) {
+    return secretKey != process.env.SPECIALIST_MANIPULATION_KEY;
+  }
   // !isSpecialist
-  else return secretKey != process.env.STUDENT_MANIPULATION_KEY;
+  return secretKey != process.env.STUDENT_MANIPULATION_KEY;
 }
 
 /*
@@ -107,9 +119,8 @@ passport.use(
     },
     /*
     function to configure login strategy. 
-    
     Humaid M. Agowun (A00430163)
-    
+
     email = the email from the request and used by passport
     password = the password from the request and used by passport
     done = the next callback
@@ -150,11 +161,12 @@ passport.use(
     /*
      * function to configure JWT strategy.
      * JWT takes care of everything for us
-     *
      * Humaid M. Agowun (A00430163)
      *
      * token = token extracted by passport-jwt
      * done = the next callback
+     *
+     * returns N/A
      */
     async function (token, done) {
       try {

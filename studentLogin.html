@@ -17,6 +17,12 @@
     body {
       height: 100vh;
     }
+
+    .fieldTip {
+      display: block;
+      font-size: 0.8em;
+    }
+
   </style>
   <script>
     /*
@@ -108,7 +114,7 @@
         <div class="inputFieldDiv">
           <label for="email" class="inputFieldLabel">Email:</label><br>
           <input type="text" class="inputField" name="email" id="email" placeholder="Enter your email">
-          <div class="hiddenDescription">
+          <div class="fieldTip">
             <div class="descriptionContainer">Do not make spelling or capitalisation mistakes</div>
           </div>
         </div>
@@ -116,7 +122,7 @@
         <div class="inputFieldDiv">
           <label for="password" class="inputFieldLabel">Password:</label><br>
           <input type="password" class="inputField" id="password" name="password" placeholder="Enter your password">
-          <div class="hiddenDescription">
+          <div class="fieldTip">
             <div class="descriptionContainer">Do not make spelling or capitalisation mistakes</div>
           </div>
         </div>
@@ -132,7 +138,7 @@
           <label class="radioLabel">
             <input type="radio" name="difficulty" value="Advanced" id="Advanced">ADVANCED
           </label>
-          <div class="hiddenDescription">
+          <div class="fieldTip">
             <div class="descriptionContainer">Pick the appropriate one for you to practice</div>
           </div>
         </div>

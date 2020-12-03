@@ -31,7 +31,6 @@ const UserSchema = new mongoose.Schema({
 /*
  * method to check if passowrd is valid
  * Used when logging in a user.
- *
  * Humaid M. Agowun (A00430163)
  *
  * password = the password the request sent - it is to be verified
@@ -47,7 +46,6 @@ UserSchema.methods.isValidPassword = async function (password) {
 /*
  * Method to change the urgency of an email in the user's inbox or sentItems.
  * Called when user clicks the 'TO DO' button.
- *
  * Humaid M. Agowun (A00430163)
  *
  * isInbox = boolean saying whether to manipulate the inbox or sentItems
@@ -64,14 +62,17 @@ UserSchema.methods.changeUrgency = async function (isInbox, index) {
   user[which][index].isUrgent = !currentUrgency;
   user.markModified(which); //required to tell mongoose to update nested array
 
-  const err = await user.save().catch((err) => err);
-  return err != null ? true : false;
+  try {
+    await user.save();
+    return true;
+  } catch (error) {
+    return false;
+  }
 };
 
 /*
  * function to add a new email to the user's inbox array
  * Called when user is receiving an email
- *
  * Humaid M. Agowun (A00430163)
  *
  * newEmail = the email to be added
@@ -84,14 +85,17 @@ UserSchema.methods.addNewInboxEmail = async function (newEmail) {
   user.inbox.unshift(newEmail);
   user.markModified("inbox");
 
-  const err = await user.save().catch((err) => err);
-  return err != null ? true : false;
+  try {
+    await user.save();
+    return true;
+  } catch (error) {
+    return false;
+  }
 };
 
 /*
  * function to add a new email to the user's sentItems array
  * Called when user is sending an email
- *
  * Humaid M. Agowun (A00430163)
  *
  * newEmail = the email to be added
@@ -103,15 +107,18 @@ UserSchema.methods.addNewSentItem = async function (newEmail) {
 
   user.sentItems.unshift(newEmail);
   user.markModified("sentItems");
-
-  const err = await user.save().catch((err) => err);
-  return err != null ? true : false;
+  
+  try {
+    await user.save();
+    return true;
+  } catch (error) {
+    return false;
+  }
 };
 
 /*
  * function called to remove email from the inbox or sentItems array
  * Called when deleteKEy clicked
- *
  * Humaid M. Agowun (A00430163)
  *
  * isInbox = boolean saying whether to manipulate the inbox or sentItems
@@ -125,29 +132,37 @@ UserSchema.methods.deleteEmail = async function (isInbox, index) {
 
   user[which].splice(index, 1);
   user.markModified(which);
-
-  const err = await user.save().catch((err) => err);
-  return err != null ? true : false;
+  
+  try {
+    await user.save();
+    return true;
+  } catch (error) {
+    return false;
+  }
 };
 
 /*
  * function called to viewEmail.
  * returns the email and changes the isRead to true.
- *
  * Humaid M. Agowun (A00430163)
  *
- * returns the email to be read
+ * returns a json {error, requestedEmail}
+ * error is "" if no error occured.
  */
 UserSchema.methods.viewEmail = async function (isInbox, index) {
   const user = this;
   const which = isInbox ? "inbox" : "sentItems";
 
-  const email = user[which][index];
+  const requestedEmail = user[which][index];
   user[which][index].isRead = true;
   user.markModified(which);
-  //need to do something about this error!
-  const err = await user.save().catch((err) => err);
-  return email;
+
+  try {
+    await user.save();
+    return {error: "", requestedEmail};
+  } catch(error) {
+    return {error: "error in saving read status", requestedEmail};
+  }
 };
 
 const UserModel = mongoose.model("User", UserSchema);

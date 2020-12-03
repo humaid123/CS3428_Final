@@ -15,11 +15,12 @@ router.post(
   function that deals to post on '/getEmails'
   get the email array needed for the list of emails 
   in the inbox and sentItems screens
-  
   Humaid M. Agowun (A00430163)
   
   req = express request object
   res = express response object
+
+  returns N/A
   */
   async function (req, res) {
     let { email, isInbox } = req.body;
@@ -48,11 +49,12 @@ router.post(
   function that deals with request to '/changeUrgency'
   used when user clicks on TO DO/DONE button
   changes the urgency in the database
-
   Humaid M. Agowun (A00430163)
   
   req = express request object
   res = express response object
+
+  returns N/A
   */
   async function (req, res) {
     let { email, isInbox, index } = req.body;
@@ -69,9 +71,8 @@ router.post(
       const success = await user.changeUrgency(isInbox, index);
       if (success) {
         return res.status(200).json({ message: "Urgency changed." });
-      } else {
-        return res.status(400).json({ message: "Urgency change failed." });
       }
+      return res.status(400).json({ message: "Urgency change failed." });
     } catch (error) {
       return res.status(400).json({ message: "Error in changing urgency." });
     }
@@ -85,8 +86,11 @@ router.post(
   used when user clicks delete key to delete an email
   Delete the email in the database
   Humaid M. Agowun (A00430163)
+
   req = express request object
   res = express response object
+
+  returns N/A
   */
   async function (req, res) {
     let { email, isInbox, index } = req.body;
@@ -103,9 +107,8 @@ router.post(
       const success = await user.deleteEmail(isInbox, index);
       if (success) {
         return res.status(200).json({ message: "Email Deleted." });
-      } else {
-        return res.status(400).json({ message: "Email deletion failed." });
       }
+      return res.status(400).json({ message: "Email deletion failed." });
     } catch (error) {
       return res.status(400).json({ message: "Error in deleting email." });
     }
@@ -121,11 +124,12 @@ router.post(
   to the receiver and cced persons' inbox
   Code could not be shortened as requires res
   for pretty much everything.
-  
   Humaid M. Agowun (A00430163)
   
   req = express request object
   res = express response object
+
+  returns N/A
   */
   async function (req, res) {
     let { email, newEmail } = req.body;
@@ -140,54 +144,25 @@ router.post(
       return res.status(400).send({ message: "Could not find sender." });
     }
 
-    //find all receivers first, so we can say improper email from the start
-    let emailReceivers = [];
-    let receiver = await UserModel.findOne({ email: newEmail.to });
-    if (receiver) {
-      emailReceivers.push(receiver);
-    } else {
-      throw res
-        .status(400)
-        .send({ message: "Could not find receiver: " + newEmail.to + "." });
-    }
-    if (newEmail.cc) {
-      for (const ccEmail of newEmail.cc) {
-        let ccedPerson = await UserModel.findOne({ email: ccEmail });
-        if (ccedPerson) {
-          emailReceivers.push(ccedPerson);
-        } else {
-          return res
-            .status(400)
-            .send({ message: "Could not find cced person: " + ccEmail + "." });
-        }
-      }
+    let { error, emailReceivers } = await getAllReceivers(newEmail);
+    if (error != "") {
+      return res.status(400).send({ message: error });
     }
 
-    //add to sender sent items
-    newEmail.isRead = true;
+    newEmail.isRead = true; //in the sent items, it is marked as read.
     let success = await sender.addNewSentItem(newEmail);
     if (!success) {
       return res.status(400).send({
         message: "Could not add email to your sent Items, Email not sent.",
       });
     }
-    //send to all receivers' inbox
-    newEmail.isRead = false;
-    let unsentEmails = [];
-    for (const emailReceiver of emailReceivers) {
-      success = await emailReceiver.addNewInboxEmail(newEmail);
-      if (!success) {
-        //we dont cancel => we try to add to as many people as possible
-        unsentEmail.push(emailReceiver.email);
-      }
-    }
+
+    newEmail.isRead = false; //in the inboxes, it is marked as unread.
+    let unsentEmails = await sendEmailToAllReceivers(emailReceivers, newEmail);
     if (unsentEmails.length != 0) {
-      //not empty, so some one did not get the email
-      let str = createUnsentString(unsentEmails);
-      // we just send a message if we could not add to someone...
       return res
-        .status(200)
-        .send({ message: "Sent email to everyone except: " + str + "." });
+        .status(200) //we still sent email to some people though some did not receive it...
+        .send({ message: createUnsentString(unsentEmails) });
     } else {
       return res.status(200).send({ message: "Email successfully sent." });
     }
@@ -195,9 +170,69 @@ router.post(
 );
 
 /*
+Given a newEmail to be stored. the function finds all the receivers
+that is the to and all the cced person from the database.
+Humaid M. Agowun (A00430163)
+
+newEmail = the new email to be stored
+
+returns {error, emailReceiver} json.
+the error is "" is no error.
+*/
+async function getAllReceivers(newEmail) {
+  const emailReceivers = [];
+  let receiver = await UserModel.findOne({ email: newEmail.to });
+  if (receiver) {
+    emailReceivers.push(receiver);
+  } else {
+    return { error: "could not find receiver: " + newEmail.to, emailReceivers };
+  }
+  if (newEmail.cc) {
+    //it is not an empty array, so we can iterate.
+    for (const ccEmail of newEmail.cc) {
+      let ccedPerson = await UserModel.findOne({ email: ccEmail });
+      if (ccedPerson) {
+        emailReceivers.push(ccedPerson);
+      } else {
+        return {
+          error: "could not find cced person: " + ccEmail,
+          emailReceivers,
+        };
+      }
+    }
+  }
+  return { error: "", emailReceivers };
+}
+
+/*
+adds the new email into all the inboxes of the receivers.
+Humaid M. Agowun
+
+emailReceivers = the to and cced persons database user instances
+newEmail = the new email sent.
+
+returns an array of the the emails of people which did not 
+receive it. Empty array if all received the email.
+*/
+async function sendEmailToAllReceivers(emailReceivers, newEmail) {
+  let unsentEmails = [];
+  for (const emailReceiver of emailReceivers) {
+    success = await emailReceiver.addNewInboxEmail(newEmail);
+    if (!success) {
+      //we dont cancel => we try to add to as many people as possible
+      unsentEmail.push(emailReceiver.email);
+    }
+  }
+  return unsentEmails;
+}
+
+/*
 function that creates a string denoting all unsent emails.
+Humaid M. Agowun
+
 unsentEmails = list of email addresses where email were not sent
-return a string of unsent emails.
+
+return a string of for the error message of the unsent emails.
 */
 function createUnsentString(unsentEmails) {
   let str = "";
@@ -208,7 +243,7 @@ function createUnsentString(unsentEmails) {
       str += unsentEmails[i] + ", ";
     }
   }
-  return str;
+  return "Sent email to everyone except: " + str + ".";
 }
 
 router.post(
@@ -218,11 +253,12 @@ router.post(
   used when user wishes to see an email
   returns the email the user wants to see and
   updates read status in database.
-  
   Humaid M. Agowun (A00430163)
   
   req = express request object
   res = express response object
+
+  returns N/A
   */
   async function (req, res) {
     let { email, isInbox, index } = req.body;
@@ -237,7 +273,12 @@ router.post(
         return res.status(400).send({ message: "Could not find user." });
       }
 
-      const requestedEmail = await user.viewEmail(isInbox, index);
+      const { error, requestedEmail } = await user.viewEmail(isInbox, index);
+      if (error != "") {
+        return res
+          .status(400)
+          .send({ message: error });
+      }
       return res.status(200).send({ requestedEmail });
     } catch (error) {
       return res
@@ -253,11 +294,12 @@ router.post(
   function that deals with posts to '/deleteAccount'
   used when specialists wants to delete an account
   Removes the account from the database.
-  
   Humaid M. Agowun (A00430163)
   
   req = express request object
   res = express response object
+
+  returns N/A
   */
   async function (req, res) {
     let { email, deletionSecretKey, emailToDelete } = req.body;
@@ -275,7 +317,9 @@ router.post(
     } catch (error) {
       return res.status(400).send({
         message:
-          "Could not delete account due to error: " + error.message + ".",
+          "Could not delete account.\nServer Error: " +
+          (error.message || "Error does not have a message") +
+          ".",
       });
     }
   }
@@ -287,11 +331,12 @@ router.post(
   function that deals with posts to '/getAccountEmails'
   route used to get dropdown accounts for composing an email
   and to get the accounts for the specialist to delete them.
-  
   Humaid M. Agowun (A00430163)
   
   req = express request object
   res = express response object
+
+  returns N/A
   */
   async function (req, res) {
     let { email, isSpecialist } = req.body;

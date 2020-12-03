@@ -1,141 +1,175 @@
-
 <html>
-<head>
+  <head>
     <title>Help for composing emails</title>
     <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-.container {
-    display: flex;
-    flex-direction: row
-    height: 90%;
-    overflow: auto;
-}
-.sideBar {
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-items: flex-start;
-    align-content: flex-start;
-    background-color: #F0F0F0;
-    width: 250px;
-    height: 100%;
-}
-.sideBarItem {
-     width: 100%;
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <style>
+      .container {
+        display: flex;
+        flex-direction: row;
+        height: 90%;
+        overflow: auto;
+      }
+      .sideBar {
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-items: flex-start;
+        align-content: flex-start;
+        background-color: #f0f0f0;
+        width: 250px;
+        height: 100%;
+      }
+      .sideBarItem {
+        width: 100%;
         border: none;
         text-align: left;
         background-color: inherit;
         margin: 2px;
-    font-size: 1.3em;
-}
-.sideBarItemDiv {
-    height: 1.6em;
-    border-bottom: 1px solid grey;
-}
-.sideBarItemDiv:hover {
-        background-color:  #e6f2ff;
+        font-size: 1.3em;
+      }
+      .sideBarItemDiv {
+        height: 1.6em;
+        border-bottom: 1px solid grey;
+      }
+      .sideBarItemDiv:hover {
+        background-color: #e6f2ff;
         color: black;
         border-left: 0.5em solid darkblue;
-}
- .cancelButtonDiv {
+      }
+      .cancelButtonDiv {
         font-size: 0.5em;
         display: flex;
         color: orangered;
         justify-content: flex-end;
-    }
-    .cancelButton {
+      }
+      .cancelButton {
         padding: 1px;
         border-radius: 5px;
         border: 1px solid orangered;
         transition-duration: 0.2s;
-    }
-    .cancelButton:hover {
+      }
+      .cancelButton:hover {
         color: white;
         background-color: red;
         cursor: pointer;
-    }
-     .logoToTheSide {
-            display: flex;
-            flex-direction: row;
-        }
-    .helpContent {
+      }
+      .logoToTheSide {
+        display: flex;
+        flex-direction: row;
+      }
+      .helpContent {
         border-left: 5px solid black;
         padding-left: 5px;
-    }
-    .openSideBarButton {
+      }
+      .openSideBarButton {
         width: 250px;
         padding: 0px;
         text-align: left;
-    }
-    .topMenu {
+      }
+      .topMenu {
         height: 3em;
         position: sticky;
-            display: flex;
-    flex-direction: row;
-    overflow: auto;
-    }
-header {
-    background-color: #2162cc;
-    width: 100%;
-    color: white;
-    height: 1.75em;
-    font-size: 1em;
-    text-align: center;
-}
-.title {
-    border-left: 5px solid black;
-    padding-left: 5px;
-}
-</style>
-</head>
-<body>
+        display: flex;
+        flex-direction: row;
+        overflow: auto;
+      }
+      header {
+        background-color: #2162cc;
+        width: 100%;
+        color: white;
+        height: 1.75em;
+        font-size: 1em;
+        text-align: center;
+      }
+      .title {
+        border-left: 5px solid black;
+        padding-left: 5px;
+      }
+    </style>
+  </head>
+  <body>
     <header class="topMenu">
-            <div class="openSideBarDiv">
-                <button class="openSideBarButton" onclick="openSideBar"><i class="fa fa-bars" style="padding: 5px;" aria-hidden="true"></i>Open Side Bar</button>
-            </div>
-            <div class="title"><b>COMPOSING HELP</b></div>
+      <div class="openSideBarDiv">
+        <button class="openSideBarButton" onclick="openSideBar">
+          <i class="fa fa-bars" style="padding: 5px" aria-hidden="true"></i>Open
+          Side Bar
+        </button>
+      </div>
+      <div class="title"><b>COMPOSING HELP</b></div>
     </header>
     <div class="container">
-        <div class="sideBar">
-            <div class="sideBarItemDiv">
-                <button class="sideBarItem" onclick="goToSectionOn('chooseComposeStyle')">Choose Compose Style</button>
-            </div>
-            <div class="sideBarItemDiv">
-                <button class="sideBarItem" onclick="goToSectionOn('to')">To Input Field</button>
-            </div>
-            <div class="sideBarItemDiv">
-                <button class="sideBarItem" onclick="goToSectionOn('cc')">Cc Input Field</button>
-            </div>
-            <div class="sideBarItemDiv">
-                <button class="sideBarItem" onclick="goToSectionOn('subject')">Subject Input Field</button>
-            </div>
-            <div class="sideBarItemDiv">
-                <button class="sideBarItem" onclick="goToSectionOn('greeting')">Greeting Input Field</button>
-            </div>
-            <div class="sideBarItemDiv">
-                <button class="sideBarItem" onclick="goToSectionOn('body')">Body Input Field</button>
-            </div>
-            <div class="sideBarItemDiv">
-                <button class="sideBarItem" onclick="goToSectionOn('closure')">Closure Input Field</button>
-            </div>
-            <div class="sideBarItemDiv">
-                <button class="sideBarItem" onclick="goToSectionOn('sendButton')">Send Button</button>
-            </div>
-            <br>
-            <br>
-            <div class="cancelButtonDiv">
-                <div class="cancelButton logoToTheSide" style="font-size: 2em;" onclick="closeSideBar()">
-                    <div><i class="fa fa-chevron-circle-left" style="padding-right: 10px;" aria-hidden="true"></i></div>
-                    <div>Close Sidebar</div>
-                </div>
-            </div>
+      <div class="sideBar">
+        <div class="sideBarItemDiv">
+          <button
+            class="sideBarItem"
+            onclick="goToSectionOn('chooseComposeStyle')"
+          >
+            Choose Compose Style
+          </button>
         </div>
-        <div class="helpContent">
-            <section id="chooseComposeStyle">
-                <h1>Choose between formal and informal composing style</h1>
-            </section>
+        <div class="sideBarItemDiv">
+          <button class="sideBarItem" onclick="goToSectionOn('to')">
+            To Input Field
+          </button>
         </div>
+        <div class="sideBarItemDiv">
+          <button class="sideBarItem" onclick="goToSectionOn('cc')">
+            Cc Input Field
+          </button>
+        </div>
+        <div class="sideBarItemDiv">
+          <button class="sideBarItem" onclick="goToSectionOn('subject')">
+            Subject Input Field
+          </button>
+        </div>
+        <div class="sideBarItemDiv">
+          <button class="sideBarItem" onclick="goToSectionOn('greeting')">
+            Greeting Input Field
+          </button>
+        </div>
+        <div class="sideBarItemDiv">
+          <button class="sideBarItem" onclick="goToSectionOn('body')">
+            Body Input Field
+          </button>
+        </div>
+        <div class="sideBarItemDiv">
+          <button class="sideBarItem" onclick="goToSectionOn('closure')">
+            Closure Input Field
+          </button>
+        </div>
+        <div class="sideBarItemDiv">
+          <button class="sideBarItem" onclick="goToSectionOn('sendButton')">
+            Send Button
+          </button>
+        </div>
+        <br />
+        <br />
+        <div class="cancelButtonDiv">
+          <div
+            class="cancelButton logoToTheSide"
+            style="font-size: 2em"
+            onclick="closeSideBar()"
+          >
+            <div>
+              <i
+                class="fa fa-chevron-circle-left"
+                style="padding-right: 10px"
+                aria-hidden="true"
+              ></i>
+            </div>
+            <div>Close Sidebar</div>
+          </div>
+        </div>
+      </div>
+      <div class="helpContent">
+        <section id="chooseComposeStyle">
+          <h1>Choose between formal and informal composing style</h1>
+        </section>
+      </div>
     </div>
-</body>
+  </body>
 </html>
