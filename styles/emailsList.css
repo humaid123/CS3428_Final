@@ -10,6 +10,11 @@ i {
   padding-right: 5px;
 }
 
+#listOfEmails {
+    border-left: 2px solid grey;
+    border-right: 2px solid grey;
+}
+
 .emailRow {
   width: 100%;
   vertical-align: center;

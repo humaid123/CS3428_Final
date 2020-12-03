@@ -55,11 +55,6 @@ body {
   display: block;
   width: 100%;
 }
-.seperator {
-  height: 100%;
-  background-color: lightgray;
-  width: 1em;
-}
 .navigationButton {
   width: 100%;
   border: none;
