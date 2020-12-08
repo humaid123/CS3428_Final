@@ -229,7 +229,7 @@ async function sendEmailToAllReceivers(emailReceivers, newEmail) {
     success = await emailReceiver.addNewInboxEmail(newEmail);
     if (!success) {
       //we dont cancel => we try to add to as many people as possible
-      unsentEmail.push(emailReceiver.email);
+      unsentEmails.push(emailReceiver.email);
     }
   }
   return unsentEmails;

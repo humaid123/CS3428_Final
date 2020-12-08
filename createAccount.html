@@ -15,39 +15,47 @@
   <script src="./jquery-3.4.1.min.js"></script>
   <script src="./constants.js"></script>
   <style>
+    /*force body to take the whole screen*/
     body {
       height: 100vh;
     }
-
+    
+    /*the fiv that contains an input field*/
     .inputFieldDiv {
       padding: 5px;
       border-bottom: 1px solid lightgrey;
       transition-duration: 0.2s;
     }
-
+    
+    /*make the input field take 90% of the space given*/
     .inputField {
       width: 90%;
       font-size: 1.3em;
     }
 
+    /*tip below each input field*/
     .fieldTip {
       display: block;
       font-size: 0.8em;
     }
 
+    /*Add a dark blue border on hover*/
     .inputFieldDiv:hover {
       border-left: 5px solid darkblue;
     }
 
+    /*The container that contains all the field and the logo*/
     .innerContainer {
       font-size: 1em;
     }
 
+    /*the CREATE ACCOUNT title*/
     .title {
       font-size: 2em;
     }
 
-    .signInButton {
+    /*The button to create an account*/
+    .createAccountButton {
       font-size: 2em;
       text-align: center;
       font-weight: bold;
@@ -57,19 +65,23 @@
       transition-duration: 0.2s;
     }
 
-    .signInButton:Hover {
+     /*Change color when the account is to be created.*/
+    .createAccountButton:Hover {
       color: darkblue;
       font-size: 2.2em;
       cursor: pointer;
     }
 
+    /*the div that contains the cancel button, 
+    puts it to the left*/
     .cancelButtonDiv {
       font-size: 0.5em;
       display: flex;
       color: orangered;
       justify-content: flex-end;
     }
-
+ 
+    /*styling for the cancel button*/
     .cancelButton {
       padding: 1px;
       border-radius: 5px;
@@ -77,6 +89,7 @@
       transition-duration: 0.2s;
     }
 
+    /*Changes the button red on hover.*/
     .cancelButton:hover {
       color: white;
       background-color: red;
@@ -170,7 +183,7 @@
           </div>
         </div>
         <br>
-        <div class="signInButton logoToTheSide" style="font-size: 2em;" onclick="createAccount()">
+        <div class="createAccountButton logoToTheSide" style="font-size: 2em;" onclick="createAccount()">
           <div><i class="fa fa-arrow-circle-o-right" style="padding-right: 10px;" aria-hidden="true"></i></div>
           <div>CREATE ACCOUNT</div>
         </div>
