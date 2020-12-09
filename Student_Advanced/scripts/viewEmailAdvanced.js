@@ -1,5 +1,11 @@
 function viewEmail(i, isInbox) {
-  document.getElementById("ViewingEmail").style.display = "block";
+  if (document.getElementById('ViewingEmail').style.display == "none") {
+    document.getElementById("ViewingEmail").style.width = "0%";
+    document.getElementById('ViewingEmail').style.display = "block";
+    setTimeout(() => {
+      document.getElementById('ViewingEmail').style.width = "100%";
+    }, 50);
+  }
   viewEmailFromServer(isInbox, i, (err, result) => {
     if (err) {
       alert("could not fetch email.\nError: " + err.message);

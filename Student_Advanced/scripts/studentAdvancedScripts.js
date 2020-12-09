@@ -49,12 +49,20 @@ function linkCompose() {
 }
 
 function showOffice() {
-  document.getElementById("Navigation").style.display = "flex";
+  if (window.innerWidth < 1000) {
+    document.getElementById("Navigation").style.display = "flex";
+  }
+  document.getElementById('Navigation').style.width = "0%";
+  setTimeout(() => {
+    document.getElementById('NavigationContent').style.display = "block";
+    document.getElementById('Navigation').style.width = "50%";
+  }, 50);
 }
 function closeOfficeButtons() {
-  document.getElementById("Navigation").style.display = "none";
+  document.getElementById('Navigation').style.width = "0%";
+  document.getElementById('NavigationContent').style.display = "none";
 }
-
 function closeViewEmail() {
+  document.getElementById("ViewingEmail").style.width = "0%";
   document.getElementById("ViewingEmail").style.display = "none";
 }
