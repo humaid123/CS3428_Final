@@ -34,7 +34,7 @@
         const password = document.getElementById("password").value.trim();
         loginInServer(email, password, true, (err, result) => {
           if (err) {
-            alert("A mistake occured. \nServer said: " + err.message);
+            alert("Server said: " + err.message);
           } else {
             //loginInServer takes care of localStorage
             alert("Successfully connected.");
@@ -115,6 +115,7 @@
           <div
             class="signInButton logoToTheSide"
             style="font-size: 2em"
+            id="signInButton"
             onclick="LoginSpecialist()"
           >
             <div>
@@ -130,6 +131,7 @@
           <div class="createAccountButtonDiv">
             <div
               class="createAccountButton logoToTheSide"
+              id="createAccountButton"
               onclick="createAccount()"
             >
               <div>
@@ -146,6 +148,7 @@
           <div class="cancelButtonDiv">
             <div
               class="cancelButton logoToTheSide"
+              id="cancelButton"
               style="font-size: 2em"
               onclick="cancelLogin()"
             >

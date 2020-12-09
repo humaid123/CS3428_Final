@@ -132,14 +132,16 @@ passport.use(
     */
     async function (email, password, done) {
       try {
+        //we send the same error message if user not found or if wrong password
+        incorrectCredentialMessage = "Wrong username or password.";
         const user = await UserModel.findOne({ email });
         if (!user) {
-          return done(null, false, { message: "Email address was not found." });
+          return done(null, false, { message: incorrectCredentialMessage });
         }
 
         const validPassword = await user.isValidPassword(password);
         if (!validPassword) {
-          return done(null, false, { message: "Wrong Password." });
+          return done(null, false, { message: incorrectCredentialMessage });
         }
 
         return done(null, user, { message: "Logged in Successfully." });
