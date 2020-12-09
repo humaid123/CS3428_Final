@@ -19,14 +19,14 @@
     body {
       height: 100vh;
     }
-    
+
     /*the fiv that contains an input field*/
     .inputFieldDiv {
       padding: 5px;
       border-bottom: 1px solid lightgrey;
       transition-duration: 0.2s;
     }
-    
+
     /*make the input field take 90% of the space given*/
     .inputField {
       width: 90%;
@@ -65,11 +65,12 @@
       transition-duration: 0.2s;
     }
 
-     /*Change color when the account is to be created.*/
+    /*Change color when the account is to be created.*/
     .createAccountButton:Hover {
       color: darkblue;
       font-size: 2.2em;
       cursor: pointer;
+      background-color: inherit;
     }
 
     /*the div that contains the cancel button, 
@@ -80,7 +81,7 @@
       color: orangered;
       justify-content: flex-end;
     }
- 
+
     /*styling for the cancel button*/
     .cancelButton {
       padding: 1px;
@@ -183,14 +184,16 @@
           </div>
         </div>
         <br>
-        <div class="createAccountButton logoToTheSide" id="createAccountButton" style="font-size: 2em;" onclick="createAccount()">
+        <div class="createAccountButton logoToTheSide" id="createAccountButton" style="font-size: 2em;"
+          onclick="createAccount()">
           <div><i class="fa fa-arrow-circle-o-right" style="padding-right: 10px;" aria-hidden="true"></i></div>
           <div>CREATE ACCOUNT</div>
         </div>
         <br>
         <br>
         <div class="cancelButtonDiv">
-          <div class="cancelButton logoToTheSide" id="cancelButton" style="font-size: 2em;" onclick="cancelCreateAccount()">
+          <div class="cancelButton logoToTheSide" id="cancelButton" style="font-size: 2em;"
+            onclick="cancelCreateAccount()">
             <div><i class="fa fa-chevron-circle-left" style="padding-right: 10px;" aria-hidden="true"></i></div>
             <div>Cancel</div>
           </div>
