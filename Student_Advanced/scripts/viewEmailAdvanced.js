@@ -1,5 +1,5 @@
 function viewEmail(i, isInbox) {
-  if (document.getElementById('ViewingEmail').style.display == "none") {
+  if (document.getElementById('ViewingEmail').style.display == "none" || window.innerWidth < 1000) {
     document.getElementById("ViewingEmail").style.width = "0%";
     document.getElementById('ViewingEmail').style.display = "block";
     setTimeout(() => {
