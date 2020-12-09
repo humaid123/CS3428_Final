@@ -143,7 +143,7 @@
 
     <div class="controlGroup">
       <!--Buttons at the bottom-->
-      <button class="normalButton" onclick="reply()">
+      <button class="normalButton" id="replyButton" onclick="reply()">
         <i
           class="fa fa-pencil-square-o"
           style="color: lightskyblue; padding: 0px"
@@ -151,8 +151,14 @@
         ></i
         >Reply
       </button>
-      <button class="normalButton" onclick="linkBackViewInbox()">Back</button>
-      <button class="normalButton" onclick="showHelp()">
+      <button
+        class="normalButton"
+        id="backButton"
+        onclick="linkBackViewInbox()"
+      >
+        Back
+      </button>
+      <button class="normalButton" id="helpButton" onclick="showHelp()">
         <i
           class="fa fa-info-circle"
           style="color: lightskyblue; padding: 0px"

@@ -38,11 +38,17 @@
     <div class="controlGroup">
       <!--Buttons at the bottom-->
       <div class="buttonAndHint">
-        <button class="normalButton" onclick="linkInbox()">Inbox</button>
+        <button class="normalButton" id="inboxButton" onclick="linkInbox()">
+          Inbox
+        </button>
         <div class="buttonHint">see received emails</div>
       </div>
       <div class="buttonAndHint">
-        <button class="normalButton" onclick="linkStudentCompose()">
+        <button
+          class="normalButton"
+          id="composeButton"
+          onclick="linkStudentCompose()"
+        >
           <i
             class="fa fa-pencil-square-o"
             style="color: lightskyblue; padding: 0px"
@@ -53,7 +59,7 @@
         <div class="buttonHint">compose an email</div>
       </div>
       <div class="buttonAndHint">
-        <button class="normalButton" onclick="showHelp()">
+        <button class="normalButton" id="helpButton" onclick="showHelp()">
           <i
             class="fa fa-info-circle"
             style="color: lightskyblue; padding: 0px"
@@ -64,7 +70,11 @@
         <div class="buttonHint">look for help</div>
       </div>
       <div class="buttonAndHint">
-        <button class="normalButton logOutButton" onclick="logOut()">
+        <button
+          class="normalButton logOutButton"
+          id="logOutButton"
+          onclick="logOut()"
+        >
           Log Out
         </button>
         <div class="buttonHint">Good bye</div>

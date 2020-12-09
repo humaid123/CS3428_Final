@@ -116,13 +116,21 @@
     <footer></footer>
 
     <div class="composeScreenButtons">
-      <button class="normalButton sendButton" onclick="sendAdminEmail()">
+      <button
+        class="normalButton sendButton"
+        id="sendButton"
+        onclick="sendAdminEmail()"
+      >
         <div><i class="fa fa-paper-plane" aria-hidden="true"></i></div>
         <div>Send</div>
       </button>
       <div class="helpAndCancel">
-        <button class="normalButton" onclick="showHelp()">Help</button>
-        <button class="normalButton" onclick="cancel()">Cancel</button>
+        <button class="normalButton" id="helpButton" onclick="showHelp()">
+          Help
+        </button>
+        <button class="normalButton" id="cancelButton" onclick="cancel()">
+          Cancel
+        </button>
       </div>
     </div>
   </body>

@@ -135,11 +135,17 @@
 
     <div class="controlGroup">
       <div class="buttonAndHint">
-        <button class="normalButton" onclick="linkBackViewSent()">Back</button>
+        <button
+          class="normalButton"
+          id="backButton"
+          onclick="linkBackViewSent()"
+        >
+          Back
+        </button>
         <div class="buttonHint">return back</div>
       </div>
       <div class="buttonAndHint">
-        <button class="normalButton" onclick="showHelp()">
+        <button class="normalButton" id="helpButton" onclick="showHelp()">
           <i
             class="fa fa-info-circle"
             style="color: lightskyblue; padding: 0px"
@@ -150,7 +156,11 @@
         <div class="buttonHint">look for help</div>
       </div>
       <div class="buttonAndHint">
-        <button class="normalButton logOutButton" onclick="logOut()">
+        <button
+          class="normalButton logOutButton"
+          id="logOutButton"
+          onclick="logOut()"
+        >
           Log Out
         </button>
         <div class="buttonHint">Good bye</div>
