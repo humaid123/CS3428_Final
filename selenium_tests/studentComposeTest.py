@@ -47,10 +47,15 @@ def sendCorrectEmail(selection):
     driver.find_element_by_id(selection).click()
     time.sleep(1)
     testInputField(driver, "To", "ToDropDown","testSpecialist1")
+    time.sleep(1)
     testInputField(driver, "Cc", "CcDropDown", "hum")
+    time.sleep(1)
     testInputField(driver, "Subject", "SubjectTextBox" , "hi")
+    time.sleep(1)
     testInputField(driver, "Greeting", "GreetingTextBox", "Hello, test1 here")
+    time.sleep(1)
     testInputField(driver, "Body", "BodyTextBox", "How are you?")
+    time.sleep(1)
     testInputField(driver, "Closure", "ClosureTextBox", "Bye")
     time.sleep(1)
     driver.find_element_by_id("sendButton").click()
@@ -70,15 +75,12 @@ def testInputField(driver, divId, div, value, clickEverything = True):
     time.sleep(1)
     lst = driver.find_element_by_id(divId + "HintList")
     items = lst.find_elements_by_css_selector("li.hintListItem")
-    print(items[0].get_attribute("innerHTML"))
     for hint in items:
-        print(divId + "hint: " + hint.get_attribute("innerHTML"))
         assert hint.get_attribute("innerHTML") != "", "empty hint in " + divId
     lst = driver.find_element_by_id(divId + "CheckBoxList")
     items = lst.find_elements_by_css_selector("li.checkboxElement")
     count = 0
     for checkBox in items:
-        print(divId + "CheckBox: " + checkBox.get_attribute("innerHTML"))
         assert checkBox.get_attribute("innerHTML") != "", "empty checkbox in " + divId
         driver.find_element_by_id(divId + "CheckBox" + str(count)).click()
         count += 1
@@ -87,6 +89,7 @@ def testInputField(driver, divId, div, value, clickEverything = True):
         driver.find_element_by_id(divId + "CheckBox0").click()
     hidden_div = driver.find_element_by_id(divId + "Hidden")
     hidden_div.find_element_by_css_selector("button.checkedEverythingButton").click()
+    time.sleep(1)
 
 def testCheckBoxFor(driver, divId, div, value):
     #will unclick the first checkbox
@@ -111,10 +114,15 @@ def verifySendingUncheckedEmailInSequence(selection):
     driver.find_element_by_id(selection).click()
     time.sleep(1)
     testCheckBoxFor(driver, "To", "ToDropDown", "testSpecialist1")
+    time.sleep(1)
     testCheckBoxFor(driver, "Cc", "CcDropDown", "hum")
+    time.sleep(1)
     testCheckBoxFor(driver, "Subject", "SubjectTextBox" , "hi")
+    time.sleep(1)
     testCheckBoxFor(driver, "Greeting", "GreetingTextBox", "Hello, test1 here")
+    time.sleep(1)
     testCheckBoxFor(driver, "Body", "BodyTextBox", "How are you?")
+    time.sleep(1)
     testCheckBoxFor(driver, "Closure", "ClosureTextBox", "Bye")
     time.sleep(1)
     driver.find_element_by_id("sendButton").click()
@@ -135,10 +143,15 @@ def verifyWithTheFollowing(selection, to, cc, expected_error_msg):
     driver.find_element_by_id(selection).click()
     time.sleep(1)
     testInputField(driver, "To", "ToDropDown", to)
+    time.sleep(1)
     testInputField(driver, "Cc", "CcDropDown", cc)
+    time.sleep(1)
     testInputField(driver, "Subject", "SubjectTextBox" , "hi")
+    time.sleep(1)
     testInputField(driver, "Greeting", "GreetingTextBox", "Hello, test1 here")
+    time.sleep(1)
     testInputField(driver, "Body", "BodyTextBox", "How are you?")
+    time.sleep(1)
     testInputField(driver, "Closure", "ClosureTextBox", "Bye")
     time.sleep(1)
     driver.find_element_by_id("sendButton").click()
