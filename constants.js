@@ -3,6 +3,7 @@ constants.js
 Humaid M. Agowun (A00430163)
 file used by all othe files in the app.
 Defines the constants used.
+It also has logOut and showHelp function
 */
 
 //constant to connect to server.
