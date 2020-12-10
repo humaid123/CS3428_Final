@@ -39,9 +39,9 @@ router.post(
       */
       async function (error, user) {
         if (error || !user) {
-          return res
-            .status(error.code || 500)
-            .json({ message: error.message || "could not create user" });
+          if (!error.code) error.code = 500;
+          if (!error.message) error.message = "Could not create user.";
+          return res.status(error.code).json({ message: error.message });
         }
 
         return res.status(200).json({ message: "Signup successful." });

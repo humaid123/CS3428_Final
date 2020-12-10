@@ -26,6 +26,7 @@ label {
   height: 0%;
   background-color: white;
   transition: height 0.6s ease-in;
+  overflow: hidden;
 }
 
 .hints {
@@ -72,10 +73,10 @@ label {
 
 @media screen and (max-width: 400px) {
   .hints {
-    font-size: 0.6em;
+    font-size: 0.8em;
   }
   .composeCheckBoxes {
-    font-size: 0.6em;
+    font-size: 0.8em;
   }
 }
 

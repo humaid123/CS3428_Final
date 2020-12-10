@@ -32,7 +32,7 @@
   align-content: flex-start;
   background-color: #f0f0f0;
   width: 50%;
-  transition: width 0.6s ease-out;
+  transition: width 0.4s ease-out;
 }
 #closeButton {
   margin-right: 1em;

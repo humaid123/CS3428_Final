@@ -77,7 +77,6 @@ function closeCheckBoxes(divId) {
       break;
     }
     if (!checkBox.checked) {
-      let correct = document.getElementById(divId + "Correct");
       closeHiddenCompartment(divId, false);
       return;
     }
@@ -89,8 +88,8 @@ function closeHiddenCompartment(divId, toTick) {
   document.getElementById(divId + "Hidden").style.height = "0px";
   setTimeout(() => {
     document.getElementById(divId + "Hidden").style.display = "none";
+    let correct = document.getElementById(divId + "Correct");
     if (toTick) {
-      let correct = document.getElementById(divId + "Correct");
       correct.innerHTML = TICKED;
       correct.className = "allTicked";
     } else {
