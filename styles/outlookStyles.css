@@ -55,7 +55,7 @@ body {
 #ViewingEmail {
   display: block;
   width: 100%;
-  transition: width 0.4s ease-out;
+  transition: width 0.3s ease-out;
 }
 .navigationButton {
   width: 100%;
@@ -125,6 +125,7 @@ body {
     overflow: auto;
     z-index: 4;
     height: 100%;
+    background: white;
   }
   #closeViewEmailDiv {
     display: block;

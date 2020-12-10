@@ -2,7 +2,9 @@ function sendStudentEmail() {
   for (const divId in COMPOSE_DIVS) {
     let correct = document.getElementById(divId + "Correct");
     if (correct.className == "notAllTicked") {
-      alert("cannot send as you have not checked everything for: " + divId);
+      alert(
+        "Cannot send as you have not checked everything for: " + divId + "."
+      );
       return;
     }
   }
@@ -24,7 +26,7 @@ function sendStudentEmail() {
   const newEmail = { to, cc, subject, body };
   storeNewEmailOnServer(newEmail, (err, result) => {
     if (err) {
-      alert("could not send email.\nError: " + err.message);
+      alert("Could not send email.\nServer said: " + err.message);
     } else {
       alert(result.message);
       linkBackAfterSending();

@@ -32,7 +32,7 @@ function loadCheckBoxes() {
 function createCheckBoxes(divId) {
   let res = `<p class="checkBoxTitle">CHECK FOR ${divId.toUpperCase()}</p>`;
   res +=
-    `<ul class="checkBoxList">` +
+    `<ul class="checkBoxList" id="${divId}CheckBoxList">` +
     constructCheckBoxItems(divId, COMPOSE_DIVS[divId].checkBoxes) +
     "</ul>";
   return res;
@@ -96,5 +96,5 @@ function closeHiddenCompartment(divId, toTick) {
       correct.innerHTML = NOT_TICKED;
       correct.className = "notAllTicked";
     }
-  }, 550);
+  }, 400);
 }
