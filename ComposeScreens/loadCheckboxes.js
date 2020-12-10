@@ -8,17 +8,21 @@ Each page thus can have different checkboxes.
 Remember that hints are built in the page itself
 */
 
+let maxHeightHidden;
 function loadCheckBoxes() {
   const json = JSON.parse(localStorage.getItem("loadCheckBox"));
   const checkBoxShouldBeLoaded = json.loadCheckBox;
 
   if (!checkBoxShouldBeLoaded) {
+    maxHeightHidden = "150px";
     for (const divId in COMPOSE_DIVS) {
       let div = document.getElementById(`${divId}CheckBoxes`);
       div.style.display = "none";
     }
   } else {
+    maxHeightHidden = "300px";
     for (const divId in COMPOSE_DIVS) {
+      console.log(divId);
       let div = document.getElementById(`${divId}CheckBoxes`);
       div.innerHTML = createCheckBoxes(divId);
     }
@@ -26,19 +30,21 @@ function loadCheckBoxes() {
 }
 
 function createCheckBoxes(divId) {
-  let res = `<p>CHECKBOXES FOR ${divId.toUpperCase()}</p>`;
+  let res = `<p class="checkBoxTitle">CHECK FOR ${divId.toUpperCase()}</p>`;
   res +=
     `<ul class="checkBoxList">` +
-    constructCheckBoxItems(divId, COMPOSE_DIVS[divId]) +
+    constructCheckBoxItems(divId, COMPOSE_DIVS[divId].checkBoxes) +
     "</ul>";
   return res;
 }
 
 function constructCheckBoxItems(divId, checkBoxes) {
   let res = "";
+  console.log(divId, checkBoxes);
 
   for (let i = 0; i < checkBoxes.length; i++) {
     let name = divId + "CheckBox" + i;
+    console.log(name, checkBoxes[i]);
     res +=
       `<li class="checkboxElement">` +
       `<label class="labelForCheckBox" for="${name}">${checkBoxes[i]}  ` +
@@ -47,9 +53,18 @@ function constructCheckBoxItems(divId, checkBoxes) {
   }
   return res;
 }
-
+let count = 0;
 function turnOnHidden(divId) {
-  document.getElementById(divId + "Hidden").style.display = "block";
+  if (
+    count == 0 ||
+    document.getElementById(divId + "Hidden").style.display == "none"
+  ) {
+    document.getElementById(divId + "Hidden").style.height = "0px";
+    document.getElementById(divId + "Hidden").style.display = "block";
+    setTimeout(() => {
+      document.getElementById(divId + "Hidden").style.height = maxHeightHidden;
+    }, 50);
+  }
 }
 
 function closeCheckBoxes(divId) {
@@ -63,14 +78,24 @@ function closeCheckBoxes(divId) {
     }
     if (!checkBox.checked) {
       let correct = document.getElementById(divId + "Correct");
-      correct.innerHTML = NOT_TICKED;
-      correct.className = "notAllTicked";
-      document.getElementById(divId + "Hidden").style.display = "none";
+      closeHiddenCompartment(divId, false);
       return;
     }
   }
-  let correct = document.getElementById(divId + "Correct");
-  correct.innerHTML = TICKED;
-  correct.className = "allTicked";
-  document.getElementById(divId + "Hidden").style.display = "none";
+  closeHiddenCompartment(divId, true);
+}
+
+function closeHiddenCompartment(divId, toTick) {
+  document.getElementById(divId + "Hidden").style.height = "0px";
+  setTimeout(() => {
+    document.getElementById(divId + "Hidden").style.display = "none";
+    if (toTick) {
+      let correct = document.getElementById(divId + "Correct");
+      correct.innerHTML = TICKED;
+      correct.className = "allTicked";
+    } else {
+      correct.innerHTML = NOT_TICKED;
+      correct.className = "notAllTicked";
+    }
+  }, 550);
 }

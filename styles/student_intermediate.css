@@ -59,6 +59,7 @@
   background-color: red;
 }
 #NavigationContent {
+  display: none;
   position: sticky;
   top: 20%;
 }

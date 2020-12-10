@@ -19,12 +19,12 @@
     <script src="../Modules/getAllAccountsFromServer.js"></script>
     <script>
       const COMPOSE_DIVS = {
-        To: { checkBoxes: [] },
-        Cc: { checkBoxes: [] },
-        Subject: { checkBoxes: [] },
-        Greeting: { checkBoxes: [] },
-        Body: { checkBoxes: [] },
-        Closure: { checkBoxes: [] },
+        To: { checkBoxes: ["a"] },
+        Cc: { checkBoxes: ["b"] },
+        Subject: { checkBoxes: ["a", "b"] },
+        Greeting: { checkBoxes: ["b"] },
+        Body: { checkBoxes: ["a"] },
+        Closure: { checkBoxes: ["a", "b"] },
       };
       function loadPage() {
         loadCheckBoxes();
@@ -63,7 +63,7 @@
           <div class="hiddenBlock">
             <div class="hintsAndCheckBoxes">
               <div class="hints" id="ToHints">
-                <p>HINTS FOR TO</p>
+                <p class="hintsTitle">HINTS FOR TO</p>
                 <ul class="hintList" id="ToHintList">
                   <li class="hintListItem">
                     To whom are you sending the email?
@@ -106,7 +106,7 @@
           <div class="hiddenBlock">
             <div class="hintsAndCheckBoxes">
               <div class="hints" id="CcHints">
-                <p>HINTS FOR CC</p>
+                <p class="hintsTitle">HINTS FOR CC</p>
                 <ul class="hintList" id="CcHintList">
                   <li class="hintListItem">
                     Who else needs to get this email?
@@ -151,7 +151,7 @@
           <div class="hiddenBlock">
             <div class="hintsAndCheckBoxes">
               <div class="hints" id="SubjectHints">
-                <p>HINTS FOR SUBJECT</p>
+                <p class="hintsTitle">HINTS FOR SUBJECT</p>
                 <ul class="hintList" id="subjectHintList">
                   <li class="hintListItem">
                     Give a Brief description of the content of the email
@@ -194,7 +194,7 @@
           <div class="hiddenBlock">
             <div class="hintsAndCheckBoxes">
               <div class="hints" id="GreetingHints">
-                <p>HINTS FOR GREETING</p>
+                <p class="hintsTitle">HINTS FOR GREETING</p>
                 <ul class="hintList" id="GreetingHintList">
                   <li class="hintListItem">Give a polite greeting</li>
                   <li class="hintListItem">Example: Dear Sir, Dear Madam</li>
@@ -236,7 +236,7 @@
           <div class="hiddenBlock">
             <div class="hintsAndCheckBoxes">
               <div class="hints" id="BodyHints">
-                <p>HINTS FOR BODY</p>
+                <p class="hintsTitle">HINTS FOR BODY</p>
                 <ul class="hintList" id="BodyHintList">
                   <li class="hintListItem">Say everything you had to say</li>
                   <li class="hintListItem">
@@ -280,7 +280,7 @@
           <div class="hiddenBlock">
             <div class="hintsAndCheckBoxes">
               <div class="hints" id="ClosureHints">
-                <p>HINTS FOR CLOSURE</p>
+                <p class="hintsTitle">HINTS FOR CLOSURE</p>
                 <ul class="hintList" id="ClosureHintList">
                   <li class="hintListItem">Give a polite greeting</li>
                   <li class="hintListItem">Example: Dear Sir, Dear Madam</li>

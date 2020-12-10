@@ -40,7 +40,7 @@ function clickCheckBox(i, isInbox) {
 }
 
 function changeCheckboxText(i) {
-  let checkbox = document.getElementById("checkbox" + i);
+  let checkbox = document.getElementById("CheckBox" + i);
   if (checkbox.innerHTML == CHECKED) {
     checkbox.innerHTML = NOT_CHECKED;
     return true; //it was checked so it was urgent

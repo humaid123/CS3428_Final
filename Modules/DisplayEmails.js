@@ -58,7 +58,7 @@ function displayEmails(data, where) {
   }
   $("div.emails").html(res);
   if (where == "inbox") {
-    const str = numUnread > 1 ? "emails" : "email";
+    const str = numUnread != 1 ? "emails" : "email";
     alert(`You have ${numUnread} unread ${str}.`);
   }
   $("div.numUnread").html("NUMBER OF UNREAD EMAILS: " + numUnread);
@@ -116,7 +116,7 @@ function createEmailTwoButtons(i, isInbox, email, otherClass) {
 function createDeleteKey(isInbox, i) {
   return (
     `<div class="deleteKeyDiv">` +
-    `<a class="deleteKey" onclick="deleteEmail(${i}, ${isInbox})">` +
+    `<a class="deleteKey" id="deleteKey${i}" onclick="deleteEmail(${i}, ${isInbox})">` +
     `<i class="fa fa-trash" aria-hidden="true"></i>DELETE` +
     `</a>` +
     `</div>`
@@ -126,13 +126,13 @@ function createDeleteKey(isInbox, i) {
 function createCheckBox(isUrgent, i, isInbox) {
   if (isUrgent) {
     return (
-      `<div class="checkBoxDiv" id="checkbox${i}" onclick="clickCheckBox(${i}, ${isInbox})">` +
+      `<div class="checkBoxDiv" id="CheckBox${i}" onclick="clickCheckBox(${i}, ${isInbox})">` +
       CHECKED +
       `</div>`
     );
   } else {
     return (
-      `<div class="checkBoxDiv" id="checkbox${i}" onclick="clickCheckBox(${i}, ${isInbox})">` +
+      `<div class="checkBoxDiv" id="CheckBox${i}" onclick="clickCheckBox(${i}, ${isInbox})">` +
       NOT_CHECKED +
       `</div>`
     );
