@@ -57,7 +57,10 @@ function displayEmails(data, where) {
     }
   }
   $("div.emails").html(res);
-  if (where == "inbox") alert("You have " + numUnread + " unread emails.");
+  if (where == "inbox") {
+    const str = numUnread > 1 ? "emails" : "email";
+    alert(`You have ${numUnread} unread ${str}.`);
+  }
   $("div.numUnread").html("NUMBER OF UNREAD EMAILS: " + numUnread);
 }
 
