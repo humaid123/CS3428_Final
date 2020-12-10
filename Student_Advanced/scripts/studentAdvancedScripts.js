@@ -6,16 +6,28 @@ let DIVS = {
     hints: ["Says who you wrote this email to OR who sent you this email."],
   },
 };
+const VIEW_DIVS = ["Cc", "Subject", "Body", "Who"];
 
 function turnOnHidden(div) {
-  for (const curr_div in DIVS) {
+  for (const curr_div of VIEW_DIVS) {
     if (curr_div == div) {
+      document.getElementById(div + "Hidden").style.height = "0px";
       document.getElementById(div + "Hidden").style.display = "block";
+      setTimeout(() => {
+        document.getElementById(div + "Hidden").style.height = "150px";
+      }, 50);
     } else {
-      document.getElementById(curr_div + "Hidden").style.display = "none";
+      const elem = document.getElementById(curr_div + "Hidden");
+      if (elem) {
+        elem.style.height = "0px";
+        setTimeout(() => {
+          elem.style.display = "none";
+        }, 400);
+      }
     }
   }
 }
+
 function loadPage() {
   addInboxEmailsFromCollection();
   for (const div in DIVS) {
@@ -52,15 +64,15 @@ function showOffice() {
   if (window.innerWidth < 1000) {
     document.getElementById("Navigation").style.display = "flex";
   }
-  document.getElementById('Navigation').style.width = "0%";
+  document.getElementById("Navigation").style.width = "0%";
   setTimeout(() => {
-    document.getElementById('NavigationContent').style.display = "block";
-    document.getElementById('Navigation').style.width = "50%";
+    document.getElementById("NavigationContent").style.display = "block";
+    document.getElementById("Navigation").style.width = "50%";
   }, 50);
 }
 function closeOfficeButtons() {
-  document.getElementById('Navigation').style.width = "0%";
-  document.getElementById('NavigationContent').style.display = "none";
+  document.getElementById("Navigation").style.width = "0%";
+  document.getElementById("NavigationContent").style.display = "none";
 }
 function closeViewEmail() {
   document.getElementById("ViewingEmail").style.width = "0%";

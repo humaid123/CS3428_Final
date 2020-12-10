@@ -21,9 +21,19 @@ const VIEW_DIVS = ["Cc", "Subject", "Body", "From", "To"];
 function turnOnHidden(div) {
   for (const curr_div of VIEW_DIVS) {
     if (curr_div == div) {
+      document.getElementById(div + "Hidden").style.height = "0px";
       document.getElementById(div + "Hidden").style.display = "block";
+      setTimeout(() => {
+        document.getElementById(div + "Hidden").style.height = "150px";
+      }, 50);
     } else {
-      document.getElementById(curr_div + "Hidden").style.display = "none";
+      const elem = document.getElementById(curr_div + "Hidden");
+      if (elem) {
+        elem.style.height = "0px";
+        setTimeout(() => {
+          elem.style.display = "none";
+        }, 400);
+      }
     }
   }
 }
