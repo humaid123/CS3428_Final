@@ -32,7 +32,7 @@
   justify-items: flex-start;
   align-content: flex-start;
   background-color: #f0f0f0;
-  width: 50%;
+  width: 60%;
   transition: width 0.4s ease-out;
 }
 #closeButton {
@@ -71,6 +71,8 @@
   text-align: left;
   background-color: inherit;
   font-weight: 250;
+  margin-left: 0px;
+  margin-right: 0px;
 }
 .navigationButton:hover {
   background-color: #e6f2ff;
@@ -88,11 +90,12 @@
   flex-direction: row;
 }
 .topButton {
-  height: 7em;
+  height: 6.5em;
   width: 6em;
   font-size: 0.76em;
   padding: 0.5em;
   border-radius: 35%;
+  margin: 0px;
 }
 .hintSideBar {
   display: none;

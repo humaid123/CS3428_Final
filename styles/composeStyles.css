@@ -231,7 +231,6 @@ footer {
   width: auto;
   grid-template-rows: 50% auto;
   grid-column-gap: 1em;
-  height: 100%;
 }
 .composeScreenButtons {
   width: 30%;

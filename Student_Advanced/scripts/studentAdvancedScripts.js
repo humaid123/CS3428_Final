@@ -81,7 +81,7 @@ function showOffice() {
   document.getElementById("Navigation").style.width = "0%";
   setTimeout(() => {
     document.getElementById("NavigationContent").style.display = "block";
-    document.getElementById("Navigation").style.width = "50%";
+    document.getElementById("Navigation").style.width = "60%";
   }, 50);
 }
 function closeOfficeButtons() {

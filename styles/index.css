@@ -54,6 +54,7 @@ root {
   padding: 0.375rem;
   font-size: 1em;
   margin: auto;
+  margin: 5px;
 }
 
 .controlGroup {
