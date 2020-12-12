@@ -1,0 +1,133 @@
+<!---
+  Lydia Belachew (A00416825)
+-->
+
+<html>
+  <head>
+    <title>Changing screens for Intermediate level</title>
+    <link rel="stylesheet" href="../styles/index.css" />
+    <link rel="stylesheet" href="../styles/emailsList.css" />
+    <link rel="stylesheet" href="../styles/composeStyles.css" />
+    <link rel="stylesheet" href="../styles/outlookStyles.css" />
+    <meta name="viewport" content="width=device-width" />
+  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <style>
+      /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+      @media screen and (max-height: 650px) {
+        .sidebar {
+          padding-top: 15px;
+        }
+        .sidebar a {
+          font-size: 18px;
+        }
+
+        .wide {
+          width: 250px;
+        }
+        .center {
+          width: 500px;
+          text-align: center;
+        }
+        .divider {
+          width: 5px;
+          height: auto;
+          display: inline-block;
+        }
+      }
+    </style>
+
+    <!--The following 3 functions are by Caitlin Maillet-->
+    <script>
+      function saveInformal() {
+        localStorage.setItem("style", "informal");
+      }
+      function saveFormal() {
+        localStorage.setItem("style", "formal");
+      }
+      function displayToHelp() {
+        if (localStorage.getItem("style") == "informal") {
+          document.getElementById("content").innerHTML =
+            "<h3>This is informal To Help</h3>";
+        }
+        if (localStorage.getItem("style") == "formal") {
+          document.getElementById("content").innerHTML =
+            "<h3>This is formal To Help</h3>";
+        }
+      }
+
+    /*Written by Lydia Belachew*/
+    </script>
+    <body>
+      <h1 style="text-align: center">CHANGING SCREENS FOR INTERMEDIATE LEVEL</h1>
+      <ul>
+        <li><a href="#mainpage">Main Page (Inbox</a>)</li>
+        <li><a href="#sentitems">Sent Items</a></li>
+        <li><a href="#compose">Compose</a></li>
+        <li><a href="#helpdesk">Help Desk</a></li>
+        <li><a href="#logout">Log out</a></li>
+
+    </ul>
+    <h2 id="mainpage">Main page (Inbox)</h2>
+    <p>
+      This the first page a user sees when accesing their email. The user will
+      see a message <br />displaying the number of unread emails. Emails that
+      have not been opened are yellow, while the ones that were are white.<br/>At the top left
+      corner of the page is an Office button. Selecting this button will open a navigation sidebar.
+      The sidebar has the following list: Inbox, Compose, Help Desk, Log out and Close a button.
+      The Close button closes the sidebar. 
+      <br>
+    </p>
+
+    <img src="IntermediateMainPage.PNG" alt="Main page" width="600px" />
+    <img src="IntermediateMPSideBar.PNG" alt="Main page with side bar" width="600px" />
+
+    <h2 id="sentitems">Sent Items</h2>
+    <p>When user selects the button Sent Items, the page displays all the emails that the user has emailed.</p>
+
+    <img src="IntermediateSentItems.PNG" alt="Image of sent emails" width="800px" />
+
+    <h2 id="compose">Compose</h2>
+    <p>Select this button when you are ready to email someone.</p>
+    <h3>Formal or Informal?</h3>
+    <p>After selecting the Compose button the user is brought over to another page where the user is questioned
+        the email will be formal or informal.<br>Hovering the mouse over either of the two options gives a brief
+        example of who that email would be for.<br>Formal emails are for people you do not have a personal relationship 
+        with. Examples would include:
+        <ul>
+          <li>Professors or Teachers</li>
+          <li>Managers or anyone with a higher position than you at a workplace</li>
+          </ul>
+          <br>Informal emails are for people you are close with. Such as, friends, family, classmates, and your peers
+    </p>
+
+    <img
+      src="FormalOrInformal.PNG"
+      alt="Email type: formal or informal"
+      width="800px"
+    />
+
+    <h2 id="helpdesk">Help Desk</h2>
+    <p>When this button is selected a new window is opened listing the various you may need help in.
+        <br>Select an of the options that you are confused about.
+    </p>
+
+    <img src="HelpDesk.PNG" alt="Help desk" width="800px" />
+
+    <h2 id="logout">Log out</h2>
+    <p>When this button is selected a message box appears, clarifying if your are sure you want to log out.
+        <br> Hit "OK" or "Cancel". If you select "OK" then you will be taken back to the login page.
+        <br>Otherwise, you will remain on the current page.
+    </p>
+    <img
+    src="Logout.PNG"
+    alt="Logout pop up"
+    width="500px"
+  />
+    </body>
+  </head>
+</html>
