@@ -1,3 +1,6 @@
+//Commenting: Lydia Belachew (A00416825)
+
+//DIVS is a JSON array of hints for each component of an email
 let DIVS = {
   Cc: { hints: ["Are there other people you want to send the email to?"] },
   Subject: { hints: ["What is this email about?"] },
@@ -6,8 +9,12 @@ let DIVS = {
     hints: ["Says who you wrote this email to OR who sent you this email."],
   },
 };
+
+//VIEW_DIVS is an array
 const VIEW_DIVS = ["Cc", "Subject", "Body", "Who"];
 
+/*This function is responsible for hiding and showing the hints. Also, does the animation
+of the sidebar.*/
 function turnOnHidden(div) {
   for (const curr_div of VIEW_DIVS) {
     if (curr_div == div) {
@@ -28,6 +35,7 @@ function turnOnHidden(div) {
   }
 }
 
+/*This function calls addInboxEmailsFromCollection() and stores the hints as a list */
 function loadPage() {
   addInboxEmailsFromCollection();
   for (const div in DIVS) {
@@ -42,6 +50,9 @@ function loadPage() {
     }
   }
 }
+
+/*This function calls the addInboxEmailsFromCollection() function. When the page 
+frame is less than 1000 it does not display the navigation sidebar. */
 function loadInboxEmails() {
   addInboxEmailsFromCollection();
   if (window.innerWidth < 1000) {
@@ -49,6 +60,8 @@ function loadInboxEmails() {
   }
 }
 
+/*This function calls the addSentEmailsFromCollection() function. When the page
+frame is less than 1000 it does not display the naviagtion sidear. */
 function loadSentEmails() {
   addSentEmailsFromCollection();
   if (window.innerWidth < 1000) {
@@ -60,6 +73,7 @@ function linkCompose() {
   window.location.href = "../ComposeScreens/studentCompose.html";
 }
 
+//This function displays the sidebar in 50sec
 function showOffice() {
   if (window.innerWidth < 1000) {
     document.getElementById("Navigation").style.display = "flex";
