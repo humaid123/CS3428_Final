@@ -1,0 +1,114 @@
+<!---
+  Lydia Belachew (A00416825)
+-->
+
+<html>
+  <head>
+    <title>Help for changing screens</title>
+    <link rel="stylesheet" href="../styles/index.css" />
+    <link rel="stylesheet" href="../styles/emailsList.css" />
+    <link rel="stylesheet" href="../styles/composeStyles.css" />
+    <link rel="stylesheet" href="../styles/outlookStyles.css" />
+    <meta name="viewport" content="width=device-width" />
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <style>
+      .btn-group button {
+        background-color: #2162cc; /* Green background */
+        border: 1px solid black; /* Green border */
+        color: white; /* White text */
+        padding: 10px 24px; /* Some padding */
+        cursor: pointer; /* Pointer/hand icon */
+        width: 50%; /* Set a width if needed */
+        display: block; /* Make the buttons appear below each other */
+        margin: auto;
+        font-weight: bold;
+      }
+
+      .btn-group button:not(:last-child) {
+        border-bottom: none; /* Prevent double borders */
+      }
+
+      /* Add a background color on hover */
+      .btn-group button:hover {
+        background-color: #352dad;
+      }
+
+      /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+      @media screen and (max-height: 650px) {
+        .sidebar {
+          padding-top: 15px;
+        }
+        .sidebar a {
+          font-size: 18px;
+        }
+
+        .wide {
+          width: 250px;
+        }
+        .center {
+          width: 500px;
+          text-align: center;
+        }
+        .divider {
+          width: 5px;
+          height: auto;
+          display: inline-block;
+        }
+      }
+    </style>
+
+    <!--The following 3 functions are by Caitlin Maillet-->
+    <script>
+      function saveInformal() {
+        localStorage.setItem("style", "informal");
+      }
+      function saveFormal() {
+        localStorage.setItem("style", "formal");
+      }
+      function displayToHelp() {
+        if (localStorage.getItem("style") == "informal") {
+          document.getElementById("content").innerHTML =
+            "<h3>This is informal To Help</h3>";
+        }
+        if (localStorage.getItem("style") == "formal") {
+          document.getElementById("content").innerHTML =
+            "<h3>This is formal To Help</h3>";
+        }
+      }
+
+    /*Written by Lydia Belachew*/
+    </script>
+    <body>
+      <h1 style="text-align: center">CHANGING SCREENS</h1>
+      <br />
+      <h2 style="text-align: center">What level would you like to choose?</h2>
+      <br />
+      <!---Button group-->
+      <div class="btn-group">
+        <button
+          onclick="window.location.href='http://ugdev.cs.smu.ca/~group7/Student_Basic/inbox.html';"
+        >
+          Basic
+        </button>
+        <br>
+        <button
+          onclick="window.location.href='http://ugdev.cs.smu.ca/~group7/Student_Intermediate/inbox.html';"
+        >
+          Intermediate
+        </button>
+        <br>
+        <button
+          onclick="window.location.href='http://ugdev.cs.smu.ca/~group7/Student_Advanced/mainPage.html';"
+        >
+          Advanced
+        </button>
+      </div>
+    </body>
+  </head>
+</html>
