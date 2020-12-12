@@ -54,7 +54,7 @@
   margin-top: 2em;
   display: flex;
   flex-direction: row;
-  align-items: right;
+  justify-content: flex-end;
 }
 #logOutButton:hover {
   cursor: pointer;

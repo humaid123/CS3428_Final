@@ -163,7 +163,7 @@ body {
   margin-top: 4em;
   display: flex;
   flex-direction: row;
-  align-items: right;
+  justify-content: flex-end;
 }
 #NavigationContent {
   position: sticky;
