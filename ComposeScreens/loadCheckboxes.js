@@ -12,6 +12,7 @@ Remember that hints are built in the page itself
 
 /*
   Function that sets the value for maxHeightHidden in pixels.
+  This function executes on loadPage().
 
   Isaac Cain (A00391748)
 */
