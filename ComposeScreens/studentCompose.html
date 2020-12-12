@@ -9,24 +9,25 @@
   <meta content="width=device-width, initial-scale=1" name="viewport" />
   <link rel="stylesheet" href="../styles/selectionPages.css">
   <style>
+    /* Style for the body. */
     body {
       height: 100vh;
     }
-
+    /* Style for the cancel button div. */
     .cancelButtonDiv {
       font-size: 0.5em;
       display: flex;
       color: orangered;
       justify-content: flex-end;
     }
-
+    /* Style for the cancel button. */
     .cancelButton {
       padding: 1px;
       border-radius: 5px;
       border: 1px solid orangered;
       transition-duration: 0.2s;
     }
-
+    /* Style for the cancel button on hover. */
     .cancelButton:hover {
       color: white;
       background-color: red;
@@ -35,12 +36,18 @@
   </style>
 
   <script>
+    // Function that takes the user to the Formal Compose page.
+    // Isaac Cain (A00391748)
     function changeToFormal() {
       window.location.href = "studentComposeFormal.html";
     }
+    // Function that takes the user to the Informal Compose page.
+    // Isaac Cain (A00391748)
     function changeToInformal() {
       window.location.href = "studentComposeInformal.html";
     }
+    // Function that returns the user to the page they were at previously.
+    // Isaac Cain (A00391748)
     function back() {
       window.history.back();
     }
@@ -49,31 +56,41 @@
 
 <body>
   <div class="container">
+    <!-- This div contains the envelope icon. -->
     <div class="logoDiv">
       <div class="logoContainer"><i class="fa fa-envelope logoIcon" aria-hidden="true"></i></div>
     </div>
+    <!-- This is the main div that contains the buttons. -->
     <div class="centerInnerDiv">
       <div class="innerContainer">
+        <!-- This contains the pencil and square icon. -->
         <div class="title logoToTheSide">
           <div><i class="fa fa-pencil-square-o" style="padding: 5px;" aria-hidden="true"></i></div>
           <div>Choosing Compose Style</div>
         </div>
+        <!-- This prompts the user to choose a Compose style. -->
         <div class="prompt" style="font-size: 2em;">Is the email formal or informal?</div>
+        <!-- This is the Formal button. It calls changeToFormal(). -->
         <div class="row" id="formalButton" onclick="changeToFormal()">
           <div class="insideRow" style="font-size: 2em;">
+            <!-- This has the handshake icon, implying formal relationships. -->
             <div><i class="fa fa-handshake-o" style="padding-right: 10px" aria-hidden="true"></i></div>
             <div>Formal</div>
           </div>
+          <!-- This is a hiden div that describes the Formal role. -->
           <div class="hiddenDescription">
             <div class="descriptionContainer">You are composing to a professor,<br>employer or anybody unrelated to you.
             </div>
           </div>
         </div>
+        <!-- This is the Informal button. It calls changeToInformal(). -->
         <div class="row" id="informalButton" onclick="changeToInformal()">
           <div class="insideRow" style="font-size: 2em">
+            <!-- THis has the peace sign icon, implying informal relationships. -->
             <div><i class="fa fa-hand-peace-o" style="padding-right: 10px" aria-hidden="true"></i></div>
             <div>Informal</div>
           </div>
+          <!-- This is a hidden div that describes the Informal role. -->
           <div class="hiddenDescription">
             <div class="descriptionContainer">You are composing to a friend, family<br>member or anybody related to you.
             </div>
@@ -81,7 +98,7 @@
         </div>
         <br>
         <br>
-
+        <!-- This is the Cancel button. It calls the back() function. -->
         <div class="cancelButtonDiv">
           <div class="cancelButton logoToTheSide" style="font-size: 2em;" onclick="back()" id="cancelButton">
             <div><i class="fa fa-chevron-circle-left" style="padding-right: 10px;" aria-hidden="true" ></i></div>
