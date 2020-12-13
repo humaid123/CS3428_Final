@@ -20,12 +20,14 @@
     <script>
       /* Define the divs for compose, with its checkpoints. */
       const COMPOSE_DIVS = { 
-        To: { checkBoxes: ["a"] },
-        Cc: { checkBoxes: ["b"] },
-        Subject: { checkBoxes: ["a", "b"] },
-        Greeting: { checkBoxes: ["b"] },
-        Body: { checkBoxes: ["a"] },
-        Closure: { checkBoxes: ["a", "b"] },
+        To: { checkBoxes: ["Did you spell their email address correctly?"] },
+        Cc: { checkBoxes: ["Did you spell all the email addresses correctly?",
+          "Did you include everyone you want to send the email to?"] },
+        Subject: { checkBoxes: ["Did you use proper spelling?"] },
+        Greeting: { checkBoxes: ["Did you use proper grammar and spelling?"] },
+        Body: { checkBoxes: ["Did you use proper grammar and spelling?"] },
+        Closure: { checkBoxes: ["Did you use proper grammar and spelling?", 
+          "Did you sign your name at the end of the closure?"] },
       };
       /* When loading the page load the checkboxes and dropdown lists. */
       /* Isaac Cain (A00391748) */
@@ -135,7 +137,10 @@
                     Who else needs to get this email?
                   </li>
                   <li class="hintListItem">
-                    Include only the person who really need to see this email
+                    Did you include anyone who does not need to get this email?
+                  </li>
+                  <li class="hintListItem">
+                    Are all the people you are sending this email to appropriate for an Informal email?
                   </li>
                 </ul>
               </div>
@@ -186,7 +191,10 @@
                 <!-- These are the hints. -->
                 <ul class="hintList" id="SubjectHintList">
                   <li class="hintListItem">
-                    Give a Brief description of the content of the email
+                    What is the purpose of this email?
+                  </li>
+                  <li class="hintListItem">
+                    Give a brief description of the purpose for or content of the email.
                   </li>
                 </ul>
               </div>
@@ -237,8 +245,12 @@
                 <p class="hintsTitle">HINTS FOR GREETING</p>
                 <!-- These are the hints. -->
                 <ul class="hintList" id="GreetingHintList">
-                  <li class="hintListItem">Give a polite greeting</li>
-                  <li class="hintListItem">Example: Dear Sir, Dear Madam</li>
+                  <li class="hintListItem">
+                    What is a friendly greeting?
+                  </li>
+                  <li class="hintListItem">
+                    Examples: "Hello [name]", "Hi", "How are you?".
+                  </li>
                 </ul>
               </div>
               <div class="composeCheckBoxes" id="GreetingCheckBoxes"></div>
@@ -288,9 +300,8 @@
                 <p class="hintsTitle">HINTS FOR BODY</p>
                 <!-- These are the hints. -->
                 <ul class="hintList" id="BodyHintList">
-                  <li class="hintListItem">Say everything you had to say</li>
                   <li class="hintListItem">
-                    Check for spelling and grammar mistake
+                    What would you like to say in this email?
                   </li>
                 </ul>
               </div>
@@ -341,8 +352,12 @@
                 <p class="hintsTitle">HINTS FOR CLOSURE</p>
                 <!-- These are the hints. -->
                 <ul class="hintList" id="ClosureHintList">
-                  <li class="hintListItem">Give a polite greeting</li>
-                  <li class="hintListItem">Example: Dear Sir, Dear Madam</li>
+                  <li class="hintListItem">
+                    What is a polite and friendly goodbye?
+                  </li>
+                  <li class="hintListItem">
+                    Examples: "Take care", "Goodbye", "Thank you".
+                  </li>
                 </ul>
               </div>
               <div class="composeCheckBoxes" id="ClosureCheckBoxes"></div>
