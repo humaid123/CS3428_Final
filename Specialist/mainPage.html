@@ -15,6 +15,7 @@
   <script src="../Modules/viewEmailFromServer.js" async></script>
   <script src="./scripts/specialistScripts.js" async></script>
   <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <!-- Adds style rules to the delete account button -->
   <style>
     #deleteAccountButton {
       border: 1px solid red;
@@ -36,7 +37,9 @@
 </head>
 
 <body onload="loadPage()">
+  <!-- Main page header -->
   <header>MAIN PAGE</header>
+  <!-- Menu -->
   <div id="container">
     <div id="menuOnTop">
       <div class="topButtonDiv">
@@ -62,9 +65,12 @@
           onclick="deleteAccounts()">DELETE ACCOUNTS</button>
       </div>
     </div>
+    <!-- Main page's objects -->
     <div id="innerContainer">
+      <!-- Navigation object -->
       <div id="Navigation">
         <div id="NavigationContent">
+          <!-- Navigation's buttons -->
           <div class="OfficeClickedDiv">
             <button class="normalButton navigationButton" id="inboxButton" onclick="loadInboxEmails()">Inbox</button>
           </div>
@@ -80,16 +86,18 @@
           </div>
         </div>
       </div>
-
+      <!-- List of emails in navigation object next to navigation buttons -->
       <div class="seperator"></div>
       <div id="listOfEmails">
         <div class="numUnread">NUM UNREAD EMAILS: </div>
         <div class="emails"></div>
       </div>
       <div class="seperator"></div>
-
+      <!-- viewEmail object -->
       <div id="ViewingEmail">
+        <!-- Display header for viewEmail object -->
         <header>VIEWING EMAIL</header>
+        <!-- Email's fields for viewEmail object -->
         <div id="Who">
           <div class="composeField myTextBox">
             <div id="WhoCorrect" class="reading"><i class="fa fa-circle-o" aria-hidden="true"></i></div>
@@ -160,6 +168,7 @@
             </div>
           </div>
         </div>
+        <!-- Button to close viewEmail object -->
         <div id="closeViewEmailDiv">
           <button class="normalButton" id="closeViewEmail" onclick="closeViewEmail()">CLOSE</button>
         </div>

@@ -1,3 +1,9 @@
+//Commenting Adam Taylor
+
+/**
+ * Functions sends email and stores email on server if the "from"
+ * field is not empty.
+ */
 function sendAdminEmail() {
   //Checking if the from field is not empty.
   let from = $("#FromDropDown").val();
