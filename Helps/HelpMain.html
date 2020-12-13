@@ -1,72 +1,74 @@
 <!DOCTYPE html>
-
+<!--
+  Caitlin Maillet
+  Lydia Belachew
+  HTML File for the help desk.
+-->
 <html>
   <head>
+    <title>Help for composing emails</title>
+    <link rel="stylesheet" href="../styles/index.css" />
+    <link rel="stylesheet" href="../styles/emailsList.css" />
+    <link rel="stylesheet" href="../styles/composeStyles.css" />
+    <link rel="stylesheet" href="../styles/outlookStyles.css" />
+    <meta name="viewport" content="width=device-width" />
+    <script src = "helps.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <script src="helps.js"></script>
-    <link rel="stylesheet" href="helps.css" />
+    <link rel = "stylesheet" href = "helps.css"/>
   </head>
 
-  <body>
-    <div class="container">
-      <div class="logoDiv">
-        <div class="logoContainer">
-          <i class="fa fa-envelope logoIcon" aria-hidden="true"></i>
-        </div>
-      </div>
-      <div class="centerInnerDiv">
-        <div class="innerContainer">
-          <div class="title">
-            <i
-              class="fa fa-info-circle"
-              style="padding: 5px"
-              aria-hidden="true"
-            ></i
-            >Help Subsystem
-          </div>
-          <div class="prompt">What do you need help with?</div>
-          <div class="row" id="composeHelp" onclick="saveCompose()">
-            <div class="insideRow">
-              <div>
-                <i class="fa fa-paper-plane bigIcon" aria-hidden="true"></i>
-              </div>
-              <div>Composing Emails</div>
-            </div>
-            <div class="hiddenDescription">
-              <div class="descriptionContainer">Help for composing emails</div>
-            </div>
-          </div>
-          <div class="row" id="navigationHelp" onclick="saveChanging()">
-            <div class="insideRow">
-              <div>
-                <i
-                  class="fa fa-arrow-circle-right bigIcon"
-                  aria-hidden="true"
-                ></i>
-              </div>
-              <div>Navigation Screens</div>
-            </div>
-            <div class="hiddenDescription">
-              <div class="descriptionContainer">Help for changing screens</div>
-            </div>
-          </div>
-          <div class="row" id="viewingHelp" onclick="saveViewEmail()">
-            <div class="insideRow">
-              <div>
-                <i class="fa fa-address-card bigIcon" aria-hidden="true"></i>
-              </div>
-              <div>Viewing Emails Screen</div>
-            </div>
-            <div class="hiddenDescription">
-              <div class="descriptionContainer">Help for viewing emails</div>
-            </div>
-          </div>
-        </div>
-      </div>
+
+  <body onload="displayOptions()">
+    <div id="mySidebar" class="sidebar">
+      <button class="sidebarBtn" onclick="displayOptions()">
+        Choose Compose Style
+      </button>
+      <button class="sidebarBtn" onclick="displayToHelp()">
+        To Input Field
+      </button>
+      <button class="sidebarBtn" onclick="displayCcHelp()">
+        Cc Input Field
+      </button>
+      <button class="sidebarBtn" onclick="displaySubjectHelp()">
+        Subject Input Field
+      </button>
+      <button class="sidebarBtn" onclick="displayGreetingHelp()">
+        Greeting Input Field
+      </button>
+      <button class="sidebarBtn" onclick="displayBodyHelp()">
+        Body Input Field
+      </button>
+      <button class="sidebarBtn" onclick="displayClosureHelp()">
+        Closure Input Field
+      </button>
+      <button class="sidebarBtn" onclick="displayViewingEmailHelp()">
+        Viewing Emails
+      </button>
+      <button class="sidebarBtn" onclick="displaySystemHelp()">
+        Changing Screens
+      </button>
+      <button class="closeSideBarbtn" onclick="closeSideBar()">X</button>
+    </div>
+
+    <div id="main">
+      <table>
+        <tr>
+          <td class="wide">
+            <button class="openSideBarbtn" onclick="openSideBar()">
+              &#9776; Open Sidebar
+            </button>
+          </td>
+          <td class="center">
+            <h1 class = "text-center">Help Desk</h1>
+          </td>
+        </tr>
+      </table>
+
+      <div id="content"></div>
     </div>
   </body>
 </html>
