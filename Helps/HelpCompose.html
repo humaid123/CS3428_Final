@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
   <head>
     <title>Help for composing emails</title>
@@ -6,176 +7,16 @@
     <link rel="stylesheet" href="../styles/composeStyles.css" />
     <link rel="stylesheet" href="../styles/outlookStyles.css" />
     <meta name="viewport" content="width=device-width" />
-    
+    <script src = "helps.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <style>
-      /* The sidebar menu */
-      .sidebar {
-        height: 100%; /* 100% Full-height */
-        width: 0; /* 0 width - change this with JavaScript */
-        position: fixed; /* Stay in place */
-        z-index: 1; /* Stay on top */
-        top: 0;
-        left: 0;
-        background-color: #2162cc; /* Black*/
-        overflow-x: hidden; /* Disable horizontal scroll */
-        padding-top: 60px; /* Place content 60px from the top */
-        transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
-      }
-
-      /* The sidebar links */
-      .sidebar .sidebarBtn {
-        width: 250px;
-        padding: 8px 8px 8px 32px;
-        text-decoration: none;
-        font-size: 25px;
-        color: white;
-        background-color: transparent;
-        border-color: transparent;
-        text-align: center;
-        display: block;
-        transition: 0.3s;
-      }
-
-      /* When you mouse over the navigation links, change their color */
-      .sidebar .sidebarBtn:hover {
-        background-color: #0b106c;
-        cursor: pointer;
-        border-left-style: solid;
-        border-left-color: white;
-      }
-
-      /* Position and style the close button (top right corner) */
-      .sidebar .closeSideBarbtn {
-        position: absolute;
-        top: 0;
-        right: 25px;
-        font-size: 36px;
-        margin-left: 50px;
-        transition: 0.3s;
-        background-color: white;
-        border-color: transparent;
-      }
-
-      .sidebar .closeSideBarbtn:hover {
-        background-color: red;
-      }
-      /* The button used to open the sidebar */
-      .openSideBarbtn {
-        font-size: 20px;
-        cursor: pointer;
-        background-color: #2162cc;
-        color: white;
-        padding: 10px 15px;
-        border: none;
-        margin: 10px;
-      }
-
-      .openSideBarbtn:hover {
-        background-color: #0b106c;
-      }
-
-      /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
-      #main {
-        transition: margin-left 0.5s; /* If you want a transition effect */
-        padding: 20px;
-      }
-
-      /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-      @media screen and (max-height: 650px) {
-        .sidebar {
-          padding-top: 15px;
-        }
-        .sidebar a {
-          font-size: 18px;
-        }
-
-        .wide {
-          width: 250px;
-        }
-        .center {
-          width: 500px;
-          text-align: center;
-        }
-        .divider {
-          width: 5px;
-          height: auto;
-          display: inline-block;
-        }
-      }
-    </style>
-    <script>
-      function displayOptions() {
-        document.getElementById("content").innerHTML =
-          '<div style = "text-align: center"><h1>Are you writing a formal or informal email?</h1>' +
-          '<button class = "openSideBarbtn" onclick = "saveFormal()">Formal</button>' +
-          '<button class = "openSideBarbtn" onclick = "saveInformal()">Informal</button></div>';
-      }
-      function saveInformal() {
-        localStorage.setItem("style", "informal");
-      }
-      function saveFormal() {
-        localStorage.setItem("style", "formal");
-      }
-      function displayToHelp() {
-        if (localStorage.getItem("style") == "informal") {
-          document.getElementById("content").innerHTML =
-            "<h3>This is informal To Help</h3>";
-        }
-        if (localStorage.getItem("style") == "formal") {
-          document.getElementById("content").innerHTML =
-            "<h3>This is formal To Help</h3>";
-        }
-      }
-      function displayCcHelp() {
-        document.getElementById("content").innerHTML =
-          "<h3>This is Cc help</h3>";
-      }
-      function displaySubjectHelp() {
-        document.getElementById("content").innerHTML =
-          "<h3>This is subject help</h3>";
-      }
-      function displayGreetingHelp() {
-        document.getElementById("content").innerHTML =
-          "<h3>This is the greeting help</h3>";
-      }
-      function displayBodyHelp() {
-        document.getElementById("content").innerHTML =
-          "<h3>This is the body help</h3>";
-      }
-      function displayClosureHelp() {
-        document.getElementById("content").innerHTML =
-          "<h3>This is the closure help</h3>";
-      }
-      function displayViewingEmailHelp() {
-        document.getElementById("content").innerHTML =
-          "<h3>This is viewing email help</h3>";
-      }
-      function displayChangingScreensHelp() {
-        document.getElementById("content").innerHTML =
-          "<h3>This is the changing screens help</h3>";
-      }
-      function displayInboxHelp() {
-        document.getElementById("content").innerHTML =
-          "<h3>This is the inbox and sent items help</h3>";
-      }
-      /* Set the width of the sidebar to 250px and the left margin of the page content to 250px */
-      function openSideBar() {
-        document.getElementById("mySidebar").style.width = "250px";
-        document.getElementById("main").style.marginLeft = "250px";
-      }
-
-      /* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
-      function closeSideBar() {
-        document.getElementById("mySidebar").style.width = "0";
-        document.getElementById("main").style.marginLeft = "0";
-      }
-    </script>
+    <link rel = "stylesheet" href = "helps.css"/>
   </head>
+
+
   <body onload="displayOptions()">
     <div id="mySidebar" class="sidebar">
       <button class="sidebarBtn" onclick="displayOptions()">
@@ -202,11 +43,8 @@
       <button class="sidebarBtn" onclick="displayViewingEmailHelp()">
         Viewing Emails
       </button>
-      <button class="sidebarBtn" onclick="displayChangingScreensHelp()">
+      <button class="sidebarBtn" onclick="displaySystemHelp()">
         Changing Screens
-      </button>
-      <button class="sidebarBtn" onclick="displayInboxHelp()">
-        Inbox and Sent Items Screens
       </button>
       <button class="closeSideBarbtn" onclick="closeSideBar()">X</button>
     </div>
@@ -220,17 +58,12 @@
             </button>
           </td>
           <td class="center">
-            <h1>Help Desk</h1>
+            <h1 class = "text-center">Help Desk</h1>
           </td>
         </tr>
       </table>
 
-      <div id="content">
-        <h5>
-          This is the help desk. Open the sidebar and choose an option on the
-          left.
-        </h5>
-      </div>
+      <div id="content"></div>
     </div>
   </body>
 </html>
