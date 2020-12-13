@@ -7,6 +7,9 @@
   <script src="../jquery-3.4.1.min.js"></script>
   <script src="../constants.js"></script>
   <script>
+    /**
+     * Gets all accounts from server and displays them.
+     */
     function fillInAllAccounts() {
       getAllAccountsFromServer(true, (err, result) => {
         if (err) {
@@ -17,6 +20,9 @@
         displayAccounts(result.accounts);
       });
     }
+    /**
+     * Displays the account.
+     */
     function displayAccounts(accounts) {
       console.log("displaying accounts: ", accounts);
       let res = "";
@@ -25,11 +31,15 @@
       }
       document.getElementById("accounts").innerHTML = res;
     }
-
+    /**
+     * Fills in the emailToDelete text field with the name of the account ot be deleted.
+     */
     function writeAccount(accountName) {
       document.getElementById("emailToDelete").value = accountName;
     }
-
+    /**
+     * Deletes the account from the database.
+     */
     function deleteAccount() {
       const emailToDelete = document.getElementById("emailToDelete").value;
       const deletionSecret = document.getElementById("deletionSecret").value;
@@ -41,7 +51,9 @@
         window.location.reload();
       });
     }
-
+    /**
+     * Returns to the previous page.
+     */
     function goBack() {
       window.history.back();
     }
@@ -66,11 +78,12 @@
 </head>
 
 <body onload="fillInAllAccounts()">
+  <!-- Display "list" of all accounts -->
   <div id="accountDisplay">
     <div>EMAILS - Click on email to fill it in the form below</div>
     <div id="accounts"></div>
   </div>
-
+  <!-- Form for deleting accounts -->
   <div id="deleteAccountForm">
     <h2>DELETING ACCOUNT</h2>
     <label for="emailToDelete">
@@ -85,5 +98,4 @@
   <br>
   <input type="button" value="Back" id="backButton" onclick="goBack()"></div>
 </body>
-
 </html>

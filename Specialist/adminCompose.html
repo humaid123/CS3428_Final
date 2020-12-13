@@ -17,16 +17,18 @@
     <script src="./scripts/adminCompose.js"></script>
     <script src="../Modules/getAllAccountsFromServer.js"></script>
   </head>
-
+  <!-- Load the options for the dropdown menus on load -->
   <body onload="loadAdminOptions()">
+    <!-- Compose page header -->
     <header>COMPOSING</header>
-
+    <!-- Helpful tip -->
     <div class="unsolicitedText">
       Did you know that you can click on To, Cc, Subject or Body and help will
       appear?
     </div>
-
+    <!-- List for data fields of the email to be composed -->
     <datalist id="LIST"></datalist>
+    <!-- Labels and text fields of the email to be composed -->
     <div id="composing">
       <div id="To">
         <div class="composeField myDropDown">
@@ -113,7 +115,7 @@
     </div>
 
     <footer></footer>
-
+    <!-- Buttons on the compose page -->
     <div class="composeScreenButtons">
       <button
         class="normalButton sendButton"
