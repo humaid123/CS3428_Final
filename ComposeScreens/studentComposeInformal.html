@@ -18,7 +18,8 @@
     <script src="./loadDropdown.js"></script>
     <script src="../Modules/getAllAccountsFromServer.js"></script>
     <script>
-      const COMPOSE_DIVS = {
+      /* Define the divs for compose, with its checkpoints. */
+      const COMPOSE_DIVS = { 
         To: { checkBoxes: ["a"] },
         Cc: { checkBoxes: ["b"] },
         Subject: { checkBoxes: ["a", "b"] },
@@ -26,23 +27,30 @@
         Body: { checkBoxes: ["a"] },
         Closure: { checkBoxes: ["a", "b"] },
       };
+      /* When loading the page load the checkboxes and dropdown lists. */
       function loadPage() {
         loadCheckBoxes();
         loadDropdown();
       }
     </script>
   </head>
-
+  <!-- Call the loadPage() function. -->
   <body onload="loadPage()">
     <header>COMPOSING</header>
-
+    <!-- Remind the student that help is available. -->
     <div class="unsolicitedText">
       Help will appear when you click on a field.
     </div>
     <datalist id="LIST"></datalist>
+    <!-- This div is the main section. -->
     <div id="composing">
+      <!-- To field: -->
       <div id="To">
+        <!-- A dropdown list for the accounts on the server. -->
         <div class="composeField myDropDown">
+          <!-- Originally the class will be "notAllTicked".
+            This will be changed by loadCheckboxes.js when the user
+            ticks all the checkboxes. -->
           <div id="ToCorrect" class="notAllTicked">
             <i class="fa fa-exclamation-triangle composeIcon"></i>
           </div>
@@ -50,6 +58,8 @@
             <label for="ToDropDown" class="myLabel">To</label>
           </div>
           <div class="elementComposeField">
+            <!-- This is the field. It accepts text, but is also a dropdown list. -->
+            <!-- When this field is focused, the hints appear. -->
             <input
               type="text"
               class="longTextBox"
@@ -59,11 +69,13 @@
             />
           </div>
         </div>
+        <!-- This is the hidden dropdown field for hints and checkboxes. -->
         <div id="ToHidden" class="hidden">
           <div class="hiddenBlock">
             <div class="hintsAndCheckBoxes">
               <div class="hints" id="ToHints">
                 <p class="hintsTitle">HINTS FOR TO</p>
+                <!-- This is the list of hints for To. -->
                 <ul class="hintList" id="ToHintList">
                   <li class="hintListItem">
                     To whom are you sending the email?
@@ -72,6 +84,7 @@
               </div>
               <div class="composeCheckBoxes" id="ToCheckBoxes"></div>
             </div>
+            <!-- This is the button the user clicks when they tick all checkboxes. -->
             <div class="checkedEverthingDiv">
               <button
                 class="checkedEverythingButton"
@@ -84,15 +97,22 @@
           </div>
         </div>
       </div>
+      <!-- End of To field. -->
+      <!-- Cc field: -->
       <div id="Cc">
+        <!-- Cc will also have a dropdown list. -->
         <div class="composeField myDropDown">
+          <!-- Originally the class will be "notAllTicked", as above. -->
           <div id="CcCorrect" class="notAllTicked">
             <i class="fa fa-exclamation-triangle composeIcon"></i>
           </div>
+          <!-- This is the label for the field. -->
           <div class="labelComposeField">
             <label for="CcDropDown" class="myLabel">Cc</label>
           </div>
+          <!-- This is the field. It accepts text and includes a dropdown list. -->
           <div class="elementComposeField">
+            <!-- When this field is focused, the hints appear. -->
             <input
               type="text"
               class="longTextBox"
@@ -102,11 +122,13 @@
             />
           </div>
         </div>
+        <!-- This is the hidden dropdown field for hints and checkboxes for Cc. -->
         <div id="CcHidden" class="hidden">
           <div class="hiddenBlock">
             <div class="hintsAndCheckBoxes">
               <div class="hints" id="CcHints">
                 <p class="hintsTitle">HINTS FOR CC</p>
+                <!-- These are the hints. -->
                 <ul class="hintList" id="CcHintList">
                   <li class="hintListItem">
                     Who else needs to get this email?
@@ -118,6 +140,7 @@
               </div>
               <div class="composeCheckBoxes" id="CcCheckBoxes"></div>
             </div>
+            <!-- This is the button the user clicks when they have ticked everything. -->
             <div class="checkedEverthingDiv">
               <button
                 class="checkedEverythingButton"
@@ -130,15 +153,21 @@
           </div>
         </div>
       </div>
+      <!-- End of Cc field. -->
+      <!-- Subject field: -->
       <div id="Subject">
         <div class="composeField myTextBox">
+          <!-- Originally the checkboxes are not ticked, as above. -->
           <div id="SubjectCorrect" class="notAllTicked">
             <i class="fa fa-exclamation-triangle composeIcon"></i>
           </div>
+          <!-- This is the label for the field. -->
           <div class="labelComposeField">
             <label for="SubjectTextBox" class="myLabel">Subject</label>
           </div>
+          <!-- This is the field for the Subject. -->
           <div class="elementComposeField">
+            <!-- When this field is focused, the hints appear. -->
             <input
               type="text"
               class="longTextBox"
@@ -147,11 +176,13 @@
             />
           </div>
         </div>
+        <!-- This is the hidden section with hints -->
         <div id="SubjectHidden" class="hidden">
           <div class="hiddenBlock">
             <div class="hintsAndCheckBoxes">
               <div class="hints" id="SubjectHints">
                 <p class="hintsTitle">HINTS FOR SUBJECT</p>
+                <!-- These are the hints. -->
                 <ul class="hintList" id="SubjectHintList">
                   <li class="hintListItem">
                     Give a Brief description of the content of the email
@@ -160,6 +191,7 @@
               </div>
               <div class="composeCheckBoxes" id="SubjectCheckBoxes"></div>
             </div>
+            <!-- This is the checkedEverything button. -->
             <div class="checkedEverthingDiv">
               <button
                 class="checkedEverythingButton"
@@ -172,17 +204,23 @@
           </div>
         </div>
       </div>
+      <!-- End of Subject field. -->
+      <!-- Greeting field: -->
       <div id="Greeting">
         <div class="composeTextArea">
           <div class="textAreaFlags">
+            <!-- Originally the class is "notAllTicked".-->
             <div id="GreetingCorrect" class="notAllTicked">
               <i class="fa fa-exclamation-triangle composeIcon"></i>
             </div>
+            <!-- The label to indicate the purpose of the field. -->
             <div class="labelTextArea">
               <label for="GreetingTextBox" class="myLabel">Greeting</label>
             </div>
           </div>
+          <!-- The field itself. -->
           <div class="elementTextArea">
+            <!-- When the field is focused on, the hints appear. -->
             <textarea
               class="emailTextArea"
               id="GreetingTextBox"
@@ -190,11 +228,13 @@
             ></textarea>
           </div>
         </div>
+        <!-- The hidden div. It appears when the Greeting field is focused on. -->
         <div id="GreetingHidden" class="hidden">
           <div class="hiddenBlock">
             <div class="hintsAndCheckBoxes">
               <div class="hints" id="GreetingHints">
                 <p class="hintsTitle">HINTS FOR GREETING</p>
+                <!-- These are the hints. -->
                 <ul class="hintList" id="GreetingHintList">
                   <li class="hintListItem">Give a polite greeting</li>
                   <li class="hintListItem">Example: Dear Sir, Dear Madam</li>
@@ -202,6 +242,7 @@
               </div>
               <div class="composeCheckBoxes" id="GreetingCheckBoxes"></div>
             </div>
+            <!-- The Checked Everything Button. -->
             <div class="checkedEverthingDiv">
               <button
                 class="checkedEverythingButton"
@@ -214,17 +255,23 @@
           </div>
         </div>
       </div>
+      <!-- End of Greeting field. -->
+      <!-- Body field: -->
       <div id="Body">
         <div class="composeTextArea">
           <div class="textAreaFlags">
+            <!-- The original class for the div is "notAllTicked". -->
             <div id="BodyCorrect" class="notAllTicked">
               <i class="fa fa-exclamation-triangle composeIcon"></i>
             </div>
+            <!-- The label to indicate the purpose of the field. -->
             <div class="labelTextArea">
               <label for="BodyTextBox" class="myLabel">Body</label>
             </div>
           </div>
+          <!-- The field itself. -->
           <div class="elementTextArea">
+            <!-- When the field is focused on, the hints appear. -->
             <textarea
               class="emailTextArea"
               id="BodyTextBox"
@@ -232,11 +279,13 @@
             ></textarea>
           </div>
         </div>
+        <!-- The hidden div. It appears when the Body field is focused on. -->
         <div id="BodyHidden" class="hidden">
           <div class="hiddenBlock">
             <div class="hintsAndCheckBoxes">
               <div class="hints" id="BodyHints">
                 <p class="hintsTitle">HINTS FOR BODY</p>
+                <!-- These are the hints. -->
                 <ul class="hintList" id="BodyHintList">
                   <li class="hintListItem">Say everything you had to say</li>
                   <li class="hintListItem">
@@ -246,6 +295,7 @@
               </div>
               <div class="composeCheckBoxes" id="BodyCheckBoxes"></div>
             </div>
+            <!-- The Checked Everything Button. -->
             <div class="checkedEverthingDiv">
               <button
                 class="checkedEverythingButton"
@@ -258,17 +308,23 @@
           </div>
         </div>
       </div>
+      <!-- End of the Body field. -->
+      <!-- The Closure field: -->
       <div id="Closure">
         <div class="composeTextArea">
           <div class="textAreaFlags">
+            <!-- The original class for the div is "notAllTicked". -->
             <div id="ClosureCorrect" class="notAllTicked">
               <i class="fa fa-exclamation-triangle composeIcon"></i>
             </div>
+            <!-- The label to indicate the purpose of the field. -->
             <div class="labelTextArea">
               <label for="ClosureTextBox" class="myLabel">Closure</label>
             </div>
           </div>
+          <!-- The field itself. -->
           <div class="elementTextArea">
+            <!-- When the field is focused on, the hints appear. -->
             <textarea
               class="emailTextArea"
               id="ClosureTextBox"
@@ -276,11 +332,13 @@
             ></textarea>
           </div>
         </div>
+        <!-- The hidden div. It appears when the Body field is focused on. -->
         <div id="ClosureHidden" class="hidden">
           <div class="hiddenBlock">
             <div class="hintsAndCheckBoxes">
               <div class="hints" id="ClosureHints">
                 <p class="hintsTitle">HINTS FOR CLOSURE</p>
+                <!-- These are the hints. -->
                 <ul class="hintList" id="ClosureHintList">
                   <li class="hintListItem">Give a polite greeting</li>
                   <li class="hintListItem">Example: Dear Sir, Dear Madam</li>
@@ -288,6 +346,7 @@
               </div>
               <div class="composeCheckBoxes" id="ClosureCheckBoxes"></div>
             </div>
+            <!-- The Checked Everything Button. -->
             <div class="checkedEverthingDiv">
               <button
                 class="checkedEverythingButton"
@@ -299,12 +358,14 @@
             </div>
           </div>
         </div>
+        <!-- End of Closure field. -->
       </div>
     </div>
 
     <footer></footer>
-
+    <!-- This section contains the Send, Help, and Cancel buttons. -->
     <div class="composeScreenButtons">
+      <!-- Send button. -->
       <button
         class="normalButton sendButton"
         id="sendButton"
@@ -313,10 +374,13 @@
         <div><i class="fa fa-paper-plane" aria-hidden="true"></i></div>
         <div>Send</div>
       </button>
+      <!-- Help and Cancel buttons.-->
       <div class="helpAndCancel">
+        <!-- Help button. -->
         <button class="normalButton" id="helpButton" onclick="showHelp()">
           Help
         </button>
+        <!-- Cancel button. -->
         <button class="normalButton" id="cancelButton" onclick="cancel()">
           Cancel
         </button>
