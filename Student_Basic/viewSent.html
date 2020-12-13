@@ -1,3 +1,5 @@
+<!--Comments by: Lydia Belachew (A00416825)-->
+
 <html>
   <head>
     <title>Your Email System</title>
@@ -29,6 +31,7 @@
             <label for="ToTextBox" class="myLabel">To</label>
           </div>
           <div class="elementComposeField">
+            <!--Where the name of the recipient of the email is-->
             <input
               type="email"
               class="longTextBox"
@@ -38,6 +41,7 @@
             />
           </div>
         </div>
+        <!--Where the list of hints for "To" is-->
         <div class="hidden" id="ToHidden">
           <div class="hints" id="ToHints">
             <p class="hintTitle">HINTS FOR TO</p>
@@ -56,6 +60,7 @@
             <label for="CcTextBox" class="myLabel">Cc</label>
           </div>
           <div class="elementComposeField">
+            <!--Where the name of another recipient of the email is-->
             <input
               type="email"
               class="longTextBox"
@@ -83,6 +88,7 @@
             <label for="SubjectTextBox" class="myLabel">Subject</label>
           </div>
           <div class="elementComposeField">
+            <!--This is where description of the content of the email is-->
             <input
               type="email"
               class="longTextBox"
@@ -112,6 +118,7 @@
             </div>
           </div>
           <div class="elementTextArea">
+            <!--Where the contents the email is displayed-->
             <textarea
               class="emailTextArea"
               id="BodyTextBox"
@@ -120,6 +127,7 @@
             ></textarea>
           </div>
         </div>
+        <!--Where hints for the Body of an email are-->
         <div class="hidden" id="BodyHidden">
           <div class="hints" id="BodyHints">
             <p class="hintTitle">HINTS FOR BODY</p>
@@ -132,7 +140,8 @@
     </div>
 
     <footer></footer>
-
+    
+    <!--Buttons at the bottom-->
     <div class="controlGroup">
       <div class="buttonAndHint">
         <button

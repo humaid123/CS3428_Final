@@ -1,3 +1,4 @@
+<!--Comments by: Lydia Belachew (A00416825)-->
 <!DOCTYPE html>
 
 <html lang="en">
@@ -19,20 +20,24 @@
     <script src="../Modules/DisplayEmails.js" async></script>
     <script src="./scripts/viewEmailsEntry.js" async></script>
     <script>
+
+      //This function is responsible showing the navigation sidebar
       function showNavigation() {
         document.getElementById("Navigation").style.display = "flex";
       }
+      //This function is responsible closing the navigation sidebar
       function closeNavigation() {
         document.getElementById("Navigation").style.display = "none";
       }
     </script>
   </head>
-
+  <!--Loads the emails to the inbox-->
   <body onload="loadStudentInbox()">
     <div id="container">
       <header>INBOX</header>
       <div id="menuOnTop">
         <div class="topButtonDiv">
+          <!--When OFFICE button is clicked the navigation sidebar is displayed-->
           <button
             id="officeButton"
             class="normalButton topButton"
@@ -51,6 +56,7 @@
 
       <div id="innerContainer">
         <div id="Navigation">
+          <!--Where all the naviagation buttons are-->
           <div id="NavigationContent">
             <div class="OfficeClickedDiv">
               <button
@@ -102,6 +108,7 @@
 
         <div id="listOfEmails">
           <div class="numUnread">NUM UNREAD EMAILS:</div>
+          <!--Where the emails are displayed-->
           <div class="emails"></div>
         </div>
       </div>

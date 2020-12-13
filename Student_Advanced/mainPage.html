@@ -1,3 +1,5 @@
+<!--Comments by: Lydia Belachew (A00416825)-->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,6 +24,7 @@
 <body onload="loadPage()">
   <header>MAIN PAGE</header>
   <div id="container">
+    <!---Top menu that contains the buttons: OFFICE, COMPOSE, and HELP DESK-->
     <div id="menuOnTop">
       <div class="topButtonDiv">
         <button id="officeButton" class="normalButton topButton" onclick="showOffice()">
@@ -44,6 +47,7 @@
     </div>
     <div id="innerContainer">
       <div id="Navigation">
+        <!---This is naviagtion sidebar, contains the buttons: Inbox, Sent Items, Log out and Close-->
         <div id="NavigationContent">
           <div class="OfficeClickedDiv">
             <button class="normalButton navigationButton" id="inboxButton" onclick="loadInboxEmails()">Inbox</button>
@@ -63,9 +67,11 @@
       <div class="seperator"></div>
       <div id="listOfEmails">
         <div class="numUnread">NUM UNREAD EMAILS: </div>
+        <!---Where the emails are displayed-->
         <div class="emails"></div>
       </div>
       <div class="seperator"></div>
+      <!---View the contents of the email-->
       <div id="ViewingEmail">
         <header>VIEWING EMAIL</header>
         <div id="Who">
@@ -139,6 +145,7 @@
           </div>
         </div>
         <div id="closeViewEmailDiv">
+          <!---Closes the view email--->
           <button class="normalButton" id="closeViewEmail" onclick="closeViewEmail()">CLOSE</button>
         </div>
       </div>
