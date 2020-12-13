@@ -1,50 +1,72 @@
+<!DOCTYPE html>
+
 <html>
-<head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <script src = "helps.js"></script>
-    <link rel = "stylesheet" href = "helps.css">
-</head>
-<body>
+    <script src="helps.js"></script>
+    <link rel="stylesheet" href="helps.css" />
+  </head>
+
+  <body>
     <div class="container">
-        <div class="logoDiv">
-            <div class="logoContainer"><i class="fa fa-envelope logoIcon" aria-hidden="true"></i></div>
+      <div class="logoDiv">
+        <div class="logoContainer">
+          <i class="fa fa-envelope logoIcon" aria-hidden="true"></i>
         </div>
-        <div class="centerInnerDiv">
+      </div>
+      <div class="centerInnerDiv">
         <div class="innerContainer">
-        <div class="title">
-            <i class="fa fa-info-circle" style="padding: 5px;" aria-hidden="true"></i>Help Subsystem
-        </div>
-        <div class="prompt">What do you need help with?</div>
-        <div class="row" id="composeHelp" onclick="saveCompose()">
+          <div class="title">
+            <i
+              class="fa fa-info-circle"
+              style="padding: 5px"
+              aria-hidden="true"
+            ></i
+            >Help Subsystem
+          </div>
+          <div class="prompt">What do you need help with?</div>
+          <div class="row" id="composeHelp" onclick="saveCompose()">
             <div class="insideRow">
-                <div><i class="fa fa-paper-plane bigIcon" aria-hidden="true"></i></div>
-                <div>Composing Emails</div>
+              <div>
+                <i class="fa fa-paper-plane bigIcon" aria-hidden="true"></i>
+              </div>
+              <div>Composing Emails</div>
             </div>
             <div class="hiddenDescription">
-                <div class="descriptionContainer">Help for composing emails</div>
+              <div class="descriptionContainer">Help for composing emails</div>
             </div>
-        </div>
-        <div class="row" id="navigationHelp" onclick="saveChanging()">
+          </div>
+          <div class="row" id="navigationHelp" onclick="saveChanging()">
             <div class="insideRow">
-                <div><i class="fa fa-arrow-circle-right bigIcon" aria-hidden="true"></i></div>
-                <div>Navigation Screens</div>
+              <div>
+                <i
+                  class="fa fa-arrow-circle-right bigIcon"
+                  aria-hidden="true"
+                ></i>
+              </div>
+              <div>Navigation Screens</div>
             </div>
             <div class="hiddenDescription">
-                <div class="descriptionContainer">Help for changing screens</div>
+              <div class="descriptionContainer">Help for changing screens</div>
             </div>
-        </div>
-        <div class="row" id="viewingHelp" onclick="saveViewEmail()">
+          </div>
+          <div class="row" id="viewingHelp" onclick="saveViewEmail()">
             <div class="insideRow">
-                <div><i class="fa fa-address-card bigIcon" aria-hidden="true"></i></div>
-                <div>Viewing Emails Screen</div>
+              <div>
+                <i class="fa fa-address-card bigIcon" aria-hidden="true"></i>
+              </div>
+              <div>Viewing Emails Screen</div>
             </div>
             <div class="hiddenDescription">
-                <div class="descriptionContainer">Help for viewing emails</div>
+              <div class="descriptionContainer">Help for viewing emails</div>
             </div>
+          </div>
         </div>
-        </div>
-        </div>
+      </div>
     </div>
-</body>
+  </body>
 </html>
