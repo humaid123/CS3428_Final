@@ -1,4 +1,9 @@
-/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+/*Caitlin Maillet
+Lydia Belachew
+This is the CSS file for the help desk
+*/
+
+/* On smaller screens, where height is less than 650px, change the style of the sidebar*/
 @media screen and (max-height: 650px) {
   .sidebar {
     padding-top: 15px;
@@ -20,6 +25,7 @@
     display: inline-block;
   }
 }
+
 /* The sidebar menu */
 .sidebar {
   height: 100%; /* 100% Full-height */
@@ -34,7 +40,7 @@
   transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
 }
 
-/* The sidebar links */
+/* The sidebar buttons */
 .sidebar .sidebarBtn {
   width: 250px;
   padding: 8px 8px 8px 32px;
@@ -48,7 +54,7 @@
   transition: 0.3s;
 }
 
-/* When you mouse over the navigation links, change their color */
+/* When you hover over the sidebar buttons, change their color */
 .sidebar .sidebarBtn:hover {
   background-color: #0b106c;
   cursor: pointer;
@@ -56,7 +62,7 @@
   border-left-color: white;
 }
 
-/* Position and style the close button (top right corner) */
+/* Position and style the close sidebar button*/
 .sidebar .closeSideBarbtn {
   position: absolute;
   top: 0;
@@ -67,7 +73,7 @@
   background-color: white;
   border-color: transparent;
 }
-
+/*When you hover over the sidebar close button, change the color*/
 .sidebar .closeSideBarbtn:hover {
   background-color: red;
 }
@@ -81,10 +87,11 @@
   border: none;
   margin: 10px;
 }
-
+/*When you hover over the open sidebar button, change the color*/
 .openSideBarbtn:hover {
   background-color: #0b106c;
 }
+/*confirmation button on main help page*/
 .okayBtn {
   font-size: 20px;
   cursor: pointer;
@@ -94,97 +101,13 @@
   border: none;
   margin: 10px;
 }
+/*When you hover over the okay button, change the color*/
 .okayBtn:hover {
   background-color: gray;
 }
-body {
-  background-color: white;
-  font-family: Arial, Helvetica, sans-serif;
-}
-.container {
-  width: 80%;
-  height: 90%;
-  display: grid;
-  grid-template-columns: 30% auto;
-  border: 1px solid black;
-  margin: auto;
-}
-
-.logoDiv {
-  background-color: #2162cc;
-  color: white;
-  font-size: 10em;
-  display: flex;
-}
-.logoContainer {
-  margin: auto;
-}
-
-.centerInnerDiv {
-  display: flex;
-  background-color: whitesmoke;
-}
-
-.innerContainer {
-  margin: auto;
-  height: fit-content;
-  font-size: 2em;
-}
-.insideRow {
-  display: flex;
-  flex-direction: row;
-}
-.bigIcon {
-  padding: 5px;
-}
-
-.hiddenDescription {
-  display: none;
-}
-.row {
-  border-bottom: 1px solid lightgrey;
-}
-.row:hover .hiddenDescription {
-  display: block;
-}
-.row:hover {
-  background-color: ghostwhite;
-  cursor: pointer;
-  border-left: 0.2em solid darkblue;
-  font-weight: bold;
-  color: darkblue;
-}
-
-.prompt {
-  font-weight: bold;
-}
-
-.title {
-  text-align: center;
-  font-weight: bold;
-  font-size: 1.3em;
-  color: #2162cc;
-  margin-bottom: 5px;
-}
-
-@media screen and (max-width: 650px) {
-  .logoDiv {
-    display: none;
-  }
-  .container {
-    grid-template-columns: 100%;
-    border: none;
-  }
-  body {
-    background-color: whiteSmoke;
-  }
-}
-
+/*Transition effect for main page content*/
 #main {
-  transition: margin-left 0.5s; /* If you want a transition effect */
+  transition: margin-left 0.5s; 
   padding: 20px;
 }
 
-body {
-  height: 100vh;
-}
