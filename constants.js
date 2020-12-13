@@ -28,7 +28,7 @@ function showHelp() {
   window.open(
     "../Helps/HelpMain.html",
     "MsgWindow",
-    "width=1000, height=500, top=200, left=400"
+    "width=1000, height=650, top=20, left=400"
   );
 }
 
