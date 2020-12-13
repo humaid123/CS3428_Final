@@ -1,95 +1,9 @@
-<!DOCTYPE html>
 <html>
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta content="width=device-width, initial-scale=1" name="viewport" />
-
-<style>  
-
-body {
-    background-color: white;
-    font-family: Arial, Helvetica, sans-serif; 
-    height: 100vh;
-}
-.container {
-    width: 80%;
-    height: 90%;
-    display: grid;
-    grid-template-columns: 30% auto;
-    border: 1px solid black;
-    margin: auto;
-}
-
-.logoDiv {
-    background-color: #2162cc;
-    color: white;
-    font-size: 10em;
-    display: flex;
-}
-.logoContainer {
-    margin: auto;
-}
-
-.centerInnerDiv {
-    display: flex;
-    background-color: whitesmoke;
-}
-
-.innerContainer {
-    margin: auto;
-    height: fit-content;
-    font-size: 2em;
-}
-.insideRow {
-    display: flex;
-    flex-direction: row;
-}
-.bigIcon {
-    padding: 5px;
-}
-
-.hiddenDescription {
-    display: none;
-}
-.row {
-    border-bottom: 1px solid lightgrey;
-}
-.row:Hover .hiddenDescription {
-    display: block;
-}
-.row:Hover {
-    background-color: ghostwhite;
-    cursor: pointer;
-    border-left: 0.2em solid darkblue;
-    font-weight: bold;
-    color: darkblue;
-}
-
-.prompt {
-    font-weight: bold;
-}
-
-.title {
-    text-align: center;
-    font-weight: bold;
-    font-size: 1.3em;
-    color: #2162cc;
-    margin-bottom: 5px;
-}
-
-@media screen and (max-width: 650px) {
-    .logoDiv {
-        display: none;
-    }
-    .container {
-        grid-template-columns: 100%;
-        border: none;
-    }
-    body {
-        background-color: whiteSmoke;
-    }
-}
-</style>
+    <script src = "helps.js"></script>
+    <link rel = "stylesheet" href = "helps.css">
 </head>
 <body>
     <div class="container">
@@ -102,25 +16,16 @@ body {
             <i class="fa fa-info-circle" style="padding: 5px;" aria-hidden="true"></i>Help Subsystem
         </div>
         <div class="prompt">What do you need help with?</div>
-        <div class="row" id="inboxHelp" onclick="showHelpListOfEmails()">
-            <div class="insideRow">
-                <div><i class="fa fa-user-circle-o bigIcon" aria-hidden="true"></i></div>
-                <div>Inbox/Sent Items Screen</div>
-            </div>
-            <div class="hiddenDescription">
-                <div class="descriptionContainer">Help for the list of emails.</div>
-            </div>
-        </div>
-        <div class="row" id="composeHelp" onclick="showHelpCompose()">
+        <div class="row" id="composeHelp" onclick="saveCompose()">
             <div class="insideRow">
                 <div><i class="fa fa-paper-plane bigIcon" aria-hidden="true"></i></div>
-                <div>Composing Emails Screens</div>
+                <div>Composing Emails</div>
             </div>
             <div class="hiddenDescription">
                 <div class="descriptionContainer">Help for composing emails</div>
             </div>
         </div>
-        <div class="row" id="navigationHelp" onclick="showHelpNavigation()">
+        <div class="row" id="navigationHelp" onclick="saveChanging()">
             <div class="insideRow">
                 <div><i class="fa fa-arrow-circle-right bigIcon" aria-hidden="true"></i></div>
                 <div>Navigation Screens</div>
@@ -129,7 +34,7 @@ body {
                 <div class="descriptionContainer">Help for changing screens</div>
             </div>
         </div>
-        <div class="row" id="viewingHelp" onclick="showHelpViewEmail()">
+        <div class="row" id="viewingHelp" onclick="saveViewEmail()">
             <div class="insideRow">
                 <div><i class="fa fa-address-card bigIcon" aria-hidden="true"></i></div>
                 <div>Viewing Emails Screen</div>
