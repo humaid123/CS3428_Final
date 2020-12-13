@@ -1,6 +1,8 @@
+/*This function stores a new Email on the server
+Written by Caitlin Maillet*/
 function storeNewEmailOnServer(newEmail, storeNewEmailFunc) {
-  const { email, token } = JSON.parse(localStorage.getItem("user")) || {};
-  if (!token || !email) {
+  const { email, token } = JSON.parse(localStorage.getItem("user")) || {};//parses the user and the token
+  if (!token || !email) {//ensures that email and token are valid user credentials
     alert("YOU ARE NOT LOGGED IN");
     window.location.href = "../index.html";
     return;
@@ -9,7 +11,7 @@ function storeNewEmailOnServer(newEmail, storeNewEmailFunc) {
     //if no from, we add a from field to the email
     email.from = email;
   }
-  $.ajax({
+  $.ajax({//connection to server
     type: "POST",
     url:
       SERVER_URL +
@@ -18,10 +20,10 @@ function storeNewEmailOnServer(newEmail, storeNewEmailFunc) {
       $.param({ secret_token: token }),
     data: { email, newEmail },
     dataType: "json",
-    success: function (result, status, xhr) {
+    success: function (result, status, xhr) {//if successful, email is stored
       storeNewEmailFunc(null, result);
     },
-    error: function (xhrm, status, error) {
+    error: function (xhrm, status, error) {//if it is unsuccessful, display error message
       if (xhrm.status != 400) {
         return alert("unrecognised error-status: " + xhrm.status + "-" + error);
       }
