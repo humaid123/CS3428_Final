@@ -1,3 +1,8 @@
+//Commenting: Adam Taylor
+
+/**
+ * Function shows a dropdown list of accounts that emails can be sent to.
+ */
 function loadAdminOptions() {
   getAllAccountsFromServer(true, (err, result) => {
     if (err) {
@@ -7,7 +12,10 @@ function loadAdminOptions() {
     }
   });
 }
-
+/**
+ * Loads the dropdown's option items.
+ * @param {*} accounts the accounts to be added to the dropdown
+ */
 function loadTheOptions(accounts) {
   let res = "";
   for (const account of accounts) {

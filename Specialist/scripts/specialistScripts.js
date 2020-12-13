@@ -1,3 +1,6 @@
+//Commenting: Adam Taylor
+
+//Declaring global variables and constants
 let DIVS = {
   Cc: { hints: ["Are there other people you want to send the email to?"] },
   Subject: { hints: ["What is this email about?"] },
@@ -8,6 +11,10 @@ let DIVS = {
 };
 const VIEW_DIVS = ["Cc", "Subject", "Body", "Who"];
 
+/**
+ * Hides the specified div element.
+ * @param {*} div value of div's id attribute.
+ */
 function turnOnHidden(div) {
   for (const curr_div of VIEW_DIVS) {
     if (curr_div == div) {
@@ -28,6 +35,9 @@ function turnOnHidden(div) {
   }
 }
 
+/**
+ * Loads the page.
+ */
 function loadPage() {
   addInboxEmailsFromCollection();
   for (const div in DIVS) {
@@ -42,6 +52,10 @@ function loadPage() {
     }
   }
 }
+
+/**
+ * Displays the list of recieved emails.
+ */
 function loadInboxEmails() {
   addInboxEmailsFromCollection();
   if (window.innerWidth < 1000) {
@@ -49,6 +63,9 @@ function loadInboxEmails() {
   }
 }
 
+/**
+ * Displays the list of sent emails.
+ */
 function loadSentEmails() {
   addSentEmailsFromCollection();
   if (window.innerWidth < 1000) {
@@ -56,12 +73,23 @@ function loadSentEmails() {
   }
 }
 
+/**
+ * Displays compose page.
+ */
 function linkCompose() {
   window.location.href = "./adminCompose.html";
 }
+
+/**
+ * Display delete accounts page.
+ */
 function deleteAccounts() {
   window.location.href = "./deleteAccounts.html";
 }
+
+/**
+ * Displays the office.
+ */
 function showOffice() {
   if (window.innerWidth < 1000) {
     document.getElementById("Navigation").style.display = "flex";
@@ -72,15 +100,29 @@ function showOffice() {
     document.getElementById("Navigation").style.width = "50%";
   }, 50);
 }
+
+/**
+ * Closes/hides the office display when it's close button is clicked.
+ */
 function closeOfficeButtons() {
   document.getElementById("Navigation").style.width = "0%";
   document.getElementById("NavigationContent").style.display = "none";
 }
+
+/**
+ * Closes the viewEmail object.
+ */
 function closeViewEmail() {
   document.getElementById("ViewingEmail").style.width = "0%";
   document.getElementById("ViewingEmail").style.display = "none";
 }
 
+/**
+ * Displays the viewEmail object and call viewEmailFromServer to
+ * display information from email.
+ * @param {*} i index value of email
+ * @param {*} isInbox "from" or "to" 
+ */
 function viewEmail(i, isInbox) {
   if (
     document.getElementById("ViewingEmail").style.display == "none" ||
@@ -102,6 +144,10 @@ function viewEmail(i, isInbox) {
   });
 }
 
+/**
+ * Changes the unread status of the email to read.
+ * @param {*} i index value of email
+ */
 function changeEmailToReadClasses(i) {
   let email = document.getElementById("email" + i);
   let classNames = email.className;
@@ -112,6 +158,11 @@ function changeEmailToReadClasses(i) {
   emailTwoButtons.className = buttonClassNames.replace("unread", "read");
 }
 
+/**
+ * Fills out the fields of the text boxes with the email's corresponding data.
+ * @param {*} email email to be viewed
+ * @param {*} isInbox "from" or "to"
+ */
 function fillTextBoxes(email, isInbox) {
   const partner = isInbox ? "from" : "to";
   $("#WhoTextBox").val(email[partner]);
