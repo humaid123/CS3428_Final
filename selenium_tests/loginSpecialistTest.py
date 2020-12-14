@@ -1,3 +1,4 @@
+# Adam Taylor
 
 from selenium.webdriver import Chrome
 import time

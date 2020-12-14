@@ -1,4 +1,4 @@
-
+# Humaid Agowun
 
 from selenium.webdriver import Chrome
 import time
@@ -98,6 +98,3 @@ alert = driver.switch_to.alert
 assert alert.text == already_taken_email_msg, "wrong message when email already taken"
 alert.accept()
 driver.close()
-
-# 5. everything correct - student and specialist
-# need to do this after figured out how to delete account automatically

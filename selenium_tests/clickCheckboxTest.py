@@ -1,3 +1,5 @@
+# Written by Caitlin Maillet
+
 from selenium.webdriver import Chrome
 import time
 
