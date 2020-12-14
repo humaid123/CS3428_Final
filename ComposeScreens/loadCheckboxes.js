@@ -1,3 +1,8 @@
+/*
+ * File that loads the checkboxes.
+ * Isaac Cain
+ */
+
 /* Icon style for when not all checkboxes have been ticked. */
 const NOT_TICKED = `<i class="fa fa-exclamation-triangle composeIcon" style="red"></i>`;
 /* Icon style for when all checkboxes have been ticked. */
