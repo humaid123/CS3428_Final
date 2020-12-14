@@ -4,6 +4,7 @@
  * The first returns the user to the page where they choose a compose style.
  * The second returns user to page they were at when they clicked 
  *    the Compose button.
+ * Isaac Cain (A00391748)
  */
 
 /*
