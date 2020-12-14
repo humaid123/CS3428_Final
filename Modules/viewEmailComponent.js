@@ -1,5 +1,3 @@
-
-
 /*This function sends the user back from viewing a sent item to the last page they visited
 Written by Caitlin Maillet*/
 function linkBackViewSent() {

@@ -2,7 +2,7 @@
  *
  * File that contains two functions.
  * The first returns the user to the page where they choose a compose style.
- * The second returns user to page they were at when they clicked 
+ * The second returns user to page they were at when they clicked
  *    the Compose button.
  * Isaac Cain (A00391748)
  */
@@ -16,10 +16,10 @@
   Isaac Cain(a00391748)
  */
 function cancel() {
-    var ans = confirm("Are you sure you want to cancel?");
-    if (ans == true) {
-        window.history.back();
-    }
+  var ans = confirm("Are you sure you want to cancel?");
+  if (ans == true) {
+    window.history.back();
+  }
 }
 /*
   Function that returns the user to the page they were at when they clicked Compose.
@@ -29,5 +29,5 @@ function cancel() {
   Isaac Cain (A00391748)
  */
 function linkBackAfterSending() {
-    window.history.go(-2);  // Go back two pages. 
+  window.history.go(-2); // Go back two pages.
 }

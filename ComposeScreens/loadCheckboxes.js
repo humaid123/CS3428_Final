@@ -29,11 +29,13 @@ function loadCheckBoxes() {
   // If checkbox is not loaded:
   if (!checkBoxShouldBeLoaded) {
     maxHeightHidden = "150px"; // set maxHeightHidden to be 150px
-    for (const divId in COMPOSE_DIVS) { // set display for checkboxes
+    for (const divId in COMPOSE_DIVS) {
+      // set display for checkboxes
       let div = document.getElementById(`${divId}CheckBoxes`);
       div.style.display = "none";
     }
-  } else { // If checkbox is loaded
+  } else {
+    // If checkbox is loaded
     maxHeightHidden = "300px"; // set maxHeightHidden to be 300px
     for (const divId in COMPOSE_DIVS) {
       console.log(divId); // send the div ID to log
@@ -73,7 +75,7 @@ function constructCheckBoxItems(divId, checkBoxes) {
   for (let i = 0; i < checkBoxes.length; i++) {
     // Declare a variable for each checkbox belonging to the div.
     let name = divId + "CheckBox" + i;
-    // Log the name and tie it to the correct checkbox. 
+    // Log the name and tie it to the correct checkbox.
     console.log(name, checkBoxes[i]);
     // Create the HTML for the correct checkbox.
     res +=
@@ -98,7 +100,8 @@ function turnOnHidden(divId) {
   ) {
     document.getElementById(divId + "Hidden").style.height = "0px";
     document.getElementById(divId + "Hidden").style.display = "block";
-    setTimeout(() => { // This sets the dropdown to the previously defined height over a period of 50ms.
+    setTimeout(() => {
+      // This sets the dropdown to the previously defined height over a period of 50ms.
       document.getElementById(divId + "Hidden").style.height = maxHeightHidden;
     }, 50);
   }
@@ -139,10 +142,11 @@ function closeCheckBoxes(divId) {
 */
 function closeHiddenCompartment(divId, toTick) {
   document.getElementById(divId + "Hidden").style.height = "0px";
-  setTimeout(() => { // Change the style over 400ms, according to the boolean.
+  setTimeout(() => {
+    // Change the style over 400ms, according to the boolean.
     document.getElementById(divId + "Hidden").style.display = "none";
     let correct = document.getElementById(divId + "Correct");
-    // If toTick is true, then all checkboxes have been clicked, and set the 
+    // If toTick is true, then all checkboxes have been clicked, and set the
     //   div classname to "allTicked".
     if (toTick) {
       correct.innerHTML = TICKED;

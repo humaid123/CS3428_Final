@@ -107,7 +107,6 @@ This is the CSS file for the help desk
 }
 /*Transition effect for main page content*/
 #main {
-  transition: margin-left 0.5s; 
+  transition: margin-left 0.5s;
   padding: 20px;
 }
-

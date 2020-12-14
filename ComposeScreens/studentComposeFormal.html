@@ -23,14 +23,26 @@
       /* Define the divs for compose, with its checkboxes. */
       const COMPOSE_DIVS = {
         To: { checkBoxes: ["Did you spell their email address correctly?"] },
-        Cc: { checkBoxes: ["Did you spell all the email addresses correctly?", 
-          "Did you include everyone you want to send the email to?"] },
+        Cc: {
+          checkBoxes: [
+            "Did you spell all the email addresses correctly?",
+            "Did you include everyone you want to send the email to?",
+          ],
+        },
         Subject: { checkBoxes: ["Did you use proper spelling?"] },
         Greeting: { checkBoxes: ["Did you use proper grammar and spelling?"] },
-        Body: { checkBoxes: ["Did you use proper grammar and spelling?",
-          "Did you use proper paragraph formatting?"] },
-        Closure: { checkBoxes: ["Did you use proper grammar and spelling?", 
-          "Did you sign your name at the end of the closure?"] },
+        Body: {
+          checkBoxes: [
+            "Did you use proper grammar and spelling?",
+            "Did you use proper paragraph formatting?",
+          ],
+        },
+        Closure: {
+          checkBoxes: [
+            "Did you use proper grammar and spelling?",
+            "Did you sign your name at the end of the closure?",
+          ],
+        },
       };
       /* When loading the page load the checkboxes and dropdown lists. */
       /* Isaac Cain (A00391748) */
@@ -41,6 +53,7 @@
     </script>
   </head>
   <!-- Call the loadPage() function. -->
+
   <body onload="loadPage()">
     <header>COMPOSING</header>
     <!-- Remind the student that help is available. -->
@@ -194,7 +207,8 @@
                     What is the purpose of this email?
                   </li>
                   <li class="hintListItem">
-                    Give a brief and formal description of the purpose for the email.
+                    Give a brief and formal description of the purpose for the
+                    email.
                   </li>
                 </ul>
               </div>
@@ -249,7 +263,8 @@
                     What is a polite and formal greeting?
                   </li>
                   <li class="hintListItem">
-                    Examples: "Good morning", "Good afternoon", "Good day", "Dear [name]".
+                    Examples: "Good morning", "Good afternoon", "Good day",
+                    "Dear [name]".
                   </li>
                 </ul>
               </div>

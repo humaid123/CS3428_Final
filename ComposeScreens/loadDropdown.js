@@ -8,7 +8,8 @@ function loadDropdown() {
   // Calls getAllAccountsFromServer (in the Modules folder).
   //   This loads all email accounts stored in the server and returns them.
   getAllAccountsFromServer(false, (err, result) => {
-    if (err) { // Error checking.
+    if (err) {
+      // Error checking.
       return alert(
         "error occured in getting all accounts.\nError: " + err.message
       );

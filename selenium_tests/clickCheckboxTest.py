@@ -2,7 +2,7 @@ from selenium.webdriver import Chrome
 import time
 
 # click check box => click check box for email0 and see what happens
-    # i guess we can check css classnames
+# i guess we can check css classnames
 
 index_url = "http://ugdev.cs.smu.ca/~group7/index.html"
 student_email = "test1"
@@ -10,6 +10,8 @@ specialist_email = "testSpecialist1"
 password = "hi"
 
 # for student the same module takes care of all of the above we test it only we basic system
+
+
 def testCheckbox(email, selection, system):
     driver = Chrome("chromedriver.exe")
     driver.get(index_url)
@@ -37,7 +39,8 @@ def testCheckbox(email, selection, system):
     else:
         assert newInnerHTML == CHECKED, "wrong change in innerHTML when clicked"
     driver.close()
-    
+
+
 testCheckbox(student_email, "studentSelection", "Basic")
 testCheckbox(student_email, "studentSelection", "Intermediate")
 testCheckbox(student_email, "studentSelection", "Basic")

@@ -1,13 +1,16 @@
-//Commenting: Lydia Belachew 
+//Commenting: Lydia Belachew
 
 /*This function is responsible for displaying the email. Displays the view email in 50sec.
 If the email can not be viewed, then an error message is displayed.  */
 function viewEmail(i, isInbox) {
-  if (document.getElementById('ViewingEmail').style.display == "none" || window.innerWidth < 1000) {
+  if (
+    document.getElementById("ViewingEmail").style.display == "none" ||
+    window.innerWidth < 1000
+  ) {
     document.getElementById("ViewingEmail").style.width = "0%";
-    document.getElementById('ViewingEmail').style.display = "block";
+    document.getElementById("ViewingEmail").style.display = "block";
     setTimeout(() => {
-      document.getElementById('ViewingEmail').style.width = "100%";
+      document.getElementById("ViewingEmail").style.width = "100%";
     }, 50);
   }
   viewEmailFromServer(isInbox, i, (err, result) => {
