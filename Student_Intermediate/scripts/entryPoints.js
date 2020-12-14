@@ -3,17 +3,17 @@
 /*This functions displays the navigation sidebar of the in 50sec*/
 function showNavigation() {
   document.getElementById("Navigation").style.display = "flex";
-  document.getElementById('Navigation').style.width = "0%";
+  document.getElementById("Navigation").style.width = "0%";
   setTimeout(() => {
-    document.getElementById('NavigationContent').style.display = "block";
-    document.getElementById('Navigation').style.width = "60%";
+    document.getElementById("NavigationContent").style.display = "block";
+    document.getElementById("Navigation").style.width = "60%";
   }, 50);
 }
 
 //This function is responsible for closing the navigation sidebar
 function closeNavigation() {
-  document.getElementById('Navigation').style.width = "0%";
-  document.getElementById('NavigationContent').style.display = "none";
+  document.getElementById("Navigation").style.width = "0%";
+  document.getElementById("NavigationContent").style.display = "none";
 }
 function linkStudentSent() {
   window.location.href = "sentItems.html";

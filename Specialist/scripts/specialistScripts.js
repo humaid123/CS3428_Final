@@ -121,7 +121,7 @@ function closeViewEmail() {
  * Displays the viewEmail object and call viewEmailFromServer to
  * display information from email.
  * @param {*} i index value of email
- * @param {*} isInbox "from" or "to" 
+ * @param {*} isInbox "from" or "to"
  */
 function viewEmail(i, isInbox) {
   if (

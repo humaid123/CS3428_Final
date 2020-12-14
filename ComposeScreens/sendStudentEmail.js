@@ -41,7 +41,8 @@ function sendStudentEmail() {
   const newEmail = { to, cc, subject, body };
   // Call storeNewEmailOnServer function (in Modules) on the data.
   storeNewEmailOnServer(newEmail, (err, result) => {
-    if (err) { // Error check.
+    if (err) {
+      // Error check.
       alert("Could not send email.\nServer said: " + err.message);
     } else {
       // If sent correctly, let user know.

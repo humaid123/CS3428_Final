@@ -21,15 +21,23 @@
     <script src="../Modules/getAllAccountsFromServer.js"></script>
     <script>
       /* Define the divs for compose, with its checkpoints. */
-      const COMPOSE_DIVS = { 
+      const COMPOSE_DIVS = {
         To: { checkBoxes: ["Did you spell their email address correctly?"] },
-        Cc: { checkBoxes: ["Did you spell all the email addresses correctly?",
-          "Did you include everyone you want to send the email to?"] },
+        Cc: {
+          checkBoxes: [
+            "Did you spell all the email addresses correctly?",
+            "Use ONE space to seperate the emails.",
+          ],
+        },
         Subject: { checkBoxes: ["Did you use proper spelling?"] },
         Greeting: { checkBoxes: ["Did you use proper grammar and spelling?"] },
         Body: { checkBoxes: ["Did you use proper grammar and spelling?"] },
-        Closure: { checkBoxes: ["Did you use proper grammar and spelling?", 
-          "Did you sign your name at the end of the closure?"] },
+        Closure: {
+          checkBoxes: [
+            "Did you use proper grammar and spelling?",
+            "Did you sign your name at the end of the closure?",
+          ],
+        },
       };
       /* When loading the page load the checkboxes and dropdown lists. */
       /* Isaac Cain (A00391748) */
@@ -40,6 +48,7 @@
     </script>
   </head>
   <!-- Call the loadPage() function. -->
+
   <body onload="loadPage()">
     <header>COMPOSING</header>
     <!-- Remind the student that help is available. -->
@@ -139,10 +148,8 @@
                     Who else needs to get this email?
                   </li>
                   <li class="hintListItem">
-                    Did you include anyone who does not need to get this email?
-                  </li>
-                  <li class="hintListItem">
-                    Are all the people you are sending this email to appropriate for an Informal email?
+                    Are all the people you are sending this email to appropriate
+                    for an Informal email?
                   </li>
                 </ul>
               </div>
@@ -196,7 +203,8 @@
                     What is the purpose of this email?
                   </li>
                   <li class="hintListItem">
-                    Give a brief description of the purpose for or content of the email.
+                    Give a brief description of the purpose for or content of
+                    the email.
                   </li>
                 </ul>
               </div>
@@ -247,9 +255,7 @@
                 <p class="hintsTitle">HINTS FOR GREETING</p>
                 <!-- These are the hints. -->
                 <ul class="hintList" id="GreetingHintList">
-                  <li class="hintListItem">
-                    What is a friendly greeting?
-                  </li>
+                  <li class="hintListItem">What is a friendly greeting?</li>
                   <li class="hintListItem">
                     Examples: "Hello [name]", "Hi", "How are you?".
                   </li>
