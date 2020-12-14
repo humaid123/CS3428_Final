@@ -24,6 +24,10 @@ This is the CSS file for the help desk
     height: auto;
     display: inline-block;
   }
+
+  img {
+    width: 400px;
+  }
 }
 
 /* The sidebar menu */
