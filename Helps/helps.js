@@ -287,7 +287,8 @@ Local Storage keys:
         document.getElementById("mySidebar").style.width = "0";
         document.getElementById("main").style.marginLeft = "0";
       }
-      /*Function closes the help desk window*/
+      /*Function closes the help desk window
+      Written by Caitlin Maillet*/
       function closeHelpDesk(){
         window.close();
       }
