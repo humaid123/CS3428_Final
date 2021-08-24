@@ -51,9 +51,8 @@ server.use(
 
 // middleware that returns error 500 if
 // anything wrong happens in server code
-server.use((err, _, res) => {
-  res.status(err.status || 500);
-  res.json({ error: err });
+server.use((_req, res) => {
+  res.status(500).json({ message: "unrecognised error" });
 });
 
 // listen on given port. Must SET UP .env to listen.

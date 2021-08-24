@@ -8,7 +8,7 @@ It also has logOut and showHelp function
 
 //constant to connect to server.
 const PORT = 3555;
-const SERVER_URL = "http://140.184.230.209:" + PORT;
+const SERVER_URL = "http://localhost:" + PORT;
 
 // constants used for TO DO vs DONE of the checkBox.
 const CHECKED = `<i class="fa fa-flag" style="color:red;" aria-hidden="true"></i>TO DO`;
